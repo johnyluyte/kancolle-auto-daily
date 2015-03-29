@@ -6,7 +6,109 @@ return!0}function Q(a,b,d,e){if(m.acceptData(a)){var f,g,h=m.expando,i=a.nodeTyp
 
 
 
-function fillScreenWithSquares(){
+
+$(function(){
+    init();
+});
+
+
+function init(){
+    isExistSquares = false;
+    // squares 架構： body > myContainer > myTable > myTbody > tr > td > squares
+    // Container 的用意在於，當需要清空 squares 時，只需要 $('#myContainer').empty();
+    setConatinerHTML();
+    // Control Panel 則自己獨立，跟 Container 和 Squares 沒有任何 parent-child 關係
+    setControlPannelComplete();
+}
+
+
+/*
+    ------ # Container ------
+*/
+function setConatinerHTML(){
+    var container = "<div id='myContainer'></div>";
+    $('body').prepend(container);
+}
+
+
+/*
+    ------ # Control Pannel ------
+*/
+function setControlPannelComplete(){
+    setControlPannelHTML();
+    setControlPannelCSS();
+    setControlPannelHandler();
+}
+
+function setControlPannelHTML(){
+  var cp =  "<div id=myControlPanelForSquares>";
+  cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
+  cp += "<hr>";
+  cp += "Per row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
+  cp += "Per column: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
+  // We use 'div' instead of 'button' here because the sky is blue
+  cp += "<hr>";
+  cp += "<button class=controlPanelButton id='btn_addSquares'>Append Squares</button>";
+  cp += "<button class=controlPanelButton id='btn_removeSquares'>Remove Squares</button>";
+  cp += "<hr>";
+  cp += "<div>Type 'clearAllSquares()' in the console if the squares overlay the control panel</div>";
+  cp += "</div>";
+  $('body').append(cp);
+}
+
+function setControlPannelCSS(){
+  $("#myControlPanelForSquares").css({
+    'z-index'    : 99,
+    'left'       : '1100px',
+    'top'        : '70px',
+    'position'   : 'absolute',
+    'height'     : '350px',
+    'width'      : '150px',
+    'border'     : '1px solid black',
+    'padding'    : '5px',
+    'background' : '#aaffdd'
+  });
+
+  $(".controlPanelButton").css({
+    'margin'     : '5px',
+    'padding'    : '3px',
+    // 'border'     : '1px solid black',
+    // 'background' : 'white',
+    'cursor'     : 'pointer'
+  });
+}
+
+function setControlPannelHandler(){
+  $("#btn_addSquares").click(function(event){
+    event.preventDefault();
+    if(isExistSquares==false){
+      isExistSquares = true;
+      setSquareTableComplete();
+    }
+    else{
+      alert("Please remove before add new squares");
+    }
+  });
+
+  $("#btn_removeSquares").click(function(event){
+    event.preventDefault();
+    if(isExistSquares==true){
+        clearAllSquares();
+    }
+  });
+}
+
+
+/*
+    ------ # Square Table ------
+*/
+function setSquareTableComplete(){
+      setSquareTableHTML();
+      setSquareTableCSS();
+      setSquareTableHandler();
+}
+
+function setSquareTableHTML(){
   var column = $("#sq_col").val();
   var row = $("#sq_row").val();
 
@@ -22,7 +124,7 @@ function fillScreenWithSquares(){
   $('#myContainer').prepend(table);
 }
 
-function setSquareAttributes(){
+function setSquareTableCSS(){
   $("#myTableFullOfSquares").css(
   {
     'z-index'        : 20,
@@ -43,103 +145,37 @@ function setSquareAttributes(){
       'width'      : square_length,
       // 'border'     : '1px solid white', // The default kancolle page will apply solid border to table
       'opacity'    : 0.1,
+      'color' : 'white',   // font color
       'background' : '#666666'
     }
   );
+}
 
+function setSquareTableHandler(){
+    $(".mySquares").click(function(){
+        $(this).css('background', 'black');
+        $(this).css('opacity', 0.6);
+        var count = $(this).text();
+        if($(this).text().length == 0){
+            $(this).text('1');
+        }else{
+            $(this).text(parseInt($(this).text())+1);
+        }
+
+        // Arguments for kancolle flash
+        var sq_length_half = parseInt($("#sq_length").val())/2.0;
+        var xPos = $(this).offset().left + sq_length_half;
+        var yPos = $(this).offset().top + sq_length_half + 100; // kancolle special
+        console.log("點擊的 Square 正中心為: [" + xPos + "," + yPos + "]，正中心到邊界距離" + sq_length_half);
+    });
 }
 
 
-function initControlPannel(){
-  var cp =  "<div id=myControlPanelForSquares>";
-  cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
-  cp += "<hr>";
-  cp += "Per row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
-  cp += "Per column: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
-  // We use 'div' instead of 'button' here because the sky is blue
-  cp += "<hr>";
-  cp += "<div class=controlPanelButton id='btn_addSquares'>Append Squares</div>";
-  cp += "<div class=controlPanelButton id='btn_removeSquares'>Remove Squares</div>";
-  cp += "<hr>";
-  cp += "<div>Type 'clearAllSquares()' in the console if the squares overlay the control panel</div>";
-  cp += "</div>";
-  $('body').append(cp);
-
-  $("#myControlPanelForSquares").css({
-    'left'       : '1100px',
-    'top'        : '70px',
-    'position'   : 'absolute',
-    'height'     : '350px',
-    'width'      : '150px',
-    'border'     : '1px solid black',
-    'padding'    : '5px',
-    'background' : '#aaffdd'
-  });
-
-
-  $(".controlPanelButton").css({
-    'margin'     : '5px',
-    'padding'    : '3px',
-    'border'     : '1px solid black',
-    'background' : 'white',
-    'cursor'     : 'pointer'
-  });
-
-  $("#btn_addSquares").click(function(event){
-    event.preventDefault();
-    if(isExistSquares==false){
-      isExistSquares = true;
-      initTable();
-    }
-    else{
-      alert("Please remove before add new squares");
-    }
-  });
-
-  $("#btn_removeSquares").click(function(event){
-    event.preventDefault();
-    if(isExistSquares==true){
-        clearAllSquares();
-    }
-    else{
-      alert("No squares to be clear");
-    }
-  });
-}
-
+/*
+    ------ # Helper Functions ------
+*/
 function clearAllSquares(){
     isExistSquares = false;
     $('#myContainer').empty();
 }
 
-function initConatiner(){
-  var container = "<div id='myContainer'></div>";
-  $('body').prepend(container);
-}
-
-function initTable(){
-      fillScreenWithSquares();
-      setSquareAttributes();
-      setSquareHandler();
-}
-
-function setSquareHandler(){
-    $(".mySquares").click(function(){
-    $(this).css('background', 'red');
-    $(this).css('opacity', 0.3);
-    console.log("Click Square: [" + $(this).offset().left + "," + $(this).offset().top + "]");
-  });
-}
-
-
-$(function(){
-  isExistSquares = false;
-
-  // squares 架構： body > myContainer > myTable > myTbody > tr > td > squares
-  // Container 的用意在於，當需要清空 squares 時，只需要 $('#myContainer').empty();
-  initConatiner();
-  // Control Panel 則自己獨立，跟 Container 和 Squares 沒有任何 parent-child 關係
-  initControlPannel();
-
-
-});
