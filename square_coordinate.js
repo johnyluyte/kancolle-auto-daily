@@ -7,13 +7,14 @@ return!0}function Q(a,b,d,e){if(m.acceptData(a)){var f,g,h=m.expando,i=a.nodeTyp
 
 
 
+
+
 $(function(){
     init();
 });
 
 
 function init(){
-    isExistSquares = false;
     // squares 架構： body > myContainer > myTable > myTbody > tr > td > squares
     // Container 的用意在於，當需要清空 squares 時，只需要 $('#myContainer').empty();
     setConatinerHTML();
@@ -41,61 +42,81 @@ function setControlPannelComplete(){
 }
 
 function setControlPannelHTML(){
-  var cp =  "<div id=myControlPanelForSquares>";
-  cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
-  cp += "<hr>";
-  cp += "Per row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
-  cp += "Per column: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
-  // We use 'div' instead of 'button' here because the sky is blue
-  cp += "<hr>";
-  cp += "<button class=controlPanelButton id='btn_addSquares'>Append Squares</button>";
-  cp += "<button class=controlPanelButton id='btn_removeSquares'>Remove Squares</button>";
-  cp += "<hr>";
-  cp += "<div>Type 'clearAllSquares()' in the console if the squares overlay the control panel</div>";
-  cp += "</div>";
-  $('body').append(cp);
+    var cp =  "<div id=myControlPanelForSquares>";
+    cp += "<h4>Squares</h4>";
+    cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
+    cp += "Row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
+    cp += "Col: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
+    cp += "Default Color: <input type='color' id='sq_default_color' value='#cccccc'><br>";
+    cp += "Default Opacity: <input type='range' id='sq_default_opacity' min='0' max='10' value='2'><br>";
+    cp += "Clicked Color: <input type='color' id='sq_clicked_color' value='#FF0000'><br>";
+    cp += "Clicked Opacity: <input type='range' id='sq_clicked_opacity' min='0' max='10' value='5'><br>";
+    cp += "Font Color: <input type='color' id='sq_font_color' value='#ffffff'><br>";
+    cp += "<button class=controlPanelButton id='btn_addSquares'>Append</button>";
+    cp += "<button class=controlPanelButton id='btn_removeSquares'>Remove</button>";
+    cp += "<hr>";
+
+    cp += "<h4>Output Offset</h4>";
+    cp += "X: <input type='number' style='width:50px;' min='-100' max='100' id='sq_pos_offset_x' value='0'>";
+    cp += ", Y: <input type='number' style='width:50px;' min='-100' max='100' id='sq_pos_offset_y' value='0'>";
+    cp += "<button class=controlPanelButton id='btn_resetOffsetX'>Reset X</button>";
+    cp += "<button class=controlPanelButton id='btn_resetOffsetY'>Reset Y</button>";
+    cp += "<hr>";
+
+    cp += "<h4>Position</h4>";
+    cp += "Relative Position<input type='text' style='width:150px;' id='input_relative_position'>";
+    cp += "<button class=controlPanelButton id='btn_selectOutput'>Select Output</button><br/>";
+    cp += "<input type='checkbox' id='cb_print_to_console' checked> Print Summary to Console";
+    cp += "</div>";
+    $('body').append(cp);
 }
 
 function setControlPannelCSS(){
-  $("#myControlPanelForSquares").css({
-    'z-index'    : 99,
-    'left'       : '1100px',
-    'top'        : '70px',
-    'position'   : 'absolute',
-    'height'     : '350px',
-    'width'      : '150px',
-    'border'     : '1px solid black',
-    'padding'    : '5px',
-    'background' : '#aaffdd'
-  });
+    var cpWidth = 180;
+    var cpHeight = 700;
+    $("#myControlPanelForSquares").css({
+      'z-index'    : 99,
+      'left'       : ($(window).width() - cpWidth - 20) + 'px',
+      'top'        : '20px',
+      'position'   : 'absolute',
+      // 'height'     : cpHeight + 'px',
+      'width'      : cpWidth + 'px',
+      'border'     : '1px solid black',
+      'padding'    : '5px',
+      'background' : '#aaffdd'
+    });
 
-  $(".controlPanelButton").css({
-    'margin'     : '5px',
-    'padding'    : '3px',
-    // 'border'     : '1px solid black',
-    // 'background' : 'white',
-    'cursor'     : 'pointer'
-  });
+    $(".controlPanelButton").css({
+      'margin'     : '3px',
+      'padding'    : '3px',
+      'cursor'     : 'pointer'
+    });
+
+    $("#input_relative_position").css({
+        'font-size' : '24px'
+    });
 }
 
 function setControlPannelHandler(){
-  $("#btn_addSquares").click(function(event){
-    event.preventDefault();
-    if(isExistSquares==false){
-      isExistSquares = true;
-      setSquareTableComplete();
-    }
-    else{
-      alert("Please remove before add new squares");
-    }
-  });
-
-  $("#btn_removeSquares").click(function(event){
-    event.preventDefault();
-    if(isExistSquares==true){
+    $("#btn_addSquares").click(function(event){
         clearAllSquares();
-    }
-  });
+        setSquareTableComplete();
+    });
+
+    $("#btn_removeSquares").click(function(event){
+        clearAllSquares();
+    });
+
+    $("#btn_resetOffsetX").click(function(event){
+        $("#sq_pos_offset_x").val(0);
+    });
+    $("#btn_resetOffsetY").click(function(event){
+        $("#sq_pos_offset_y").val(0);
+    });
+
+    $("#btn_selectOutput").click(function(event){
+        $("#input_relative_position").select();
+    });
 }
 
 
@@ -103,58 +124,56 @@ function setControlPannelHandler(){
     ------ # Square Table ------
 */
 function setSquareTableComplete(){
-      setSquareTableHTML();
-      setSquareTableCSS();
-      setSquareTableHandler();
+    setSquareTableHTML();
+    setSquareTableCSS();
+    setSquareTableHandler();
 }
 
 function setSquareTableHTML(){
-  var column = $("#sq_col").val();
-  var row = $("#sq_row").val();
-
-  var table = "<table id='myTableFullOfSquares'><tbody id='myTbody'>";
-  for(var i=1;i<=row;i++){
-    table += "<tr>";
-      for(var k=1;k<=column;k++){
-        table += "<td><div class='mySquares'></div></td>"
-      }
-    table += "</tr>";
-  }
-  table += "</myTbody></table>";
-  $('#myContainer').prepend(table);
+    var column = $("#sq_col").val();
+    var row = $("#sq_row").val();
+    var table = "<table id='myTableFullOfSquares'><tbody id='myTbody'>";
+    for(var i=1;i<=row;i++){
+      table += "<tr>";
+        for(var k=1;k<=column;k++){
+          table += "<td><div class='mySquares'></div></td>"
+        }
+      table += "</tr>";
+    }
+    table += "</myTbody></table>";
+    $('#myContainer').prepend(table);
 }
 
 function setSquareTableCSS(){
-  $("#myTableFullOfSquares").css(
-  {
-    'z-index'        : 20,
-    'position'       : 'absolute',
-    'border'         : 'none',
-    'border-style'   : 'none',
-    'border-spacing' : '0px',
-    'border-collapse': 'collapse',
-    'cellspacing'    : '0px',
-    'cellpadding'    : '0px'
-  });
+    $("#myTableFullOfSquares").css({
+      'z-index'        : 20,
+      'position'       : 'absolute',
+      'border'         : 'none',
+      'border-style'   : 'none',
+      'border-spacing' : '0px',
+      'border-collapse': 'collapse',
+      'cellspacing'    : '0px',
+      'cellpadding'    : '0px'
+    });
 
-  var square_length = $("#sq_length").val() + 'px';
-  $(".mySquares").css(
-    {
-      'margin'     : '0px',
-      'height'     : square_length,
-      'width'      : square_length,
-      // 'border'     : '1px solid white', // The default kancolle page will apply solid border to table
-      'opacity'    : 0.1,
-      'color' : 'white',   // font color
-      'background' : '#666666'
-    }
-  );
+    var square_length = $("#sq_length").val() + 'px';
+    $(".mySquares").css({
+        'margin'     : '0px',
+        'height'     : square_length,
+        'width'      : square_length,
+        'cursor'     : 'crosshair',
+        // 'border'     : '1px solid white', // The default kancolle page will apply solid border to table
+        'opacity'    : $("#sq_default_opacity").val() * 0.1,
+        'color'      : $("#sq_font_color").val(),   // font color
+        'background' : $("#sq_default_color").val()
+    });
 }
 
 function setSquareTableHandler(){
     $(".mySquares").click(function(){
-        $(this).css('background', 'black');
-        $(this).css('opacity', 0.6);
+        $(this).css('background', $("#sq_clicked_color").val());
+        $(this).css('opacity', $("#sq_clicked_opacity").val() * 0.1);
+        $(this).css('color', $("#sq_font_color").val());
         var count = $(this).text();
         if($(this).text().length == 0){
             $(this).text('1');
@@ -162,11 +181,20 @@ function setSquareTableHandler(){
             $(this).text(parseInt($(this).text())+1);
         }
 
-        // Arguments for kancolle flash
-        var sq_length_half = parseInt($("#sq_length").val())/2.0;
-        var xPos = $(this).offset().left + sq_length_half;
-        var yPos = $(this).offset().top + sq_length_half + 100; // kancolle special
-        console.log("點擊的 Square 正中心為: [" + xPos + "," + yPos + "]，正中心到邊界距離" + sq_length_half);
+        var mPosX = event.clientX + parseInt($("#sq_pos_offset_x").val());
+        var mPosY = event.clientY + parseInt($("#sq_pos_offset_y").val());
+        var mPositionList = "[" + mPosX + "," + mPosY + "]";
+        $("#input_relative_position").val(mPositionList);
+        if($("#cb_print_to_console").prop('checked')){
+            var square_length = parseInt($("#sq_length").val());
+            var mAbsMinX = $(this).offset().left;
+            var mAbsMaxX = $(this).offset().left + square_length;
+            var mAbsMinY = $(this).offset().top;
+            var mAbsMaxY = $(this).offset().top + square_length;
+            console.log("[Square Table] clicked absolute position =  " + "[" + mAbsMinX + "~" + mAbsMaxX + "," + mAbsMinY + "~" + mAbsMaxY + "]");
+            console.log("[Square Table] clicked relative position =  " + "[" + mPosX + "," + mPosY + "]");
+            console.log("[Square Table] clicked relative offset =  " + mPositionList);
+        }
     });
 }
 
@@ -175,7 +203,6 @@ function setSquareTableHandler(){
     ------ # Helper Functions ------
 */
 function clearAllSquares(){
-    isExistSquares = false;
     $('#myContainer').empty();
 }
 

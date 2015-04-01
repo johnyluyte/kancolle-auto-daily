@@ -17,8 +17,18 @@
 javascript 程式要能控制 square opacty, font-color, background color, attributes after clicked, etc.
 
 
+## 腳本
+
+1. 半夜自動遠征，自動補給，自動出發  (自動點選執行任務?)
+
+2. 自動修復(在修復畫面不停檢查是否有空的港口，有的話就檢查是否有待維修的船，自動維修)
+
+3. 手動選擇地圖後，自動戰鬥(自動選陣行、自動不追擊、自動撤退?)
+
 
 ## TODO：
+
+怎麼解決 iTaiwan 每四小時斷線的問題→要輸入 iTaiwan 密碼→還要重新連結 VPN→重新連上 kancolle?
 
 要印出 output, log 檔案，每個 log 都要以時間日期 stamp 開頭
 當錯誤跳出時備份截圖
