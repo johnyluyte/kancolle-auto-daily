@@ -16,10 +16,19 @@ window.confirm = ignorePrompt;
 window.alert = ignorePrompt;
 window.prompt = ignorePrompt;
 
+function removeSection(divClassOrId){
+    var target = $(divClassOrId);
+    // if target exist, i.e, if jQuery selector is not null
+    if(target.length){
+        target.remove();
+    }
+}
 
 
 $(function(){
     init();
+    removeSection(".area-naviapp");
+    removeSection("#foot");
 });
 
 
