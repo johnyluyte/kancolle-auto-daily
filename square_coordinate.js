@@ -66,9 +66,9 @@ function setControlPannelHTML(){
     cp += "Row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
     cp += "Col: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
     cp += "Default Color: <input type='color' id='sq_default_color' value='#cccccc'><br>";
-    cp += "Default Opacity: <input type='range' id='sq_default_opacity' min='0' max='10' value='2'><br>";
+    cp += "Default Opacity: [1~10]<input type='range' id='sq_default_opacity' min='1' max='10' value='2'><br>";
     cp += "Clicked Color: <input type='color' id='sq_clicked_color' value='#FF0000'><br>";
-    cp += "Clicked Opacity: <input type='range' id='sq_clicked_opacity' min='0' max='10' value='5'><br>";
+    cp += "Clicked Opacity: [1~10]<input type='range' id='sq_clicked_opacity' min='1' max='10' value='5'><br>";
     cp += "Font Color: <input type='color' id='sq_font_color' value='#ffffff'><br>";
     cp += "<button class=controlPanelButton id='btn_addSquares'>Append</button>";
     cp += "<button class=controlPanelButton id='btn_removeSquares'>Remove</button>";
