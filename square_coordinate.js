@@ -10,7 +10,8 @@ return!0}function Q(a,b,d,e){if(m.acceptData(a)){var f,g,h=m.expando,i=a.nodeTyp
 // alert(), confirm(), prompt()
 function ignorePrompt(text) {
     console.log("Ignored page message: " + text);
-    return true;
+    // If we return true, the page would refresh and "this page is not available in your area"
+    return false;
 };
 window.confirm = ignorePrompt;
 window.alert = ignorePrompt;
@@ -61,7 +62,6 @@ function setControlPannelComplete(){
 
 function setControlPannelHTML(){
     var cp =  "<div id=myControlPanelForSquares>";
-    cp += "<h4>Squares</h4>";
     cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
     cp += "Row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
     cp += "Col: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
@@ -81,10 +81,14 @@ function setControlPannelHTML(){
     cp += "<button class=controlPanelButton id='btn_resetOffsetY'>Reset Y</button>";
     cp += "<hr>";
 
-    cp += "<h4>Position</h4>";
+    cp += "<h4>Result</h4>";
     cp += "Relative Position<input type='text' style='width:150px;' id='input_relative_position'>";
-    cp += "<button class=controlPanelButton id='btn_selectOutput'>Select Output</button><br/>";
-    cp += "<input type='checkbox' id='cb_print_to_console'> Print Summary to Console";
+    cp += "(Press 'ctrl+c' to copy)<br/>";
+    cp += "<hr>";
+
+    cp += "<input type='checkbox' id='cb_print_to_console'>console.log(result)<br/>";
+    cp += "removeControlPanel()<br>";
+    cp += "clearAllSquares()<br>";
     cp += "</div>";
     $('body').append(cp);
 }
@@ -130,10 +134,6 @@ function setControlPannelHandler(){
     });
     $("#btn_resetOffsetY").click(function(event){
         $("#sq_pos_offset_y").val(0);
-    });
-
-    $("#btn_selectOutput").click(function(event){
-        $("#input_relative_position").select();
     });
 }
 
@@ -203,6 +203,8 @@ function setSquareTableHandler(){
         var mPosY = event.clientY + parseInt($("#sq_pos_offset_y").val());
         var mPositionList = "[" + mPosX + "," + mPosY + "]";
         $("#input_relative_position").val(mPositionList);
+        selectResult();
+
         if($("#cb_print_to_console").prop('checked')){
             var square_length = parseInt($("#sq_length").val());
             var mAbsMinX = $(this).offset().left;
@@ -220,7 +222,14 @@ function setSquareTableHandler(){
 /*
     ------ # Helper Functions ------
 */
-function clearAllSquares(){
-    $('#myContainer').empty();
+function removeControlPanel(){
+    $("#myControlPanelForSquares").remove();
 }
 
+function clearAllSquares(){
+    $("#myContainer").empty();
+}
+
+function selectResult(){
+    $("#input_relative_position").select();
+}
