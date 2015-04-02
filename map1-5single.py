@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+
+from pymouse import PyMouse
+from pykeyboard import PyKeyboard
+import time
+import datetime
+
+m = PyMouse()
+k = PyKeyboard()
+
+
+# - - - Global Variables - - -
+# 每個步驟之間，等待的秒數（也就是預期的網路延遲時間）
+gl_lag = 4
+
+# 將伺服器延遲時間算入的最普通的正常點擊方式
+def click_then_wait(position, sleep_sec):
+    """
+    點擊 position 之後睡眠 sleep_sec 秒，給予伺服器緩衝時間
+    """
+    print get_time_stamp() + "click_then_wait(): [" + str(position[0]) + "," + str(position[1]) + "]"
+    m.click(position[0], position[1])
+    time.sleep(sleep_sec)
+
+
+def get_time_stamp():
+    current_time = str(datetime.datetime.now()).split('.')[0] # 2015-03-29 20:18:08
+    return "[" + current_time[5:] + "] " # [03-29 20:18:08]
+
+
+def count_down(minute_left):
+    for i in range(minute_left):
+        print get_time_stamp() + "waiting.. " + str(minute_left - i) + " minutes left."
+        click_then_wait([1010,280], 1)
+        time.sleep(59)
+
+def main():
+    while True:
+        click_then_wait([870, 510], gl_lag)
+
+main()
+

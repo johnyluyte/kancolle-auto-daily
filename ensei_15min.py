@@ -11,7 +11,7 @@ k = PyKeyboard()
 
 # - - - Global Variables - - -
 # 每個步驟之間，等待的秒數（也就是預期的網路延遲時間）
-gl_lag = 3
+gl_lag = 4
 # 整個 MAC 螢幕的長、寬
 x_dim, y_dim = m.screen_size()
 # Get focus off terminal
@@ -27,7 +27,9 @@ def click_for_N_seconds(position, sleep_sec, n_sec):
     """
     period = n_sec // sleep_sec
     for i in range(period):
-        print get_time_stamp() + "clickForNSeconds(): [" + str(position[0]) + "," + str(position[1]) + "]"
+        msg = get_time_stamp() + "clickForNSeconds(): [" + str(position[0]) + "," + str(position[1]) + "]\n"
+        fileHandler.write(msg)
+        print msg
         m.click(position[0], position[1])
         time.sleep(sleep_sec)
 
@@ -36,7 +38,9 @@ def click_then_wait(position, sleep_sec):
     """
     點擊 position 之後睡眠 sleep_sec 秒，給予伺服器緩衝時間
     """
-    print get_time_stamp() + "click_then_wait(): [" + str(position[0]) + "," + str(position[1]) + "]"
+    msg = get_time_stamp() + "click_then_wait(): [" + str(position[0]) + "," + str(position[1]) + "]\n"
+    fileHandler.write(msg)
+    print msg
     m.click(position[0], position[1])
     time.sleep(sleep_sec)
 
@@ -46,8 +50,6 @@ def click_then_wait(position, sleep_sec):
 def ensei_15min():
     # 遠征快要回來了
     # 需要點擊進入一個地方再出來，才會更新遠征狀態
-    click_then_wait([300, 400], gl_lag)
-    click_then_wait([300, 400], gl_lag)
     # 觀看完遠征結果：狂點 [1010,280]  12 秒
     click_for_N_seconds([1010,280], 1, 20)
     # 主畫面中點擊補給補給 [300, 400]
@@ -92,7 +94,14 @@ def count_down(minute_left):
 def main():
     while True:
         ensei_15min()
-        count_down(90)
+        count_down(89)
 
+
+fileHandler = None
+fileName = str(datetime.datetime.now()).split('.')[0]
+fileHandler = open(fileName,"a")
+
+
+# click_then_wait([632,375], gl_lag + 1)
 main()
 
