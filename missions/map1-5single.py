@@ -28,15 +28,9 @@ def get_time_stamp():
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
 
-def count_down(minute_left):
-    for i in range(minute_left):
-        print get_time_stamp() + "waiting.. " + str(minute_left - i) + " minutes left."
-        click_then_wait([1010,280], 1)
-        time.sleep(59)
-
 def main():
     while True:
-        click_then_wait([870, 510], gl_lag)
+        click_then_wait([644,443], gl_lag)
 
 main()
 
