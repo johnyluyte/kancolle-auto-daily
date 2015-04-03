@@ -108,9 +108,9 @@ function setControlPannelComplete(){
 
 function setControlPannelHTML(){
     var cp =  "<div id=CATcontrolPanel>";
-    cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
+    cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='15'><br>";
     cp += "Row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
-    cp += "Col: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
+    cp += "Col: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='47'><br>";
     cp += "Default Color: <input type='color' id='sq_default_color' value='#cccccc'><br>";
     cp += "Default Opacity: [1~10]<input type='range' id='sq_default_opacity' min='1' max='10' value='2'><br>";
     cp += "Clicked Color: <input type='color' id='sq_clicked_color' value='#FF0000'><br>";
@@ -213,6 +213,9 @@ function setSquareTableHTML(){
 function setSquareTableCSS(){
     $("#myTableFullOfSquares").css({
       'z-index'        : 20,
+      'margin'         : 0,
+      'top'            : 0,
+      'left'           : 0,
       'position'       : 'absolute',
       'border'         : 'none',
       'border-style'   : 'none',
