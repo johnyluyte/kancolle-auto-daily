@@ -588,6 +588,23 @@ python 不停的截圖看畫面左上角，當偵測到圖片後，分析該圖�
 python 再根據該圖片的內容，做 js 要求的動作
 
 
+但是上面的方法很難傳送 json，可以的話還是想要傳送 json
+
+但是礙於 mac 網路不固定，沒有一個固定的 IP
+
+可能需要藉由一個中繼的 proxy server 來跟 js 溝通，明明就在同一台電腦，卻不能互相溝通 ＱＱ
+
+另一個要注意的是，hostmonster 的是 shared host，可能不能自己擁有一個 port 長駐
+
+一個方法是 js, php 跟 python 有一個共同 sync 的變數 next_pkg_no，由 python 統一 sync 其他兩者
+
+pyhton 不斷跟 php request 這個 json 封包，而 js 則是監聽 http header，聽到我們要的封包後，將 next_pkg_no 塞進去封包並傳給 php
+
+php 此時就能回應 python 的要求，pyhton 得到封包後，解析並決定下一步要幹麻
+
+
+看起來有點複雜？要不要嘗試 hostmonster 以外的選擇？用 amazon ec2 說不定就有固定 ip ?
+
 
 去找到 api_id 對照船 或是 sortid 的表格
 

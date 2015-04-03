@@ -28,14 +28,16 @@ function removeSection(divClassOrId){
 
 $(function(){
     init();
+    removeSection("#dmm_ntgnavi");
     removeSection(".area-naviapp");
     removeSection("#foot");
+    // cancel
 });
 
 
 function init(){
-    // squares 架構： body > myContainer > myTable > myTbody > tr > td > squares
-    // Container 的用意在於，當需要清空 squares 時，只需要 $('#myContainer').empty();
+    // squares 架構： body > CATsquaresContainer > myTable > myTbody > tr > td > squares
+    // Container 的用意在於，當需要清空 squares 時，只需要 $('#CATsquaresContainer').empty();
     setConatinerHTML();
     // Control Panel 則自己獨立，跟 Container 和 Squares 沒有任何 parent-child 關係
     setControlPannelComplete();
@@ -46,7 +48,7 @@ function init(){
     ------ # Container ------
 */
 function setConatinerHTML(){
-    var container = "<div id='myContainer'></div>";
+    var container = "<div id='CATsquaresContainer'></div>";
     $('body').prepend(container);
 }
 
@@ -61,7 +63,7 @@ function setControlPannelComplete(){
 }
 
 function setControlPannelHTML(){
-    var cp =  "<div id=myControlPanelForSquares>";
+    var cp =  "<div id=CATcontrolPanel>";
     cp += "Square Length: <input type='number' style='width:40px;' min='1' max='30' id='sq_length' value='17'><br>";
     cp += "Row: <input type='number' style='width:50px;' min='1' max='100' id='sq_row' value='29'><br>";
     cp += "Col: <input type='number' style='width:50px;' min='1' max='100' id='sq_col' value='54'><br>";
@@ -87,7 +89,7 @@ function setControlPannelHTML(){
     cp += "<hr>";
 
     cp += "<input type='checkbox' id='cb_print_to_console'>console.log(result)<br/>";
-    cp += "removeControlPanel()<br>";
+    cp += "removeCAT()<br>";
     cp += "clearAllSquares()<br>";
     cp += "</div>";
     $('body').append(cp);
@@ -96,10 +98,10 @@ function setControlPannelHTML(){
 function setControlPannelCSS(){
     var cpWidth = 180;
     var cpHeight = 700;
-    $("#myControlPanelForSquares").css({
+    $("#CATcontrolPanel").css({
       'z-index'    : 99,
       'left'       : ($(window).width() - cpWidth - 20) + 'px',
-      'top'        : '75px',
+      'top'        : '16px',
       'position'   : 'absolute',
       // 'height'     : cpHeight + 'px',
       'width'      : cpWidth + 'px',
@@ -159,7 +161,7 @@ function setSquareTableHTML(){
       table += "</tr>";
     }
     table += "</myTbody></table>";
-    $('#myContainer').prepend(table);
+    $('#CATsquaresContainer').prepend(table);
 }
 
 function setSquareTableCSS(){
@@ -222,12 +224,13 @@ function setSquareTableHandler(){
 /*
     ------ # Helper Functions ------
 */
-function removeControlPanel(){
-    $("#myControlPanelForSquares").remove();
+function removeCAT(){
+    $("#CATcontrolPanel").remove();
+    $("#CATsquaresContainer").remove();
 }
 
 function clearAllSquares(){
-    $("#myContainer").empty();
+    $("#CATsquaresContainer").empty();
 }
 
 function selectResult(){
