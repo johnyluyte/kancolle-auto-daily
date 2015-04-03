@@ -25,20 +25,30 @@ function removeSection(divClassOrId){
     }
 }
 
+function editKancollePageCSS(){
+    $("#main-ntg").css("text-align","left");
+    $("#main-ntg").css("margin","-16px -62px");
+    $("#game_frame").css("height","500");
+}
 
-$(function(){
-    init();
+function initKancollePage(){
     removeSection("#dmm_ntgnavi");
     removeSection(".area-naviapp");
     removeSection("#foot");
-    // cancel
+    editKancollePageCSS();
+}
+
+
+$(function(){
+    initKancollePage();
+    initCAT();
 });
 
 
-function init(){
+function initCAT(){
     // squares 架構： body > CATsquaresContainer > myTable > myTbody > tr > td > squares
     // Container 的用意在於，當需要清空 squares 時，只需要 $('#CATsquaresContainer').empty();
-    setConatinerHTML();
+    setSquaresConatinerHTML();
     // Control Panel 則自己獨立，跟 Container 和 Squares 沒有任何 parent-child 關係
     setControlPannelComplete();
 }
@@ -47,9 +57,9 @@ function init(){
 /*
     ------ # Container ------
 */
-function setConatinerHTML(){
-    var container = "<div id='CATsquaresContainer'></div>";
-    $('body').prepend(container);
+function setSquaresConatinerHTML(){
+    var squaresContainer = "<div id='CATsquaresContainer'></div>";
+    $('body').prepend(squaresContainer);
 }
 
 
@@ -76,14 +86,14 @@ function setControlPannelHTML(){
     cp += "<button class=controlPanelButton id='btn_removeSquares'>Remove</button>";
     cp += "<hr>";
 
-    cp += "<h4>Output Offset</h4>";
+    cp += "<b>Output Offset</b><br/>";
     cp += "X: <input type='number' style='width:50px;' min='-100' max='100' id='sq_pos_offset_x' value='0'>";
     cp += ", Y: <input type='number' style='width:50px;' min='-100' max='100' id='sq_pos_offset_y' value='100'>";
     cp += "<button class=controlPanelButton id='btn_resetOffsetX'>Reset X</button>";
     cp += "<button class=controlPanelButton id='btn_resetOffsetY'>Reset Y</button>";
     cp += "<hr>";
 
-    cp += "<h4>Result</h4>";
+    cp += "<b>Result: </b>";
     cp += "Relative Position<input type='text' style='width:150px;' id='input_relative_position'>";
     cp += "(Press 'ctrl+c' to copy)<br/>";
     cp += "<hr>";
@@ -97,13 +107,15 @@ function setControlPannelHTML(){
 
 function setControlPannelCSS(){
     var cpWidth = 180;
-    var cpHeight = 700;
+    var cpHeight = 468;
+    var leftPadding = 2;
     $("#CATcontrolPanel").css({
       'z-index'    : 99,
-      'left'       : ($(window).width() - cpWidth - 20) + 'px',
-      'top'        : '16px',
+      // 'left'       : ($(window).width() - cpWidth - 20) + 'px',
+      'left'       : (800 + leftPadding) + 'px',
+      'top'        : '0px',
       'position'   : 'absolute',
-      // 'height'     : cpHeight + 'px',
+      'height'     : cpHeight + 'px',
       'width'      : cpWidth + 'px',
       'border'     : '1px solid black',
       'padding'    : '5px',

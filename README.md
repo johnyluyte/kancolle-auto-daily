@@ -606,6 +606,14 @@ php 此時就能回應 python 的要求，pyhton 得到封包後，解析並決�
 看起來有點複雜？要不要嘗試 hostmonster 以外的選擇？用 amazon ec2 說不定就有固定 ip ?
 
 
+弄半天，發現好像不能單純用 js 去抓到 chrome 所有接收的 http response 有 XSS 的問題，
+
+仔細想想也是，如果有個常駐的 js 能抓到我瀏覽器的所有 response，好像安全性也令人擔憂
+
+所以最後改從 chrome dev tool 抓 response，複製到 clipboard，再從 clipboard 抓進 python 分析
+
+
+
 去找到 api_id 對照船 或是 sortid 的表格
 
 
