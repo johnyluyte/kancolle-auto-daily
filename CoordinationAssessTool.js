@@ -47,11 +47,28 @@ function editKancollePageCSS(){
     $("#game_frame").css("height","500");
 }
 
+function coverUpAdmiralName(){
+    var wakame = "<div id='wakame'></div>";
+    $('body').prepend(wakame);
+    $('#wakame').css({
+        'z-index'    : 10,
+        'width'      : '170px',
+        'height'     : '20px',
+        'position'   : 'absolute',
+        'top'        : '6px',
+        'left'       : '113px',
+        // 'background' : '#34332D'
+        'background' : '#302F2E'
+    });
+}
+
+
 function initKancollePage(){
     removeSection("#dmm_ntgnavi");
     removeSection(".area-naviapp");
     removeSection("#foot");
     editKancollePageCSS();
+    coverUpAdmiralName();
 }
 
 
@@ -257,6 +274,7 @@ function removeCAT(){
     $("#CATcontrolPanel").remove();
     $("#CATsquaresContainer").remove();
     $("#CATkancolleWiki").remove();
+    $('#wakame').remove();
 }
 
 function clearAllSquares(){
