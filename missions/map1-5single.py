@@ -31,6 +31,8 @@ def get_time_stamp():
 def main():
     while True:
         click_then_wait([644,443], gl_lag)
+        # 燃料低於 threshold
+        # 或是船艦超過 97 隻就停止練等
 
 main()
 

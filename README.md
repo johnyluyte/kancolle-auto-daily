@@ -5,6 +5,18 @@
 
 自動執行“艦隊收集”每日任務
 
+但是直接分析 API 發 quest 會被抓
+且造成 server 負擔，影響其他玩家
+
+(放入 官方 twitter)
+
+https://github.com/masarakki/IJN48
+BANされたよ!
+
+上面那篇文章作者是 2014年1月 寫的，所以有些 API 已經完全不一樣了
+舉例來說，我已經攔截不到戰鬥過程的 JSON，導致無法分析是否該突入夜戰，或是該撤退
+這項 API 的更改應該就是為了防止自動練功的程式。
+
 
 ## 步驟
 
@@ -14,39 +26,48 @@
 4. 寫一個 javascript 程式，該程式可將指定的網頁頁面覆蓋上滿滿的方格，當方格被滑鼠點擊時，會印出自己的座標，利用此小程式找到 WYSWYG 的 pymosuse 對應座標
 5. 但是 event.clientX, event.clientY 會受到視窗相對位置影響，也就是說，我們要避免捲動到螢幕 -> removeSection()
 6. 連線不穩定，大約半小時就會跳出一次 page error 的 javascript confirm 問說要不要重新讀取，但是即使出現這個 error，遊戲依然可以正常繼續下去，不重新讀取也不會有任何影響，因此對我們來說，這個 error 除了擾人以外，沒有任何意義。 -> ignorePrompt()
-7. 每次都要貼上很麻煩，用成 greasemonkey 或是 chrome extension?
-
-
-python 加上偵測按鍵、按左即選則左（進擊）、按右即選擇右（側退）
-一個新的 js 左邊或下面加上 wiki 、加上潛艇艦娘圖案、陳菊？
-
-
-## 腳本
-
-1. 半夜自動遠征，自動補給，自動出發  (自動點選執行任務?)
-
-2. 自動修復(在修復畫面不停檢查是否有空的港口，有的話就檢查是否有待維修的船，自動維修)
-
-3. 手動選擇地圖後，自動戰鬥(自動選陣行、自動不追擊、自動撤退?)
+右邊那個 js 要產生黑色海苔遮住提督姓名
 
 
 
-簡易腳本
-- 遠征
-- 每日任務 15 次補給
+一個 新的 js 去監控 http header 並且 filter 我們要的 response
+根據 response 內容去做邏輯判斷，將要執行的動作透過圖片顯示在畫面左上角 （例如進攻或側退，是否需要維修等等）
+python 不停的截圖看畫面左上角，當偵測到圖片後，分析該圖片的意思，並且點擊“clear image” 清空圖片，告訴 js 說我看到了
+python 再根據該圖片的內容，做 js 要求的動作
 
-需要 API
-- 遠征 ＋ 清晨自動解每日每週遠征任務
-- 自動排隊修理船
+但是上面的方法很難傳送 json，可以的話還是想要傳送 json
+但是礙於 mac 網路不固定，沒有一個固定的 IP
+可能需要藉由一個中繼的 proxy server 來跟 js 溝通，明明就在同一台電腦，卻不能互相溝通 ＱＱ
+另一個要注意的是，hostmonster 的是 shared host，可能不能自己擁有一個 port 長駐
+一個方法是 js, php 跟 python 有一個共同 sync 的變數 next_pkg_no，由 python 統一 sync 其他兩者
+pyhton 不斷跟 php request 這個 json 封包，而 js 則是監聽 http header，聽到我們要的封包後，將 next_pkg_no 塞進去封包並傳給 php
+php 此時就能回應 python 的要求，pyhton 得到封包後，解析並決定下一步要幹麻
 
-需要圖像辨識
-- 練等級 1-5
+看起來有點複雜？要不要嘗試 hostmonster 以外的選擇？用 amazon ec2 說不定就有固定 ip ?
 
-需要 API + 圖像辨識
-- 練等級 ＋ 自動解每日戰鬥任務
+弄半天，發現好像不能單純用 js 去抓到 chrome 所有接收的 http response 有 XSS 的問題，
+仔細想想也是，如果有個常駐的 js 能抓到我瀏覽器的所有 response，好像安全性也令人擔憂
+所以最後改從 chrome dev tool 抓 response，複製到 clipboard，再從 clipboard 抓進 python 分析
+
+我們想要得到 dmm server 回傳的 http response，因為裡面含有的 JSON 資訊可以讓程式了解該做什麼
+
+http://stackoverflow.com/questions/220231/accessing-the-web-pages-http-headers-in-javascript
+js 似乎無法直接取得 chrome 收到的所有 http response
+
+改變戰略，用 chrome developer tool 的 network，下 filter 後來抓 JSON
+用 pyUserInput 控制滑鼠鍵盤，取得 json
+
+在 filter 欄位加入 -method:GET 可過濾掉我們不要的資訊
+
+或是在 filter 欄位直接輸入 port | deck | ndeck | questlist 等等
+
+
+http://www.macdrifter.com/2011/12/python-and-the-mac-clipboard.html
+然後參考這篇文章，用 python 從 clipboard 取得剛剛複製的 JSON 資訊
 
 
 
+<<<<<<< HEAD
 ## 考察：
 
 火力、雷裝、對空、裝甲
@@ -78,49 +99,71 @@ python 加上偵測按鍵、按左即選則左（進擊）、按右即選擇右�
 
 
 ## TODO：
+=======
+>>>>>>> d4c952d4cc722231811ea8091df214022175c4e0
 
-右邊那個 js 要產生黑色海苔遮住提督姓名
+然後在 Python 裡面 parse JSON，規則參考 艦これ　API/JSON 分析那篇 (自己寫)
 
-一個 新的 js 去監控 http header 並且 filter 我們要的 response
-
-根據 response 內容去做邏輯判斷，將要執行的動作透過圖片顯示在畫面左上角 （例如進攻或側退，是否需要維修等等）
-
-python 不停的截圖看畫面左上角，當偵測到圖片後，分析該圖片的意思，並且點擊“clear image” 清空圖片，告訴 js 說我看到了
-
-python 再根據該圖片的內容，做 js 要求的動作
-
-
-但是上面的方法很難傳送 json，可以的話還是想要傳送 json
-
-但是礙於 mac 網路不固定，沒有一個固定的 IP
-
-可能需要藉由一個中繼的 proxy server 來跟 js 溝通，明明就在同一台電腦，卻不能互相溝通 ＱＱ
-
-另一個要注意的是，hostmonster 的是 shared host，可能不能自己擁有一個 port 長駐
-
-一個方法是 js, php 跟 python 有一個共同 sync 的變數 next_pkg_no，由 python 統一 sync 其他兩者
-
-pyhton 不斷跟 php request 這個 json 封包，而 js 則是監聽 http header，聽到我們要的封包後，將 next_pkg_no 塞進去封包並傳給 php
-
-php 此時就能回應 python 的要求，pyhton 得到封包後，解析並決定下一步要幹麻
-
-
-看起來有點複雜？要不要嘗試 hostmonster 以外的選擇？用 amazon ec2 說不定就有固定 ip ?
-
-
-弄半天，發現好像不能單純用 js 去抓到 chrome 所有接收的 http response 有 XSS 的問題，
-
-仔細想想也是，如果有個常駐的 js 能抓到我瀏覽器的所有 response，好像安全性也令人擔憂
-
-所以最後改從 chrome dev tool 抓 response，複製到 clipboard，再從 clipboard 抓進 python 分析
+API 的分析請見下篇文章
 
 
 
 去找到 api_id 對照船 或是 sortid 的表格
-
-
 從回到主畫面的 port json 就可以得到所有船艦資訊，所以理論上可以知道“哪個艦娘”在哪個頁面的哪個位置。
 
+這邊有些有趣的 data
+https://www.snip2code.com/Snippet/32881/Kankore-Slot-Item-Data
+
+
+需要一個 api_sortno(艦娘圖鑑的號碼) 與 艦娘名稱 的對應表格
+
+到 http://wikiwiki.jp/kancolle/?%B4%CF%C1%A5
+
+透過 excel + sublime text 簡易處理，產生一個 python 的 [圖鑑號碼-艦娘名稱] 對照 list
+
+github 公開 excel 與 python
+
+
+7. 每次都要貼上很麻煩，用成 greasemonkey 或是 chrome extension?
+
+
+
+
+## 腳本
+
+1. 半夜自動遠征，自動補給，自動出發  (自動點選執行任務?)
+
+2. 自動修復(在修復畫面不停檢查是否有空的港口，有的話就檢查是否有待維修的船，自動維修)
+
+3. 手動選擇地圖後，自動戰鬥(自動選陣行、自動不追擊、自動撤退?)
+
+
+
+簡易腳本
+- 遠征
+- 每日任務 15 次補給
+
+需要 API
+- 遠征 ＋ 清晨自動解每日每週遠征任務
+- 自動排隊修理船
+- 自動檢查任務進度
+
+需要圖像辨識
+- 練等級 1-5
+http://akankorebiyori.blog.fc2.com/blog-entry-121.html
+
+需要 API + 圖像辨識
+- 練等級 ＋ 自動解每日戰鬥任務
+
+
+
+## TODO：
+
+家具背景記得換一換再錄影
+
+要印出 output, log 檔案，每個 log 都要以時間日期 stamp 開頭
+當錯誤跳出時備份截圖
+要能藉由圖片偵測“遊戲的畫面”在螢幕個位置，並自動調整 pymouse 應點擊的位置
 
 用 alias 的方式將 python ensei15.py 改成好玩的名稱
 例如
@@ -129,6 +172,11 @@ poi~
 how do you turn this on
 5566 cannot die
 
+聲音可以從這裡下載
+http://www51.atpages.jp/kancollev/kcplayer.php?f=0&c=37v1
+
+用這個來拆除那珂ちゃん
+http://www51.atpages.jp/kancollev/kcplayer.php?c=37v13
 
 用相同的概念來做一個 那珂ちゃん 自動解體互動
 cchien:~/git/kancolle-auto-daily $ 那珂ちゃん
@@ -180,18 +228,22 @@ Request URL:http://125.6.189.103/kcsapi/api_req_hokyu/charge
 因為會日文的關係，這些變數對我而言一眼就了解
 不會日文的恐怕還要建立表格來對照
 
-
-最後當然就是需要一點資工的基礎，跟一顆努力不懈的好奇心啦。
+最後當然就是需要一點資工的基礎，跟一顆努力不懈的好奇心。
 時間、穩定的網路、VPN 等等
 
+邊學習 python 邊完成的練習
+
+3/25 開始玩
+3/28 開始寫外掛
+coursera 的 programming for everybody
+coursera 的 Interactive python programming I
+coursera 的 Interactive python programming II
+Learn Python the Hard Way
+還有大量的 StackOverflow
 
 
 怎麼解決 iTaiwan 每四小時斷線的問題→要輸入 iTaiwan 密碼→還要重新連結 VPN→重新連上 kancolle?
 用 4G 網路
-
-要印出 output, log 檔案，每個 log 都要以時間日期 stamp 開頭
-當錯誤跳出時備份截圖
-要能藉由圖片偵測“遊戲的畫面”在螢幕個位置，並自動調整 pymouse 應點擊的位置
 
 
 ## License

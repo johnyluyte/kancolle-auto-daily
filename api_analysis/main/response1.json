@@ -1,0 +1,251 @@
+{
+  "api_result": 1,
+  "api_result_msg": "成功",
+  "api_data": {
+    "api_material": [
+      {
+        "api_member_id": 12130401,
+        "api_id": 1,
+        "api_value": 3022
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 2,
+        "api_value": 6096
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 3,
+        "api_value": 3214
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 4,
+        "api_value": 5535
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 5,
+        "api_value": 55
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 6,
+        "api_value": 62
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 7,
+        "api_value": 47
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 8,
+        "api_value": 0
+      }
+    ],
+    "api_deck_port": [
+      {
+        "api_member_id": 12130401,
+        "api_id": 1,
+        "api_name": "第1艦隊",
+        "api_name_id": "",
+        "api_mission": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "api_flagship": "0",
+        "api_ship": [
+          79,
+          132,
+          59,
+          101,
+          18,
+          182
+        ]
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 2,
+        "api_name": "第2艦隊",
+        "api_name_id": "",
+        "api_mission": [
+          1,
+          5,
+          1427963369471,
+          0
+        ],
+        "api_flagship": "0",
+        "api_ship": [
+          12,
+          25,
+          7,
+          83,
+          128,
+          172
+        ]
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 3,
+        "api_name": "第3艦隊",
+        "api_name_id": "",
+        "api_mission": [
+          2,
+          3,
+          1427961370743,
+          0
+        ],
+        "api_flagship": "0",
+        "api_ship": [
+          5,
+          49,
+          4,
+          66,
+          16,
+          13
+        ]
+      }
+    ],
+    "api_ndock": [
+      {
+        "api_member_id": 12130401,
+        "api_id": 1,
+        "api_state": 0,
+        "api_ship_id": 0,
+        "api_complete_time": 0,
+        "api_complete_time_str": "0",
+        "api_item1": 0,
+        "api_item2": 0,
+        "api_item3": 0,
+        "api_item4": 0
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 2,
+        "api_state": 1,
+        "api_ship_id": 118,
+        "api_complete_time": 1427963491374,
+        "api_complete_time_str": "2015-04-02 17:31:31",
+        "api_item1": 37,
+        "api_item2": 0,
+        "api_item3": 69,
+        "api_item4": 0
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 3,
+        "api_state": -1,
+        "api_ship_id": 0,
+        "api_complete_time": 0,
+        "api_complete_time_str": "0",
+        "api_item1": 0,
+        "api_item2": 0,
+        "api_item3": 0,
+        "api_item4": 0
+      },
+      {
+        "api_member_id": 12130401,
+        "api_id": 4,
+        "api_state": -1,
+        "api_ship_id": 0,
+        "api_complete_time": 0,
+        "api_complete_time_str": "0",
+        "api_item1": 0,
+        "api_item2": 0,
+        "api_item3": 0,
+        "api_item4": 0
+      }
+    ],
+    "api_ship": [
+      "因為太長了":"所以我把它移到另一個檔案"
+    ],
+    "api_basic": {
+      "api_member_id": "12130401",
+      "api_nickname": "ChunkNorris",
+      "api_nickname_id": "135603628",
+      "api_active_flag": 1,
+      "api_starttime": 1427903647953,
+      "api_level": 22,
+      "api_rank": 5,
+      "api_experience": 24865,
+      "api_fleetname": null,
+      "api_comment": "",
+      "api_comment_id": "",
+      "api_max_chara": 100,
+      "api_max_slotitem": 497,
+      "api_max_kagu": 0,
+      "api_playtime": 0,
+      "api_tutorial": 0,
+      "api_furniture": [
+        1,
+        38,
+        72,
+        235,
+        133,
+        197
+      ],
+      "api_count_deck": 3,
+      "api_count_kdock": 2,
+      "api_count_ndock": 2,
+      "api_fcoin": 6250,
+      "api_st_win": 248,
+      "api_st_lose": 14,
+      "api_ms_count": 116,
+      "api_ms_success": 110,
+      "api_pt_win": 22,
+      "api_pt_lose": 18,
+      "api_pt_challenged": 0,
+      "api_pt_challenged_win": 0,
+      "api_firstflag": 1,
+      "api_tutorial_progress": 100,
+      "api_pvp": [
+        0,
+        0
+      ],
+      "api_medals": 0,
+      "api_large_dock": 1
+    },
+    "api_log": [
+      {
+        "api_no": 0,
+        "api_type": "3",
+        "api_state": "0",
+        "api_message": "艦隊が、「遠征」から帰投しました。"
+      },
+      {
+        "api_no": 1,
+        "api_type": "2",
+        "api_state": "0",
+        "api_message": "「工廠」で、建造が完了した艦があります。"
+      },
+      {
+        "api_no": 2,
+        "api_type": "1",
+        "api_state": "0",
+        "api_message": "「入渠」していた艦の修理が、完了しました。"
+      },
+      {
+        "api_no": 3,
+        "api_type": "3",
+        "api_state": "0",
+        "api_message": "艦隊が、「遠征」から帰投しました。"
+      },
+      {
+        "api_no": 4,
+        "api_type": "1",
+        "api_state": "0",
+        "api_message": "「入渠」していた艦の修理が、完了しました。"
+      },
+      {
+        "api_no": 5,
+        "api_type": "1",
+        "api_state": "0",
+        "api_message": "「入渠」していた艦の修理が、完了しました。"
+      }
+    ],
+    "api_p_bgm_id": 106
+  }
+}
