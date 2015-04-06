@@ -1,0 +1,66 @@
+{
+  "api_result": 1,
+  "api_result_msg": "成功",
+  "api_data": {
+    "api_count": 18,
+    "api_page_count": 4,
+    "api_disp_page": 4,
+    "api_list": [
+      {
+        "api_no": 302,
+        "api_category": 3,
+        "api_type": 3,
+        "api_state": 2,
+        "api_title": "大規模演習",
+        "api_detail": "今週中に「演習」で他の提督の艦隊に対して20回「勝利」しよう！",
+        "api_get_material": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "api_bonus_flag": 1,
+        "api_progress_flag": 1,
+        "api_invalid_flag": 0
+      },
+      {
+        "api_no": 304,
+        "api_category": 3,
+        "api_type": 2,
+        "api_state": 2,
+        "api_title": "「演習」で他提督を圧倒せよ！",
+        "api_detail": "本日中に他の司令官の艦隊との「演習」で5回以上「勝利」をおさめよう！",
+        "api_get_material": [
+          0,
+          50,
+          0,
+          50
+        ],
+        "api_bonus_flag": 1,
+        "api_progress_flag": 0,
+        "api_invalid_flag": 0
+      },
+      {
+        "api_no": 403,
+        "api_category": 4,
+        "api_type": 2,
+        "api_state": 1,
+        "api_title": "「遠征」を１０回成功させよう！",
+        "api_detail": "本日中に「遠征」10回成功させよう！",
+        "api_get_material": [
+          150,
+          300,
+          300,
+          150
+        ],
+        "api_bonus_flag": 1,
+        "api_progress_flag": 2,
+        "api_invalid_flag": 0
+      },
+      -1,
+      -1
+    ],
+    "api_exec_count": 2,
+    "api_exec_type": 2415533
+  }
+}

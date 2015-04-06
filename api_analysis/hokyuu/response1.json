@@ -1,0 +1,87 @@
+{
+  "api_result": 1,
+  "api_result_msg": "成功",
+  "api_data": {
+    "api_ship": [
+      {
+        "api_id": 205,
+        "api_fuel": 40,
+        "api_bull": 65,
+        "api_onslot": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "api_id": 132,
+        "api_fuel": 15,
+        "api_bull": 20,
+        "api_onslot": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "api_id": 59,
+        "api_fuel": 25,
+        "api_bull": 25,
+        "api_onslot": [
+          1,
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "api_id": 101,
+        "api_fuel": 40,
+        "api_bull": 65,
+        "api_onslot": [
+          2,
+          2,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "api_id": 18,
+        "api_fuel": 25,
+        "api_bull": 30,
+        "api_onslot": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "api_id": 182,
+        "api_fuel": 10,
+        "api_bull": 20,
+        "api_onslot": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "api_material": [
+      2989,
+      6063,
+      3181,
+      5524
+    ],
+    "api_use_bou": 0
+  }
+}
