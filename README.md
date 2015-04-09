@@ -58,12 +58,18 @@ js 似乎無法直接取得 chrome 收到的所有 http response
 用 pyUserInput 控制滑鼠鍵盤，取得 json
 
 在 filter 欄位加入 -method:GET 可過濾掉我們不要的資訊
+錯！！ 還是無法過濾掉 gadget/ 這種資訊！
 
 或是在 filter 欄位直接輸入 port | deck | ndeck | questlist 等等
 
 
 http://www.macdrifter.com/2011/12/python-and-the-mac-clipboard.html
+http://pastebin.com/4MjuSkW3
 然後參考這篇文章，用 python 從 clipboard 取得剛剛複製的 JSON 資訊
+
+會遇到 unicode 編碼問題
+http://stackoverflow.com/questions/11544541/python-ascii-and-unicode-decode-error
+http://stackoverflow.com/questions/16058065/how-can-i-convert-strings-like-u5c0f-u738b-u5b50-u003a-u6c49-u6cd5-u82f1-u5bf9
 
 
 
