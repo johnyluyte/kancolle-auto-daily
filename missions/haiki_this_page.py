@@ -11,7 +11,7 @@ k = PyKeyboard()
 
 # - - - Global Variables - - -
 # 每個步驟與伺服器之間，等待的秒數（也就是預期的網路延遲時間）
-gl_lag = 2
+gl_lag = 0.1
 # Get focus off terminal
 m.click(250, 350, 1)
 
@@ -33,18 +33,23 @@ def get_time_stamp():
 
 def seperate_hokyuu(fleet_position):
     click_no_wait(fleet_position)
-    click_then_wait([630,540], gl_lag)
+    click_then_wait([873,619], gl_lag)
     click_no_wait(fleet_position)
-    click_then_wait([773,543], gl_lag)
+    click_then_wait([1013,620], gl_lag)
 
 
 def main():
-    seperate_hokyuu([158,262])
-    seperate_hokyuu([162,318])
-    seperate_hokyuu([158,369])
-    seperate_hokyuu([159,419])
-    seperate_hokyuu([164,482])
-    seperate_hokyuu([167,518])
+    click_then_wait([190,238], gl_lag)
+    click_then_wait([191,267], gl_lag)
+    click_then_wait([189,300], gl_lag)
+    click_then_wait([188,332], gl_lag)
+    click_then_wait([189,362], gl_lag)
+    click_then_wait([188,391], gl_lag)
+    click_then_wait([189,420], gl_lag)
+    click_then_wait([190,447], gl_lag)
+    click_then_wait([188,481], gl_lag)
+    click_then_wait([189,511], gl_lag)
+    click_then_wait([706,529], gl_lag)
 
 main()
 
