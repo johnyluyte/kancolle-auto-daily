@@ -252,7 +252,7 @@ function setSquareTableHandler(){
 
         var mPosX = event.clientX + parseInt($("#sq_pos_offset_x").val());
         var mPosY = event.clientY + parseInt($("#sq_pos_offset_y").val());
-        var mPositionList = "[" + mPosX + "," + mPosY + "]";
+        var mPositionList = "(" + mPosX + "," + mPosY + ")";
         $("#input_relative_position").val(mPositionList);
         selectResult();
 
@@ -262,8 +262,8 @@ function setSquareTableHandler(){
             var mAbsMaxX = $(this).offset().left + square_length;
             var mAbsMinY = $(this).offset().top;
             var mAbsMaxY = $(this).offset().top + square_length;
-            console.log("[Square Table] clicked absolute position =  " + "[" + mAbsMinX + "~" + mAbsMaxX + "," + mAbsMinY + "~" + mAbsMaxY + "]");
-            console.log("[Square Table] clicked relative position =  " + "[" + mPosX + "," + mPosY + "]");
+            console.log("[Square Table] clicked absolute position =  " + "(" + mAbsMinX + "~" + mAbsMaxX + "," + mAbsMinY + "~" + mAbsMaxY + ")");
+            console.log("[Square Table] clicked relative position =  " + "(" + mPosX + "," + mPosY + ")");
             console.log("[Square Table] clicked relative offset =  " + mPositionList);
         }
     });
