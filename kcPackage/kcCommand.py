@@ -31,11 +31,11 @@ cmd 的第二個 hash key 是目前所在的場景可執行的指令
 
 cmd 的 value 是個 tuple 其格式如下
 
-滑鼠點擊乙次：                           (msg, type=0, pos1)
-滑鼠點擊乙次(會切換場景)：               (msg, type=1, pos1)
-一系列的滑鼠點擊：                       (msg, type=2, count, func, pos1, sleep1, pos2, sleep2 ..)
-滑鼠點擊乙次，有 callback：              (msg, type=3, pos1, func)
-滑鼠點擊乙次(會切換場景)，有 callback：  (msg, type=4, pos1, func)
+type 0 滑鼠點擊乙次：                           (msg, type=0, pos1)
+type 1 滑鼠點擊乙次(會切換場景)：               (msg, type=1, pos1)
+type 2 一系列的滑鼠點擊：                       (msg, type=2, count, func, pos1, sleep1, pos2, sleep2 ..)
+type 3 滑鼠點擊乙次，有 callback：              (msg, type=3, pos1, func)
+type 4 滑鼠點擊乙次(會切換場景)，有 callback：  (msg, type=4, pos1, func)
 
 
 @msg    - (str) 顯示的訊息
@@ -58,8 +58,8 @@ cmd 的 value 是個 tuple 其格式如下
 
 """
 
-def get_current_avail_cmds():
-    pass
+def get_current_available_cmds(place):
+    return cmd['general'].keys() + cmd[place].keys()
 
 
 
