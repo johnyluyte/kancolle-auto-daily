@@ -8,17 +8,13 @@ import datetime
 import Foundation
 import AppKit
 
+import kcGlobal as g
 
 
 # - - - Global Variables - - -
 
 m = PyMouse()
 k = PyKeyboard()
-
-# 每個步驟與伺服器之間，等待的秒數（也就是預期的網路延遲時間）
-gl_lag = 2
-# 目前所在的畫面
-place = "port"
 
 
 # 複製字串到 MAC 的剪貼簿
@@ -39,10 +35,8 @@ def pbpaste():
 
 
 
-
-
 # 將伺服器延遲時間算入的最普通的正常點擊方式
-def click_and_wait(position, sleep_sec = gl_lag):
+def click_and_wait(position, sleep_sec = g.LAG):
     """
     點擊 position 之後睡眠 sleep_sec 秒，給予伺服器緩衝時間
     """
@@ -67,12 +61,11 @@ def get_time_stamp():
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
 
-
-def gprint(msg):
+def uprint(msg):
     print "電：", msg
 
-def gfinish():
-    gprint("任務完了")
+# def finish():
+    # gprint("任務完了")
 
 def get_focus_game():
     click_and_wait([130,120], 0.1)
@@ -80,3 +73,6 @@ def get_focus_game():
 def get_focus_terminal():
     click_and_wait([1000,221], 0.1)
 
+def change_place(new_place):
+    g.PLACE = new_place
+    uprint("Place は " + new_place + " に変更しました")
