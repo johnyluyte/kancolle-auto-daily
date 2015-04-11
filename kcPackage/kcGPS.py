@@ -28,32 +28,32 @@
 # pos 之後的第二個 hash 是目前所在的頁面想要按的按鈕座標
 pos = dict()
 pos['general'] = dict()
-pos['general']['ok'] = [400,500]
-pos['general']['left'] = [300,350]
-pos['general']['right'] = [517,343]
-pos['general']['back'] = [116,550]
-pos['general']['c'] = pos['general']['back']
-pos['general']['jin1'] = [452,279]
-pos['general']['jin2'] = [572,279]
-pos['general']['jin3'] = [694,282]
-pos['general']['jin4'] = [516,446]
-pos['general']['jin5'] = [648,441]
+pos['general']['ok'] = ("OK", [400,500])
+pos['general']['left'] = ("Left", [300,350])
+pos['general']['right'] = ("Right", [517,343])
+pos['general']['back'] = ("キャンセル", [116,550])
+pos['general']['c'] = ("キャンセル", pos['general']['back'][1])
+pos['general']['jin1'] = ("陣形 - 単縦陣(水雷特化)", [452,279])
+pos['general']['jin2'] = ("陣形 - 複縦陣(命中特化)", [572,279])
+pos['general']['jin3'] = ("陣形 - 輪形陣(防御重視)", [694,282])
+pos['general']['jin4'] = ("陣形 - 梯形陣", [516,446])
+pos['general']['jin5'] = ("陣形 - 単横陣(対潜特化)", [648,441])
 
 
 
 # 在主要的那五個畫面之間移動時，只需用左邊那些按鈕即可
-pos['main5'] = dict()
-pos['main5']['port'] = [79,160]
-pos['main5']['hensei'] = [29,252]
-pos['main5']['refill'] = [29,303]
-pos['main5']['kaisou'] = [23,358]
-pos['main5']['ndock'] = [23,410]
-pos['main5']['factory'] =[25,458]
-pos['main5']['senseki'] = [163,155]
-pos['main5']['quest'] = [556,152]
+pos['main5']             = dict()
+pos['main5']['port']     = ("母港へ移動しました", [79,160])
+pos['main5']['hensei']   = ("編成画面へ移動しました", [29,252])
+pos['main5']['refill']   = ("補給画面へ移動しました", [29,303])
+pos['main5']['kaisou']   = ("改装画面へ移動しました", [23,358])
+pos['main5']['ndock']    = ("入渠画面へ移動しました", [23,410])
+pos['main5']['factory']  = ("工廠画面へ移動しました", [25,458])
+pos['main5']['senseki']  = ("戦績画面へ移動しました", [163,155])
+pos['main5']['quest']    = ("任務画面へ移動しました", [556,152])
 
 # 改變船隻排列的依據
-pos['main5']['sort'] = [775,212]
+pos['main5']['sort'] = ("ソートルールを変更しました", [775,212])
 
 # 跳到第一頁 或 最後一頁
 pos['main5']['q'] = [440,557]
@@ -80,15 +80,15 @@ pos['main5']['0'] = [497,511]
 
 
 pos['port'] = dict()
-pos['port']['port'] = pos['main5']['port']
-pos['port']['hensei'] = [202,238]
-pos['port']['refill'] = [80,315]
-pos['port']['kaisou'] = [318,315]
-pos['port']['ndock'] = [127,462]
-pos['port']['factory'] = [275,462]
-pos['port']['fight'] = [207,363]  # 出擊
-pos['port']['senseki'] = pos['main5']['senseki']
-pos['port']['quest'] = pos['main5']['quest']
+pos['port']['port']    = ("母港へ移動しました", pos['main5']['port'][1])
+pos['port']['hensei']  = ("編成画面へ移動しました", [202,238])
+pos['port']['refill']  = ("補給画面へ移動しました", [80,315])
+pos['port']['kaisou']  = ("改装画面へ移動しました", [318,315])
+pos['port']['ndock']   = ("入渠画面へ移動しました", [127,462])
+pos['port']['factory'] = ("工廠画面へ移動しました", [275,462])
+pos['port']['fight']   = ("出撃画面へ移動しました", [207,363])  # 出擊
+pos['port']['senseki'] = ("戦績画面へ移動しました", pos['main5']['senseki'][1])
+pos['port']['quest']   = ("任務画面へ移動しました", pos['main5']['quest'][1])
 
 # 編成
 pos['hensei'] = dict()
@@ -117,7 +117,7 @@ pos['hensei']['s2'] = [668,317]
 pos['hensei']['s3'] = [328,429]
 pos['hensei']['s4'] = [672,432]
 pos['hensei']['s5'] = [327,537]
-pos['hensei']['s6'] = [327,537]
+pos['hensei']['s6'] = [673,540]
 # change ship 切換船隻
 pos['hensei']['c1'] = [413,317]
 pos['hensei']['c2'] = [757,311]
@@ -242,6 +242,7 @@ pos['quest']['3'] = [739,376]
 pos['quest']['4'] = [743,443]
 pos['quest']['5'] = [746,519]
 pos['quest']['port'] = pos['main5']['port']
+# pos['quest']['c'] = pos['main5']['port'][1]
 # btn_pages = [btn_page1, btn_page2, btn_page3, btn_page4, btn_page5]
 
 

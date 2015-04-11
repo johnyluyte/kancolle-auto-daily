@@ -51,7 +51,7 @@ def click_and_wait(position, sleep_sec = gl_lag):
 
 def click_no_wait(position):
     # 這邊可以加上 offset，用來微調或修正點擊最終位置
-    print get_time_stamp() + "click(): [" + str(position[0]) + "," + str(position[1]) + "]"
+    # print get_time_stamp() + "click(): [" + str(position[0]) + "," + str(position[1]) + "]"
     m.click(position[0], position[1])
 
 def keydown_and_wait(keys, sleep_sec):
@@ -69,7 +69,7 @@ def get_time_stamp():
 
 
 def gprint(msg):
-    print msg
+    print "電：", msg
 
 def gfinish():
     gprint("任務完了")
