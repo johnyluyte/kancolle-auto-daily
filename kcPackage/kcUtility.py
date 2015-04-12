@@ -71,6 +71,9 @@ def get_time_stamp():
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
 
+
+
+
 def uprint(msg):
     print "電：", msg
 

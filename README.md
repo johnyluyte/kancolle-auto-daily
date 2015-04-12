@@ -72,8 +72,16 @@ http://stackoverflow.com/questions/11544541/python-ascii-and-unicode-decode-erro
 http://stackoverflow.com/questions/16058065/how-can-i-convert-strings-like-u5c0f-u738b-u5b50-u003a-u6c49-u6cd5-u82f1-u5bf9
 
 
+寫成 command line 模式
 
-<<<<<<< HEAD
+接下來就是程式架構，盡量用 OOP 的方式撰寫，把不同功能的 module 區分清楚
+
+之後就可以將不同的 "macro" 寫成不同的腳本，直接在統一個 command line 模式下呼叫
+
+
+
+
+
 ## 考察：
 
 火力、雷裝、對空、裝甲
@@ -105,8 +113,6 @@ http://stackoverflow.com/questions/16058065/how-can-i-convert-strings-like-u5c0f
 
 
 ## TODO：
-=======
->>>>>>> d4c952d4cc722231811ea8091df214022175c4e0
 
 然後在 Python 裡面 parse JSON，規則參考 艦これ　API/JSON 分析那篇 (自己寫)
 
@@ -119,7 +125,6 @@ API 的分析請見下篇文章
 
 這邊有些有趣的 data
 https://www.snip2code.com/Snippet/32881/Kankore-Slot-Item-Data
-
 
 需要一個 api_sortno(艦娘圖鑑的號碼) 與 艦娘名稱 的對應表格
 
@@ -143,6 +148,16 @@ github 公開 excel 與 python
 
 3. 手動選擇地圖後，自動戰鬥(自動選陣行、自動不追擊、自動撤退?)
 
+
+在 shell 輸入 data ndock, data deck1, data decks, data isuzu 時，要能顯示
+在 data 那邊，加入一下各航空母艦艦載量，加入一下改的等級?
+在編成時，輸入 c1 akagi 可以自動幫我換好艦娘(
+  - 要先確認並過濾重複的艦娘，找到正確的(own_id 最小)
+  - 找到在第幾頁，並自動選取(從 q 或 w 然後 asdf 這樣選)
+延續上面的，只是這次可以在編成畫面輸入 cf loli 就全員換成第六驅逐艦隊，cf main 就換成 main force
+當然也可以透過 fleet 來顯示目前所有預設的艦隊，然後輸入 fleet loli 來看詳細
+自動檢查"接下來的行程" (有哪些船艦快修好了，有哪些遠征快回來了，有哪些船艦快造好了 等等)
+自動在進入 port, ndock, factory 時檢查 api  (dev tool 記得要縮到只剩一個，filter 位置會改變，要記下來)
 
 
 簡易腳本

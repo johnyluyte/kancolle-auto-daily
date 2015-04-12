@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import kcShipData as s
+
 
 # 使用者輸入
 USER_INPUT = None
@@ -18,6 +20,8 @@ COLOR_LIGHTRED="\033[1;31m"
 COLOR_LIGHTYELLOW="\033[1;33m"
 
 
+def gerror(msg):
+    print COLOR_LIGHTRED, msg, COLOR_DEFAULT
 
 # 修船廠資訊
 class Ndock(object):
@@ -63,14 +67,15 @@ class Ship(object):
         self.lucky = lucky
 
     def print_info(self):
-        print("own_id " + str(self.own_id))
-        print("sortno " + str(self.sortno))
-        print("lv " + str(self.lv))
+        print(str(self.own_id) + "\t" + str(self.sortno) + "\t" + str(s.get_ship_name(self.sortno)))
+        # print("own_id " + str(self.own_id))
+        # print("sortno " + str(self.sortno))
+        # print("lv " + str(self.lv))
         # print("nowhp " + str(self.nowhp))
         # print("maxhp " + str(self.maxhp))
         # print("cond " + str(self.cond))
-        print("karyoku " + str(self.karyoku))
-        print("raisou " + str(self.raisou))
+        # print("karyoku " + str(self.karyoku))
+        # print("raisou " + str(self.raisou))
         # print("taiku " + str(self.taiku))
         # print("soukou " + str(self.soukou))
         # print("kaihi " + str(self.kaihi))
@@ -112,7 +117,7 @@ class Player(object):
         elif deck_id > 0 and deck_id < 5 and (self.decks[deck_id-1] is not None):
             self.decks[deck_id-1].print_info()
         else:
-            print "[Player][print_info_decks] Invalid deck_id"
+            gerror("[Player][print_info_decks] Invalid deck_id")
 
     def print_info_ndocks(self, dock_id = 5):
         # 印出所有的修船廠狀態
@@ -124,7 +129,7 @@ class Player(object):
         elif dock_id > 0 and dock_id < 5 and (self.ndocks[dock_id-1] is not None):
             self.ndocks[dock_id-1].print_info()
         else:
-            print "[Player][print_info_ndocks] Invalid deck_id"
+            gerror("[Player][print_info_ndocks] Invalid dock_id")
 
     """
     TODO: 應該改成輸入船的名字也可以印出來!?
@@ -132,10 +137,13 @@ class Player(object):
     """
     def print_info_ships(self, ship_in_list = 1):
         # 印出某個指定的船狀態，以在 list 的順序印出來，
-        if ship_in_list > 0 and ship_in_list <= 100 and (self.ships[ship_in_list-1] is not None):
-            self.ships[ship_in_list-1].print_info()
+        if ship_in_list > 0 and ship_in_list <= 100:
+            if self.ships[ship_in_list-1] is not None:
+                self.ships[ship_in_list-1].print_info()
+            else:
+                return
         else:
-            print "[Player][print_info_ships] Invalid deck_id"
+            gerror("[Player][print_info_ships] Invalid ship_in_list")
 
 player = Player()
 

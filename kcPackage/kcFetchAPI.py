@@ -154,7 +154,11 @@ def parse_port(jsonData):
         sakuteki        = ships[i]['api_sakuteki'][0]
         lucky           = ships[i]['api_lucky'][0]
         g.player.ships[i] = g.Ship(own_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
-    g.player.print_info_ships(5)
+
+    for i in range(1,101):
+        if i % 10 == 1:
+            print "[", i, "]"
+        g.player.print_info_ships(i)
 
 
 
