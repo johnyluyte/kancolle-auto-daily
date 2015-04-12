@@ -2,15 +2,10 @@
 import kcGlobal as g
 import kcUtility as u
 import kcCommand as c
+import kcFetchAPI as f
 
 """
-pvt
-pve
-pvp
-
-jin1~5
-left
-right
+refill f5 need qwasdf
 """
 
 def is_handled_by_predefined_func(inp):
@@ -21,7 +16,31 @@ def is_handled_by_predefined_func(inp):
     """
     if inp == "exit" or inp =="bye":
         u.uprint("お疲れ様でした、明日も頑張ってください。")
-        exit() # Exit
+        exit()
+    # 抓取 json API
+    elif inp.startswith('api') and len(inp.split()) == 2:
+        arg = inp.split()[1]
+        if arg == 'quest' or arg == 'q':
+            u.get_focus_game()
+            f.fetch_api_response('questlist')
+            u.get_focus_terminal()
+            return True
+        elif arg == 'port' or arg == 'p':
+            u.get_focus_game()
+            f.fetch_api_response('port')
+            u.get_focus_terminal()
+            return True
+        else:
+            return False
+    # 顯示從 json API 得來的資料
+    elif inp.startswith('data') and len(inp.split()) == 2:
+        arg = inp.split()[1]
+        if arg == 'questlist':
+            return True
+        elif arg == 'port':
+            return True
+        else:
+            return False
     elif inp.startswith('place'):
         # 印出目前場景
         if len(inp.split()) == 1:

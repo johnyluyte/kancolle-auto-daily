@@ -55,6 +55,16 @@ def keydown_and_wait(keys, sleep_sec):
 def keydown_no_wait(keys):
     print get_time_stamp() + "keydown(): " + str(keys)
     k.press_keys(keys)
+    # k.release_key(keys)
+
+def input_string_and_wait(msg, sleep_sec):
+    input_string_no_wait(msg)
+    time.sleep(sleep_sec)
+
+def input_string_no_wait(msg):
+    print get_time_stamp() + "input_string(): " + msg
+    k.type_string(msg)
+
 
 def get_time_stamp():
     current_time = str(datetime.datetime.now()).split('.')[0] # 2015-03-29 20:18:08
