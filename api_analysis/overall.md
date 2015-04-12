@@ -16,6 +16,15 @@ https://chrome.google.com/webstore/detail/live-http-headers/iaiioopjkcekapmldfgb
 
 
 
+這邊分析的 API 是 4/2 分析的
+
+也就是 03/27 メンテナンス作業 後的 API
+
+04/10 メンテナンス 過後我也稍微比對了一下，基本上大同小異，只新增了幾個變數(ex: api_parallel_quest_count 等)
+
+格式基本上都一樣
+
+
 記得把提督 ID 都刪掉
 
 這些都是經過短暫實驗與工程師直覺推敲出來的
