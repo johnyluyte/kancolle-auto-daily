@@ -14,6 +14,13 @@ https://chrome.google.com/webstore/detail/live-http-headers/iaiioopjkcekapmldfgb
 
 [勿刪除] json 不可上傳，因為 git 擁有 id 資訊
 
+也可參考這邊
+http://kancolletool.github.io/docs/api/
+資料雖然也有些比較舊的，但是這幾句話還是能套用
+> KanColle's API is a messy REST API that takes the word "redundant" to a new level.
+
+> Fortunately for us, all data is plain JSON authorized only by your API Token.
+> Less fortunately, all images and such are embedded into SWF files, and are a pain to get out of there.
 
 
 這邊分析的 API 是 4/2 分析的

@@ -33,11 +33,37 @@ def is_handled_by_predefined_func(inp):
         else:
             return False
     # 顯示從 json API 得來的資料
+    elif inp.startswith('get') and len(inp.split()) == 2:
+        arg = inp.split()[1]
+        if g.player.get_ship(arg) == None:
+            return False
+        else:
+            return True
     elif inp.startswith('data') and len(inp.split()) == 2:
         arg = inp.split()[1]
-        if arg == 'questlist':
+        if arg == 'quest' or arg == 'q':
             return True
-        elif arg == 'port':
+        elif arg == 'port' or arg == 'p':
+            return True
+        elif arg == 'deck' or arg == 'd':
+            g.player.print_info_decks()
+            return True
+        elif arg == 'ndock' or arg == 'n':
+            g.player.print_info_ndocks()
+            return True
+        elif arg == 'event' or arg == 'e':
+            # 即將到來的事件（修復、遠征、建造）
+            return True
+        elif arg == 'ship' or arg == 's':
+            for i in range(1,101):
+                if i % 10 == 1:
+                    print "[", i, "]"
+                g.player.print_info_ships(i)
+            return True
+        elif arg == 'material' or arg == 'r': # Resource
+            g.player.print_info_materials()
+            return True
+        elif arg == 'myfleet' or arg == 'm':
             return True
         else:
             return False

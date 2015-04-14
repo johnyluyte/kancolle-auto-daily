@@ -18,6 +18,92 @@ BANされたよ!
 這項 API 的更改應該就是為了防止自動練功的程式。
 
 
+
+## 現有程式調查 survey
+
+在 github 搜尋 kancolle 可以找到一堆 open source 的艦これ相關程式，為了避免重造輪子，先針對這些開源程式做研究。
+
+程式大致可以分成下列幾種：
+
+### 1. Database 型態
+
+https://github.com/ponkotuy/MyFleetGirls
+https://myfleet.moe/
+https://github.com/sirobot/kancolle
+
+
+### 2. 協助 proxy，cache 等
+
+艦これ封鎖日本海外 IP，故海外玩家大部分必須經由 VPN 啟動基本連線。(連上後遊戲本身不會鎖IP，故連上後就可以切斷 VPN)
+
+proxy 類程式可以讓玩家不須連上 VPN，或是提供代連的服務
+
+瀏覽器在開啟艦これ時，需要從伺服器拿到並初始化一些資料，有時候某些步驟是多餘的，cache 類程式檢查使用者端瀏覽器是否已經有相關 cache，加快遊戲讀取速度。
+
+
+### 3. 自動系列(外掛)
+
+https://github.com/methane/kancolle-tools/blob/master/autorepair.py
+自動維修，解析 API 後直接發封包給 server 要求維修。
+最後更新 26 Oct 2013
+
+https://github.com/tesseract2048/kancolle-warden/blob/master/client_simulator.py
+自動遠征、戰鬥、維修等等，解析 API 後直接發封包給 server 要求。
+最後更新 19 Feb 2014
+
+https://github.com/niyuna/kancolle_echor/blob/master/kancolle_echor.py
+跟上面一樣，自動遠征、戰鬥、維修等等，解析 API 後直接發封包給 server 要求。
+最後更新 7 Jun 2014
+
+https://github.com/amylase/kancolle-auto
+用圖形辨識的方式自動重複遠征-完成-補給-遠征..
+這個用到的 sikuli 就是我需要的!?
+
+
+### 4. 輔助型、提供資訊
+
+艦これ預設的 UI 實在是很爛，所以很多玩家開發出介面型工具，讓遊戲資訊能更簡潔明瞭的顯示出來，讓玩家掌握
+
+http://grabacr.net/kancolleviewer
+最強的艦これ專用瀏覽器，可惜 Windows 限定
+
+https://github.com/otiai10/kanColleWidget
+實用的 chrome extension 外掛
+
+https://github.com/KanColleTool/KanColleTool
+跟 kancolleviewer 很像，
+
+
+
+
+## 待研究：
+
+
+https://github.com/rhenium/kancolle_helper
+這個是怎麼純用 chrome extension 就抓到見娘資料的?
+是用 cookie?  以前遊戲有用 cookie存?
+
+https://github.com/amylase/kancolle-auto
+用圖形辨識的方式自動重複遠征-完成-補給-遠征..
+這個用到的 sikuli 就是我需要的!?
+
+1. Cookie
+
+詳情可以到 dev tool -> Resource 研究
+幾乎所有 js 都附有註解，包含部分付款資訊的 js
+
+2. API
+
+官方更新 API 後就無法使用，上面 github 內許多自動執行的已經無法運作了 (API 不同?)
+
+官方假設刻意修改部分 server 端 API，並同時更新 client 端 flash，
+
+但 server 端仍保留向下相容接受舊的 API，並偷偷記錄那些玩家還在使用舊的 API，就可抓出那些玩家使用外掛..
+
+3.
+
+
+
 ## 步驟
 
 1. 用尺量螢幕長寬，以及要點擊之按鈕的位置，找出兩者相對比例後，推算出要丟給 pymouse 的座標
@@ -110,6 +196,11 @@ http://stackoverflow.com/questions/16058065/how-can-i-convert-strings-like-u5c0f
 大井、北上
 0,1,0,1
 0,4,0,1 lv10
+
+--UC--
+
+摩耶
+如月中破
 
 
 ## TODO：
