@@ -11,6 +11,9 @@ from pykeyboard import PyKeyboard
 m = PyMouse()
 k = PyKeyboard()
 
+import hashlib
+
+last_hash = None
 
 """
 {
@@ -116,7 +119,7 @@ def parse_port(jsonData):
     for i in range(len(material)):
         tempList.append(material[i]['api_value'])
     g.player.materials = g.Material(tempList)
-    g.player.print_info_materials()
+    # g.player.print_info_materials()
 
     deck = meta['api_deck_port']
     for i in range(len(deck)):
@@ -124,7 +127,7 @@ def parse_port(jsonData):
         ships             = deck[i]['api_ship']
         mission           = deck[i]['api_mission']
         g.player.decks[i] = g.Deck(name, ships, mission)
-    g.player.print_info_decks()
+    # g.player.print_info_decks()
 
     ndock = meta['api_ndock']
     for i in range(2):
@@ -134,7 +137,7 @@ def parse_port(jsonData):
         complete_time     = ndock[i]['api_complete_time']
         complete_time_str = ndock[i]['api_complete_time_str']
         g.player.ndocks[i] = g.Ndock(ndock_id, state, ship_id, complete_time, complete_time_str)
-    g.player.print_info_ndocks()
+    # g.player.print_info_ndocks()
 
 
     ships = meta['api_ship']
@@ -155,11 +158,12 @@ def parse_port(jsonData):
         lucky           = ships[i]['api_lucky'][0]
         g.player.ships[i] = g.Ship(own_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
 
-    for i in range(1,101):
-        if i % 10 == 1:
-            print "[", i, "]"
-        g.player.print_info_ships(i)
+    # for i in range(1,101):
+    #     if i % 10 == 1:
+    #         print "[", i, "]"
+    #     g.player.print_info_ships(i)
 
+    u.uprint("port API 解析完了です")
 
 
 """
@@ -237,23 +241,35 @@ def parse_questlist(jsonData):
 
 
 def set_chrome_dev_filter(filter):
-    m.click(80, 685, 1)
+    # 將 chrome dev tool 調整到 800 * 567 px
+    m.click(80, 720)
     time.sleep(0.01)
     k.press_key('Command')
     k.tap_key('a')
     k.release_key('Command')
-    time.sleep(0.01)
+    time.sleep(0.1)
     k.type_string(filter)
-    time.sleep(0.2)
+    time.sleep(0.01)
 
 def copy_api_response_from_chrome_dev():
     u.click_and_wait([80,770], 0.3)
-    u.click_and_wait([500,770], 0.1)
+    u.click_and_wait([500,770], 0.3)
     # keydown_then_wait(['Command','a'], 0.2) 不需要全選，直接複製即可複製 responsive 的內容!
     k.press_key('Command')
     k.tap_key('c')
     k.release_key('Command')
-    time.sleep(0.01)
+    time.sleep(0.3)
+
+def is_same_as_last_fetch(json_data):
+    global last_hash
+    md5 = hashlib.md5()
+    md5.update(str(json_data))
+    this_hash = md5.digest()
+    if last_hash == this_hash:
+        print g.COLOR_LIGHTRED ,"Didn't update Json due two same hash value", g.COLOR_DEFAULT
+        return True
+    last_hash = this_hash
+    return False
 
 
 def fetch_api_response(filter):
@@ -268,7 +284,11 @@ def fetch_api_response(filter):
         json_data = json.loads(dataFromClipboard[7:])
     except:
         print("Failed to fecth API, no valid JSON available")
-        return False
+        return
+
+    # 與上個 JSON 是否擁有相同的 hash，有的話就更新
+    if is_same_as_last_fetch(json_data) is True:
+        return
 
     if filter == 'questlist':
         global gl_total_quest_page
@@ -277,7 +297,8 @@ def fetch_api_response(filter):
     elif filter == 'port':
         parse_port(json_data)
 
-
+    # 清空 clipboard
+    u.pbcopy("5566")
 """
     # Workaround 解決複製兩次 json 的情形（做了多次實驗依然找不出原因，先放棄追究原因）
     # 檢查是否有出現 重複複製兩次 的情形，如果有的話，要把第二個 json 拿掉
