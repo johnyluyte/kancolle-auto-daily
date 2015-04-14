@@ -238,12 +238,12 @@ kanmusuIndex["319"]    = ("五十鈴改", "")
 kanmusuIndex["322"]    = ("川内改", "")
 kanmusuIndex["323"]    = ("神通改", "")
 kanmusuIndex["324"]    = ("那珂改", "")
-kanmusuIndex["334"]    = ("暁改", "")
-kanmusuIndex["335"]    = ("響改", "")
-kanmusuIndex["336"]    = ("雷改", "")
-kanmusuIndex["337"]    = ("電改", "")
+kanmusuIndex["334"]    = ("暁改", "akatuki")
+kanmusuIndex["335"]    = ("響改", "hibiki")
+kanmusuIndex["336"]    = ("雷改", "kaminari")
+kanmusuIndex["337"]    = ("電改", "denchan")
 kanmusuIndex["371"]    = ("摩耶改", "")
-kanmusuIndex["377"]    = ("赤城改", "")
+kanmusuIndex["377"]    = ("赤城改", "akagi")
 kanmusuIndex["386"]    = ("扶桑改", "")
 kanmusuIndex["387"]    = ("山城改", "")
 kanmusuIndex["389"]    = ("鬼怒改", "")
@@ -253,13 +253,20 @@ kanmusuIndex["390"]    = ("阿武隈改", "")
 
 
 
-
 def get_ship_name(id):
     name = kanmusuIndex.get(str(id), None)
     if name is not None:
         name = name[0]
     return name
 
+def get_ship_key(nick_name):
+    found = False
+    for key in kanmusuIndex:
+        if kanmusuIndex[key][1] == nick_name:
+            found = key
+            break
+    print "[get_ship_key] found = ", found
+    return found
 
 
 questIndex = dict()
