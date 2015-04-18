@@ -83,8 +83,6 @@ class Ship(object):
         # print("sakuteki " + str(self.sakuteki))
         # print("lucky " + str(self.lucky))
 
-
-
 class Material(object):
     def __init__(self, itemsValue):
         self.items  = [["燃料",0], ["彈藥",0], ["鋼材",0], ["機材",0], ["高速建造",0], ["高速修復",0], ["建造資材",0], ["改修資材",0]]
@@ -94,10 +92,6 @@ class Material(object):
     def print_info(self):
         for tmp in self.items:
             print(tmp[0] + ": " + str(tmp[1]))
-
-
-
-
 
 class Player(object):
     def __init__(self):

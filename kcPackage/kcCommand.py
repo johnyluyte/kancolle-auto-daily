@@ -159,6 +159,8 @@ cmd['hensei']['f1']         = (cmd['refill']['f1'][0], 0, (139,223))
 cmd['hensei']['f2']         = (cmd['refill']['f2'][0], 0, (166,222))
 cmd['hensei']['f3']         = (cmd['refill']['f3'][0], 0, (198,221))
 cmd['hensei']['f4']         = (cmd['refill']['f4'][0], 0, (226,222))
+# 解除旗艦以外的編列
+cmd['hensei']['clear']         = ("伴随艦一括解除したのです", 0, (423,217))
 # watch status 船隻狀態
 cmd['hensei']['s1']         = ("旗艦の詳細です", 0, (329,314))
 cmd['hensei']['s2']         = ("二番目の艦娘の詳細です", 0, (668,317))

@@ -155,7 +155,4 @@ def main():
 
         handle_command(g.USER_INPUT)
 
-        # filter quest  (設定 chrome dev filter)
-
-
 main()

@@ -249,16 +249,16 @@ def set_chrome_dev_filter(filter):
     k.release_key('Command')
     time.sleep(0.1)
     k.type_string(filter)
-    time.sleep(0.01)
+    time.sleep(0.4)
 
 def copy_api_response_from_chrome_dev():
-    u.click_and_wait([80,770], 0.3)
-    u.click_and_wait([500,770], 0.3)
+    u.click_and_wait([80,770], 0.4)
+    u.click_and_wait([500,770], 0.05)
     # keydown_then_wait(['Command','a'], 0.2) 不需要全選，直接複製即可複製 responsive 的內容!
     k.press_key('Command')
     k.tap_key('c')
     k.release_key('Command')
-    time.sleep(0.3)
+    time.sleep(0.05)
 
 def is_same_as_last_fetch(json_data):
     global last_hash
@@ -298,7 +298,7 @@ def fetch_api_response(filter):
         parse_port(json_data)
 
     # 清空 clipboard
-    u.pbcopy("5566")
+    # u.pbcopy("5566")
 """
     # Workaround 解決複製兩次 json 的情形（做了多次實驗依然找不出原因，先放棄追究原因）
     # 檢查是否有出現 重複複製兩次 的情形，如果有的話，要把第二個 json 拿掉
