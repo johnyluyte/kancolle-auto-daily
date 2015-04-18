@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-import kcGlobal as g
+
+from kcUtility import get_place
 
 """
 定義各個畫面名稱
@@ -59,7 +60,7 @@ type 4 滑鼠點擊乙次(會切換場景)，有 callback：  (msg, type=4, pos1
 
 
 def get_current_available_cmds():
-    return cmd['general'].keys() + cmd[g.PLACE].keys()
+    return cmd['general'].keys() + cmd[get_place()].keys()
 
 
 

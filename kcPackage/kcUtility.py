@@ -2,83 +2,64 @@
 from pymouse import PyMouse
 from pykeyboard import PyKeyboard
 
-import time
+from time import sleep
 import datetime
 
 import Foundation
 import AppKit
 
-import kcGlobal as g
-
 
 # - - - Global Variables - - -
 
-m = PyMouse()
-k = PyKeyboard()
+_LAG = 2
+_m = PyMouse()
+_k = PyKeyboard()
 
+_place = "port"
 
-# 複製字串到 MAC 的剪貼簿
-def pbcopy(s):
-    # "Copy string argument to clipboard"
-    board = AppKit.NSPasteboard.generalPasteboard()
-    board.declareTypes_owner_([AppKit.NSStringPboardType], None)
-    newStr = Foundation.NSString.stringWithString_(s)
-    newData = newStr.nsstring().dataUsingEncoding_(Foundation.NSUTF8StringEncoding)
-    board.setData_forType_(newData, AppKit.NSStringPboardType)
-
-# 從 MAC 的剪貼簿取出字串
-def pbpaste():
-    # "Returns contents of clipboard"
-    board = AppKit.NSPasteboard.generalPasteboard()
-    content = board.stringForType_(AppKit.NSStringPboardType)
-    return content
+# 顯示在 terminal 的顏色
+# http://apple.stackexchange.com/questions/9821/can-i-make-my-mac-os-x-terminal-color-items-according-to-syntax-like-the-ubuntu
+_color = dict()
 
 
 
-# 將伺服器延遲時間算入的最普通的正常點擊方式
-def click_and_wait(position, sleep_sec = g.LAG):
-    """
-    點擊 position 之後睡眠 sleep_sec 秒，給予伺服器緩衝時間
-    """
-    click_no_wait(position)
-    time.sleep(sleep_sec)
+"""
+一般工具
+"""
+def uprint(msg, font_color = 'default'):
+    print "電：", _color[font_color], msg, _color['default']
 
-def click_no_wait(position):
-    # 這邊可以加上 offset，用來微調或修正點擊最終位置
-    # print get_time_stamp() + "click(): [" + str(position[0]) + "," + str(position[1]) + "]"
-    m.click(position[0], position[1])
+def uerror(msg):
+    uprint(msg, 'red')
 
-def keydown_and_wait(keys, sleep_sec):
-    keydown_no_wait(keys)
-    time.sleep(sleep_sec)
+def change_scene(funcName):
+    map( funcName, [0] )
 
-def keydown_no_wait(keys):
-    print get_time_stamp() + "keydown(): " + str(keys)
-    k.press_keys(keys)
-    # k.release_key(keys)
+def set_place(new_place):
+    global _place
+    _place = new_place
+    uprint("Place は " + new_place + " に変更しました")
 
-def input_string_and_wait(msg, sleep_sec):
-    input_string_no_wait(msg)
-    time.sleep(sleep_sec)
-
-def input_string_no_wait(msg):
-    print get_time_stamp() + "input_string(): " + msg
-    k.type_string(msg)
-
+def get_place():
+    return _place
 
 def get_time_stamp():
     current_time = str(datetime.datetime.now()).split('.')[0] # 2015-03-29 20:18:08
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
 
+"""
+滑鼠相關
+"""
+def click_and_wait(position, sleep_sec = _LAG):
+    # 點擊 position 之後睡眠 sleep_sec 秒，給予伺服器緩衝時間
+    click_no_wait(position)
+    sleep(sleep_sec)
 
-
-
-def uprint(msg):
-    print "電：", msg
-
-# def finish():
-    # gprint("任務完了")
+def click_no_wait(position):
+    # 這邊可以加上 offset，用來微調或修正點擊最終位置
+    # print get_time_stamp() + "click(): [" + str(position[0]) + "," + str(position[1]) + "]"
+    _m.click(position[0], position[1])
 
 def get_focus_game():
     click_and_wait([130,120], 0.1)
@@ -86,6 +67,66 @@ def get_focus_game():
 def get_focus_terminal():
     click_and_wait([1000,221], 0.1)
 
-def change_place(new_place):
-    g.PLACE = new_place
-    uprint("Place は " + new_place + " に変更しました")
+
+"""
+鍵盤相關
+"""
+def keydown_and_wait(keys, sleep_sec):
+    keydown_no_wait(keys)
+    sleep(sleep_sec)
+
+def keydown_no_wait(keys):
+    print get_time_stamp() + "keydown(): " + str(keys)
+    _k.press_keys(keys)
+    # k.release_key(keys)
+
+def keydown_string_and_wait(msg, sleep_sec):
+    keydown_string_no_wait(msg)
+    sleep(sleep_sec)
+
+def keydown_string_no_wait(msg):
+    print get_time_stamp() + "input_string(): " + msg
+    _k.type_string(msg)
+
+def keydown_ctrl_a_and_wait(sleep_sec):
+    print get_time_stamp() + "keydown(): ctrl + a"
+    _k.press_key('Command')
+    _k.tap_key('a')
+    _k.release_key('Command')
+    sleep(sleep_sec)
+
+def keydown_ctrl_c_and_wait(sleep_sec):
+    print get_time_stamp() + "keydown(): ctrl + c"
+    _k.press_key('Command')
+    _k.tap_key('c')
+    _k.release_key('Command')
+    sleep(sleep_sec)
+
+
+"""
+剪貼簿相關
+"""
+def pbcopy(s):
+    board = AppKit.NSPasteboard.generalPasteboard()
+    board.declareTypes_owner_([AppKit.NSStringPboardType], None)
+    newStr = Foundation.NSString.stringWithString_(s)
+    newData = newStr.nsstring().dataUsingEncoding_(Foundation.NSUTF8StringEncoding)
+    board.setData_forType_(newData, AppKit.NSStringPboardType)
+
+def pbpaste():
+    board = AppKit.NSPasteboard.generalPasteboard()
+    content = board.stringForType_(AppKit.NSStringPboardType)
+    return content
+
+
+"""
+Main
+"""
+def main():
+    global _color
+    _color['default'] = "\033[m"
+    _color['green']   = "\033[1;32m"
+    _color['red']     = "\033[1;31m"
+    _color['yellow']  = "\033[1;33m"
+
+main()

@@ -1,17 +1,30 @@
 # -*- coding: utf-8 -*-
 
 kanmusuIndex = dict()
+# kanmusuIndex['337'] = ('電改', 'denchan')
 
 def get_ship_name(id):
+    """
+    @ id: 艦娘的圖鑑號碼
+    @ return: 艦娘的官方名稱
+    """
     name = kanmusuIndex.get(str(id), None)
     if name is not None:
         name = name[0]
     return name
 
+
 def get_ship_key(nick_name):
+    """
+    @ nick_name: 艦娘的暱稱
+    @ return:
+         有找到: 回傳該艦娘的圖鑑號碼
+         沒找到: 回傳 False
+    """
     found = False
-    for key in kanmusuIndex:
-        if kanmusuIndex[key][1] == nick_name:
+    for key, value in kanmusuIndex.items():
+        # ('337', ('電改', 'denchan'))
+        if value[1] == nick_name:
             found = key
             break
     print "[get_ship_key] found = ", found
