@@ -144,9 +144,13 @@ def _parse_port(player, jsonData):
         player.ndocks[i] = Ndock(ndock_id, state, ship_id, complete_time, complete_time_str)
     # player.print_info_ndocks()
 
-
+    # 先清空 player ships
+    for i in xrange(100):
+        player.ships[i] = None
     ships = meta['api_ship']
-    for i in range(len(ships)):
+    count = len(ships)
+    player.ships_count = count
+    for i in xrange(count):
         own_id          = ships[i]['api_id']
         sortno          = ships[i]['api_sortno']
         lv              = ships[i]['api_lv']

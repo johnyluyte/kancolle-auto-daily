@@ -6,10 +6,11 @@ from kcShipData import get_ship_key
 
 class Player(object):
     def __init__(self):
-        self.materials  = None
-        self.decks      = [None, None, None, None]
-        self.ndocks     = [None, None, None, None]
-        self.ships      = [None] * 100  # 意義同上，建立 1 個含有 100 個 None 的 list
+        self.materials   = None
+        self.decks       = [None, None, None, None]
+        self.ndocks      = [None, None, None, None]
+        self.ships       = [None] * 100  # 意義同上，建立 1 個含有 100 個 None 的 list
+        self.ships_count = 0
 
     def print_info_materials(self):
         if self.materials is None:
@@ -64,7 +65,10 @@ class Player(object):
         else:
             uerror("[Player][print_info_ships] Invalid ship_in_list")
 
-    def get_ship(self, nick_name):
+    def print_info_ships_count(self):
+        print "艦娘總數為：", self.ships_count
+
+    def get_ship_local_id(self, nick_name):
         # 輸入艦娘的綽號（譬如 denchan），透過對照表找到 denchan 對應的圖鑑號碼
         key = get_ship_key(nick_name)
         print "[get_ship] key = ", key
@@ -79,6 +83,8 @@ class Player(object):
                     # 要加一，因為 list 從 [0] 開始
                     result = index + 1
         # not found
-        print "[get_ship] nick_name = ", nick_name ," result = " , result
+        print "[get_ship] nick_name = ", nick_name ," api_id = " , result
+
+
         return result
 

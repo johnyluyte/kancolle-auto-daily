@@ -25,6 +25,7 @@ from kcUtility import get_place
 """
 # 定義各個按鈕的位置
 
+
 # 遊戲主畫面
 
 """
