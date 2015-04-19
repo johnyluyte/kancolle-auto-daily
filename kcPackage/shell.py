@@ -1,35 +1,20 @@
 # -*- coding: utf-8 -*-
-from kcUtility import _color
-from kcUtility import uerror
-from kcUtility import uprint
-from kcUtility import unknown_command
-from kcUtility import set_place
-from kcUtility import get_place
-from kcUtility import get_focus_game
-from kcUtility import get_focus_terminal
-from kcUtility import click_and_wait
-from kcUtility import click_no_wait
+import kcUtility as u
 
-from kcCommand import get_current_available_cmds
-from kcCommand import get_place_of_command
-from kcCommand import exec_single_command
-
-from kcScript import exec_script
-
-from kcFetchAPI import fetch_api_response
+import kcCommand
+import kcScript
+import kcFetchAPI
 
 from kcClasses.player import Player
 
-
 """
-refill f5 need qwasdf
+TODO:
+列出所有有 nick_name 的船
+列出所有 fleet 的名稱
+change fleet (6 ships)
+quest
+How to handle chrome dev tool unstable (periodicaly clear network monitor?)
 """
-
-
-player = Player()
-_user_input = None
-
-
 
 def is_handled_by_predefined_func(inp):
     """
@@ -38,20 +23,20 @@ def is_handled_by_predefined_func(inp):
     如果無法處理，return False
     """
     if inp == "exit" or inp =="bye":
-        uprint("お疲れ様でした、明日も頑張ってください")
+        u.uprint("お疲れ様でした、明日も頑張ってください")
         exit()
     # 抓取 json API
     elif inp.startswith('api') and len(inp.split()) == 2:
         arg = inp.split()[1]
         if arg == 'quest' or arg == 'q':
-            get_focus_game()
-            fetch_api_response(player, 'questlist')
-            get_focus_terminal()
+            u.get_focus_game()
+            kcFetchAPI.fetch_api_response(player, 'questlist')
+            u.get_focus_terminal()
             return True
         elif arg == 'port' or arg == 'p':
-            get_focus_game()
-            fetch_api_response(player, 'port')
-            get_focus_terminal()
+            u.get_focus_game()
+            kcFetchAPI.fetch_api_response(player, 'port')
+            u.get_focus_terminal()
             return True
         else:
             return False
@@ -94,14 +79,14 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('place'):
         # 印出目前場景
         if len(inp.split()) == 1:
-            uprint("私たちは今 " + get_place() + " にいます")
+            u.uprint("私たちは今 " + u._color['yellow'] + u.get_place() + u._color['default'] + " にいます")
         # 指定目前場景
         else:
-            set_place(inp.split()[1])
+            u.set_place(player, inp.split()[1])
         return True
     elif inp == "cmd" or inp == '?':
-        uprint("Place = " + _color['yellow'] + get_place() + _color['default'])
-        uprint("available commands = " + str(sorted(get_current_available_cmds())))
+        u.uprint("Place = " + u._color['yellow'] + u.get_place() + u._color['default'])
+        u.uprint("available commands = " + str(sorted(kcCommand.get_current_available_cmds())))
         return True
     elif inp == "":
         global _user_input
@@ -126,26 +111,29 @@ def check_command(input_):
     if len(input_)>1:
         args = input_[1:]
 
-    place = get_place_of_command(command)
+    place = kcCommand.get_place_of_command(command)
     if place is None:
-        unknown_command(command)
+        u.unknown_command(command)
         return False
 
     if len(input_)>1:
-        exec_script(player, place, command, args)
+        kcScript.exec_script(player, place, command, args)
     else:
-        exec_single_command(player, place, command)
+        kcCommand.exec_single_command(player, place, command)
+
 
 
 
 def main():
-    uprint("あわわわ、びっくりしたのです。")
-    set_place("port")
-
     global _user_input
+    global player
+    player = Player()
+
+    u.uprint("あわわわ、びっくりしたのです。")
+    # set_place("port")
 
     while True:
-        _user_input = raw_input(_color['green'] + "電：提督、ご命令を" + _color['default'] + " > ")
+        _user_input = raw_input(u._color['green'] + "電：提督、ご命令を" + u._color['default'] + " > ")
 
         if is_handled_by_predefined_func(_user_input) is True:
             continue

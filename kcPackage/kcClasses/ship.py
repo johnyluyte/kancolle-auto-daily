@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from kcUtility import _color
+# from kcUtility import _color
+import kcUtility as u
 
-from kcShipData import get_ship_name
+import kcShipData
 
 class Ship(object):
     def __init__(self, own_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky):
@@ -22,9 +23,9 @@ class Ship(object):
 
     def print_info(self):
         msg = str(self.own_id) + "\t" + str(self.sortno) +  "\t" + str(self.lv) + "\t"
-        name = str(get_ship_name(self.sortno))
+        name = str(kcShipData.get_ship_name_by_id(self.sortno))
         if name == 'None':
-            msg += _color['red'] + name + _color['default']
+            msg += u._color['red'] + name + u._color['default']
         else:
             msg += name
         print(msg)

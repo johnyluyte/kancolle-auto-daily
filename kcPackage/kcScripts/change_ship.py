@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-from kcUtility import uprint
-from kcUtility import get_focus_game
-from kcUtility import get_focus_terminal
-from kcUtility import click_and_wait
-from kcUtility import click_no_wait
+import kcUtility as u
 
 from kcCommand import cmd
 
@@ -25,13 +21,13 @@ def run(player_, position, nick_name):
 
     # 計算一下此艦娘在第幾頁的第幾個
     tmp = abs(player.ships_count - local_id) + 1
-    page = (tmp // 10) + 1
+    page = ((tmp-1) // 10) + 1
     number = tmp % 10
     # print "Page: ", page, "N.O: ", number
 
-    get_focus_game()
+    u.get_focus_game()
     main(position, page, number)
-    get_focus_terminal()
+    u.get_focus_terminal()
 
 
 def main(position, page, number):
@@ -43,7 +39,7 @@ def main(position, page, number):
     target = cmd['hensei']
 
 
-    do_action(target[position][0], target[position][2], 0.25)
+    do_action(target[position][0], target[position][2], 0.3)
 
     # 遊戲會記錄選擇上一個艦娘時的頁面，所意要先回到第一頁
     do_action(target['q'][0], target['q'][2], 0.1)
@@ -92,6 +88,6 @@ def main(position, page, number):
 
 
 def do_action(cmd_msg, cmd_pos, sleep_time):
-    uprint(cmd_msg)
-    click_and_wait(cmd_pos, sleep_time)
+    u.uprint(cmd_msg)
+    u.click_and_wait(cmd_pos, sleep_time)
 

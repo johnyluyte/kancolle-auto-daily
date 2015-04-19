@@ -3,8 +3,10 @@
 kanmusuIndex = dict()
 # kanmusuIndex['337'] = ('電改', 'denchan')
 
-def get_ship_name(id):
+def get_ship_name_by_id(id):
     """
+    輸入艦娘的圖鑑號碼，回傳該艦娘的官方名稱
+
     @ id: 艦娘的圖鑑號碼
     @ return: 艦娘的官方名稱
     """
@@ -14,8 +16,10 @@ def get_ship_name(id):
     return name
 
 
-def get_ship_key(nick_name):
+def get_ship_zukan_id_by_nick_name(nick_name):
     """
+    輸入艦娘的暱稱，回傳該艦娘的圖鑑號碼
+
     @ nick_name: 艦娘的暱稱
     @ return:
          有找到: 回傳該艦娘的圖鑑號碼
@@ -27,7 +31,7 @@ def get_ship_key(nick_name):
         if value[1] == nick_name:
             found = key
             break
-    print "[get_ship_key] found = ", found
+    # print "[get_ship_key] found = ", found
     return found
 
 

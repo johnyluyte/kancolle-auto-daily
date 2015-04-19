@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
-from kcUtility import uprint
-from kcUtility import get_place
-from kcUtility import set_place
-from kcUtility import get_focus_game
-from kcUtility import get_focus_terminal
-from kcUtility import click_and_wait
-from kcUtility import click_no_wait
+import kcUtility as u
 
 """
 定義各個畫面名稱
@@ -72,17 +66,17 @@ def exec_single_command(player, place ,command):
 
     # type 0 滑鼠點擊乙次：
     if cmd_type == 0:
-        get_focus_game()
-        uprint(cmd_msg)
-        click_no_wait(cmd_pos)
-        get_focus_terminal()
+        u.get_focus_game()
+        u.uprint(cmd_msg)
+        u.click_no_wait(cmd_pos)
+        u.get_focus_terminal()
     # type 1 滑鼠點擊乙次(會切換場景)：
     elif cmd_type == 1:
-        get_focus_game()
-        uprint(cmd_msg)
-        click_no_wait(cmd_pos)
-        set_place(command)
-        get_focus_terminal()
+        u.get_focus_game()
+        u.uprint(cmd_msg)
+        u.click_no_wait(cmd_pos)
+        u.set_place(player, command)
+        u.get_focus_terminal()
         """
     # type 2 一系列的滑鼠點擊：
     elif cmd_type == 2:
@@ -95,7 +89,7 @@ def exec_single_command(player, place ,command):
         pass
         """
     else:
-        unknown_command(command)
+        u.unknown_command(command)
 
 
 def get_place_of_command(command):
@@ -106,15 +100,15 @@ def get_place_of_command(command):
     """
     result = None
     # 這些 if elif 的順序也代表了搜尋的順序
-    if command in cmd[get_place()].keys():
-        result = get_place()
+    if command in cmd[u.get_place()].keys():
+        result = u.get_place()
     elif command in cmd['general'].keys():
         result = 'general'
     return result
 
 
 def get_current_available_cmds():
-    return cmd['general'].keys() + cmd[get_place()].keys()
+    return cmd['general'].keys() + cmd[u.get_place()].keys()
 
 
 
@@ -194,6 +188,13 @@ cmd['refill']['3']          = ("三番目の艦娘を選択しました", 0, (15
 cmd['refill']['4']          = ("四番目の艦娘を選択しました", 0, (160,419))
 cmd['refill']['5']          = ("五番目の艦娘を選択しました", 0, (160,471))
 cmd['refill']['6']          = ("六番目の艦娘を選択しました", 0, (162,517))
+cmd['refill']['q']          = ("first page を選択しました", 0, (218,551))
+cmd['refill']['w']          = ("last page を選択しました", 0, (498,551))
+cmd['refill']['a']          = ("ページを変更しました", 0, (298,552))
+cmd['refill']['s']          = ("ページを変更しました", 0, (332,548))
+cmd['refill']['d']          = ("ページを変更しました", 0, (363,548))
+cmd['refill']['f']          = ("ページを変更しました", 0, (395,549))
+cmd['refill']['g']          = ("ページを変更しました", 0, (426,549))
 cmd['refill']['oil']        = ("燃料のみ補給しました", 0, (641,540))
 cmd['refill']['bullet']     = ("弾薬のみ補給しました", 0, (775,534))
 cmd['refill']['matome']     = ("燃料と弾薬まとめて補給しました", 0, (703,543))

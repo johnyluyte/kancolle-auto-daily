@@ -1,24 +1,15 @@
 # -*- coding: utf-8 -*-
-from kcUtility import uerror
-from kcUtility import uprint
-from kcUtility import click_and_wait
-from kcUtility import keydown_ctrl_a_and_wait
-from kcUtility import keydown_ctrl_c_and_wait
-from kcUtility import keydown_string_and_wait
-from kcUtility import pbcopy
-from kcUtility import pbpaste
+import kcUtility as u
 
 from kcClasses.deck import Deck
 from kcClasses.material import Material
 from kcClasses.ndock import Ndock
 from kcClasses.ship import Ship
 
-
 import json
 import hashlib
+
 last_hash = None
-
-
 
 """
 {
@@ -172,7 +163,9 @@ def _parse_port(player, jsonData):
     #         print "[", i, "]"
     #     player.print_info_ships(i)
 
-    uprint("port API 解析完了です", 'yellow')
+    u.uprint("port API 解析完了です", 'yellow')
+
+    return player
 
 
 """
@@ -251,14 +244,14 @@ def _parse_questlist(jsonData):
 
 def _set_chrome_dev_filter(filter):
     # 將 chrome dev tool 調整到 800 * 567 px
-    click_and_wait([80,720], 0.01)
-    keydown_ctrl_a_and_wait(0.1)
-    keydown_string_and_wait(filter, 0.4)
+    u.click_and_wait([80,720], 0.01)
+    u.keydown_ctrl_a_and_wait(0.1)
+    u.keydown_string_and_wait(filter, 0.4)
 
 def _copy_api_response_from_chrome_dev():
-    click_and_wait([80,770], 0.4)
-    click_and_wait([500,770], 0.05)
-    keydown_ctrl_c_and_wait(0.1)
+    u.click_and_wait([80,770], 0.4)
+    u.click_and_wait([500,770], 0.05)
+    u.keydown_ctrl_c_and_wait(0.1)
 
 def _is_same_as_last_fetch(json_data):
     global last_hash
@@ -266,7 +259,7 @@ def _is_same_as_last_fetch(json_data):
     md5.update(str(json_data))
     this_hash = md5.digest()
     if last_hash == this_hash:
-        uerror("Didn't update Json due two same hash value")
+        u.uerror("Didn't update Json due two same hash value")
         return True
     last_hash = this_hash
     return False
@@ -274,20 +267,20 @@ def _is_same_as_last_fetch(json_data):
 
 def fetch_api_response(player, filter):
     # 清空 clipboard
-    pbcopy("5566")
+    u.pbcopy("5566")
 
     # 設定 filter
     _set_chrome_dev_filter(filter)
     # 複製 response
     _copy_api_response_from_chrome_dev()
 
-    dataFromClipboard = pbpaste()
+    dataFromClipboard = u.pbpaste()
 
     try:
         json_data = json.loads(dataFromClipboard[7:])
     except:
         print("Failed to fecth API, no valid JSON available")
-        # print dataFromClipboard
+        print dataFromClipboard
         return
 
     # 與上個 JSON 是否擁有相同的 hash，有的話就更新
@@ -300,5 +293,4 @@ def fetch_api_response(player, filter):
         print "gl_total_quest_page = ", gl_total_quest_page
     elif filter == 'port':
         _parse_port(player, json_data)
-
 

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from kcUtility import uprint
-from kcUtility import uerror
-from kcUtility import unknown_command
+import kcUtility as u
 
 import kcScripts.change_ship
 import kcScripts.refill_fleet_daily
@@ -22,4 +20,4 @@ def exec_script(player, place, command, args):
             elif args[0] == 'all':
                 kcScripts.refill_fleet_all.run(command)
     else:
-        unknown_command(command)
+        u.unknown_command(command)
