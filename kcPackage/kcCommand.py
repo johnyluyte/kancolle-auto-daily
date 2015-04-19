@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
-
+from kcUtility import uprint
 from kcUtility import get_place
+from kcUtility import set_place
+from kcUtility import get_focus_game
+from kcUtility import get_focus_terminal
+from kcUtility import click_and_wait
+from kcUtility import click_no_wait
 
 """
 定義各個畫面名稱
@@ -58,6 +63,54 @@ type 4 滑鼠點擊乙次(會切換場景)，有 callback：  (msg, type=4, pos1
 @sleep3 - 同 sleep1
 
 """
+
+
+def exec_single_command(player, place ,command):
+    cmd_msg  = cmd[place][command][0]
+    cmd_type = cmd[place][command][1]
+    cmd_pos  = cmd[place][command][2]
+
+    # type 0 滑鼠點擊乙次：
+    if cmd_type == 0:
+        get_focus_game()
+        uprint(cmd_msg)
+        click_no_wait(cmd_pos)
+        get_focus_terminal()
+    # type 1 滑鼠點擊乙次(會切換場景)：
+    elif cmd_type == 1:
+        get_focus_game()
+        uprint(cmd_msg)
+        click_no_wait(cmd_pos)
+        set_place(command)
+        get_focus_terminal()
+        """
+    # type 2 一系列的滑鼠點擊：
+    elif cmd_type == 2:
+        pass
+    # type 3 滑鼠點擊乙次，有 callback：
+    elif cmd_type == 3:
+        pass
+    # type 4 滑鼠點擊乙次(會切換場景)，有 callback：
+    elif cmd_type == 4:
+        pass
+        """
+    else:
+        unknown_command(command)
+
+
+def get_place_of_command(command):
+    """
+    @ command : (string) 使用者輸入的字串的第一個 word
+    @ return  : (string)   該指令所在的位置("general", "hensei", "refill", "ndock", ..)
+                (bool)     如果該指令不合法，回傳 False
+    """
+    result = None
+    # 這些 if elif 的順序也代表了搜尋的順序
+    if command in cmd[get_place()].keys():
+        result = get_place()
+    elif command in cmd['general'].keys():
+        result = 'general'
+    return result
 
 
 def get_current_available_cmds():
@@ -132,9 +185,15 @@ for key, value in cmd['shared_menu'].items():
 cmd['refill']['f1']         = ("第一艦隊を選択しました", 0, (150,223))
 cmd['refill']['f2']         = ("第二艦隊を選択しました", 0, (179,220))
 cmd['refill']['f3']         = ("第三艦隊を選択しました", 0, (206,221))
-cmd['refill']['f4']         = ("第四艦隊を選択しました", 0, (239,226))
+cmd['refill']['f4']         = ("第四艦隊を選択しました", 0, (241,220))
 cmd['refill']['f5']         = ("編成されていない艦娘たちを選択しました", 0, (268,220))
 cmd['refill']['all']        = ("全艦隊を選択/解除", 0, (121,223))
+cmd['refill']['1']          = ("一番目の艦娘を選択しました", 0, (161,268))
+cmd['refill']['2']          = ("二番目の艦娘を選択しました", 0, (165,316))
+cmd['refill']['3']          = ("三番目の艦娘を選択しました", 0, (158,366))
+cmd['refill']['4']          = ("四番目の艦娘を選択しました", 0, (160,419))
+cmd['refill']['5']          = ("五番目の艦娘を選択しました", 0, (160,471))
+cmd['refill']['6']          = ("六番目の艦娘を選択しました", 0, (162,517))
 cmd['refill']['oil']        = ("燃料のみ補給しました", 0, (641,540))
 cmd['refill']['bullet']     = ("弾薬のみ補給しました", 0, (775,534))
 cmd['refill']['matome']     = ("燃料と弾薬まとめて補給しました", 0, (703,543))

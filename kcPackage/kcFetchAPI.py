@@ -203,7 +203,7 @@ def _parse_port(player, jsonData):
 def _parse_questlist(jsonData):
     meta = jsonData['api_data']
     # print json.dumps(data)
-    print "檢查任務第," , meta['api_disp_page'], "頁，共", meta['api_page_count'], "頁。"
+    print "檢查任務第" , meta['api_disp_page'], "頁，共", meta['api_page_count'], "頁。"
     quests = meta['api_list']
 
     # 每一頁一定會有五個欄位，沒有任務的欄位會是 -1，這邊用 (1,6) 只是為了程式方便

@@ -32,6 +32,9 @@ def uprint(msg, font_color = 'default'):
 def uerror(msg):
     uprint(msg, 'red')
 
+def unknown_command(command):
+    uerror('unknown command: ' + command)
+
 def change_scene(funcName):
     map( funcName, [0] )
 

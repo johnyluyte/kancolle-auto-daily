@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
-import kcCommand as c
-
 from kcUtility import _color
 from kcUtility import uerror
 from kcUtility import uprint
+from kcUtility import unknown_command
 from kcUtility import set_place
 from kcUtility import get_place
 from kcUtility import get_focus_game
 from kcUtility import get_focus_terminal
 from kcUtility import click_and_wait
 from kcUtility import click_no_wait
+
+from kcCommand import get_current_available_cmds
+from kcCommand import get_place_of_command
+from kcCommand import exec_single_command
+
+from kcScript import exec_script
 
 from kcFetchAPI import fetch_api_response
 
@@ -95,7 +100,8 @@ def is_handled_by_predefined_func(inp):
             set_place(inp.split()[1])
         return True
     elif inp == "cmd" or inp == '?':
-        uprint("Place = " + _color['yellow'] + get_place() + _color['default'] + ", available commands = " + str(sorted(c.get_current_available_cmds())))
+        uprint("Place = " + _color['yellow'] + get_place() + _color['default'])
+        uprint("available commands = " + str(sorted(get_current_available_cmds())))
         return True
     elif inp == "":
         global _user_input
@@ -103,157 +109,49 @@ def is_handled_by_predefined_func(inp):
         return False
 
 
-def exec_command(command):
-    pass
 
-
-def parse_command(place ,command, args_list = None):
-    cmd_msg  = c.cmd[place][command][0]
-    cmd_type = c.cmd[place][command][1]
-    cmd_pos  = c.cmd[place][command][2]
-
-    # type 0 滑鼠點擊乙次：
-    if cmd_type == 0:
-        get_focus_game()
-        uprint(cmd_msg)
-        click_no_wait(cmd_pos)
-        get_focus_terminal()
-    # type 1 滑鼠點擊乙次(會切換場景)：
-    elif cmd_type == 1:
-        get_focus_game()
-        uprint(cmd_msg)
-        click_no_wait(cmd_pos)
-        set_place(command)
-        get_focus_terminal()
-    # type 2 一系列的滑鼠點擊：
-    elif cmd_type == 2:
-        pass
-    # type 3 滑鼠點擊乙次，有 callback：
-    elif cmd_type == 3:
-        pass
-    # type 4 滑鼠點擊乙次(會切換場景)，有 callback：
-    elif cmd_type == 4:
-        pass
-    else:
-        uerror("unknown cmd_type: " + cmd_type)
-
-
-def autoGetKanmusu(nick_name):
-    local_id = player.get_ship_local_id(nick_name)
-    if local_id is None:
-        print "Cannot find kanmusu with nick_name: ", nick_name
-        return
-    # 計算一下此艦娘在第幾頁的第幾個
-    position = abs(player.ships_count - local_id) + 1
-    page = (position // 10) + 1
-    number = position % 10
-    # print "Page: ", page, "N.O: ", number
-    auto_hensei_ship('c1', page, number)
-
-def auto_hensei_ship(position, page, number):
+def check_command(input_):
     """
-    @ position : 要換到艦隊的第幾個位置（c1 ~ c6）
-    @ page     : 該艦娘在第幾頁
-    @ number   : 該艦娘在該頁第幾個
+    @ input_  : (string) 使用者輸入的字串
+    @ return  :
+        將使用者輸入的字串切割，並檢查第一個 word[0] 是否為合法的指令(Command)，
+        如果正常的話就執行，不回傳
+        如果非合理指令，就不動作並回傳 False
+        e.g.
+            input_ = "get akagi"
+            則我們檢查 word[0]，也就是 "get" 是否為合法的指令。
     """
-    get_focus_game()
+    input_ = input_.split()
+    command = input_[0]
+    if len(input_)>1:
+        args = input_[1:]
 
-    my_helper(c.cmd['hensei'][position][0], c.cmd['hensei'][position][2], 0.25)
-
-    # 遊戲會記錄選擇上一個艦娘時的頁面，所意要先回到第一頁
-    my_helper(c.cmd['hensei']['q'][0], c.cmd['hensei']['q'][2], 0.1)
-
-    tmp = list()
-    if (player.ships_count // 10) + 1 == page:
-        # 在最後一頁
-        tmp.append(c.cmd['hensei']['w'])
-    elif player.ships_count // 10 == page:
-        # 在倒數第二頁
-        tmp.append(c.cmd['hensei']['w'])
-        tmp.append(c.cmd['hensei']['f'])
-    # elif page == 1:
-    #     tmp.append(c.cmd['hensei']['a'])
-    elif page == 2:
-        tmp.append(c.cmd['hensei']['s'])
-    elif page == 3:
-        tmp.append(c.cmd['hensei']['d'])
-    elif page == 4:
-        tmp.append(c.cmd['hensei']['f'])
-    elif page == 5:
-        tmp.append(c.cmd['hensei']['g'])
-    elif page == 6:
-        tmp.append(c.cmd['hensei']['g'])
-        tmp.append(c.cmd['hensei']['f'])
-    elif page == 7:
-        tmp.append(c.cmd['hensei']['g'])
-        tmp.append(c.cmd['hensei']['f'])
-        tmp.append(c.cmd['hensei']['f'])
-    elif page == 8:
-        tmp.append(c.cmd['hensei']['g'])
-        tmp.append(c.cmd['hensei']['f'])
-        tmp.append(c.cmd['hensei']['f'])
-        tmp.append(c.cmd['hensei']['f'])
-    # elif page == 9:
-    #     tmp = c.cmd['hensei']['a']
-    # elif page == 10:
-    #     tmp = c.cmd['hensei']['a']
-
-    for i in tmp:
-        my_helper(i[0], i[2], 0.1)
-
-    number = str(number)
-    my_helper(c.cmd['hensei'][number][0], c.cmd['hensei'][number][2], 0.2)
-    my_helper(c.cmd['hensei']['yes'][0], c.cmd['hensei']['yes'][2], 0.01)
-
-    get_focus_terminal()
-
-def my_helper(cmd_msg, cmd_pos, sleep_time):
-    uprint(cmd_msg)
-    click_and_wait(cmd_pos, sleep_time)
-
-
-
-def handle_command(inp):
-    tmp = inp.split()
-    command = tmp[0]
-    if len(tmp)>1:
-        args = tmp[1:]
-
-    # 別忘了這些 if elif 的順序也代表了指令優先順序
-    if command in c.cmd[get_place()].keys():
-        place = get_place()
-    elif command in c.cmd['general'].keys():
-        place = 'general'
-    # g1 akagi
-    elif command == 'g1' and len(tmp) == 2:
-        place = 'hensei'
-        autoGetKanmusu(tmp[1])
-        return True
-    else:
-        uerror("unknown command: " + command)
+    place = get_place_of_command(command)
+    if place is None:
+        unknown_command(command)
         return False
 
-    if len(tmp)>1:
-        parse_command(place, command, args)
+    if len(input_)>1:
+        exec_script(player, place, command, args)
     else:
-        parse_command(place, command)
+        exec_single_command(player, place, command)
 
-
-def init():
-    uprint("あわわわ、びっくりしたのです。")
-    set_place("port")
 
 
 def main():
-    init()
+    uprint("あわわわ、びっくりしたのです。")
+    set_place("port")
+
+    global _user_input
 
     while True:
-        global _user_input
         _user_input = raw_input(_color['green'] + "電：提督、ご命令を" + _color['default'] + " > ")
 
         if is_handled_by_predefined_func(_user_input) is True:
             continue
 
-        handle_command(_user_input)
+        check_command(_user_input)
 
-main()
+
+if __name__ == '__main__':
+    main()
