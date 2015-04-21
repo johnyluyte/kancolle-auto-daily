@@ -8,23 +8,55 @@ def get_ship_name_by_id(id):
     輸入艦娘的圖鑑號碼，回傳該艦娘的官方名稱
 
     @ id: 艦娘的圖鑑號碼
-    @ return: 艦娘的官方名稱
+    @ return:
+        有找到：回傳艦娘的官方名稱
+        沒找到：回傳 None
     """
     name = kanmusuIndex.get(str(id), None)
     if name is not None:
         name = name[0]
     return name
 
-
-def get_ship_zukan_id_by_nick_name(nick_name):
+def get_ship_nick_name_by_id(id):
     """
+    輸入艦娘的圖鑑號碼，回傳該艦娘的暱稱
+
+    @ id: 艦娘的圖鑑號碼
+    @ return:
+        有找到：回傳艦娘的暱稱
+        沒找到：回傳 None
+    """
+    name = kanmusuIndex.get(str(id), None)
+    if name is not None:
+        name = name[1]
+    return name
+
+def get_ship_name_by_nick_name(nick_name):
+    """
+    輸入艦娘的暱稱，回傳該艦娘的官方名稱
+
+    @ nick_name: 艦娘的暱稱
+    @ return:
+        有找到：回傳艦娘的官方名稱
+        沒找到：回傳 None
+    """
+    name = None
+    for key,value in kanmusuIndex.items():
+        if value[1] == nick_name:
+            name = value[0]
+            break
+    return name
+
+"""
+def get_ship_zukan_id_by_nick_name(nick_name):
+    ""
     輸入艦娘的暱稱，回傳該艦娘的圖鑑號碼
 
     @ nick_name: 艦娘的暱稱
     @ return:
          有找到: 回傳該艦娘的圖鑑號碼
          沒找到: 回傳 False
-    """
+    ""
     found = False
     for key, value in kanmusuIndex.items():
         # ('337', ('電改', 'denchan'))
@@ -33,7 +65,7 @@ def get_ship_zukan_id_by_nick_name(nick_name):
             break
     # print "[get_ship_key] found = ", found
     return found
-
+"""
 
 def main():
     global kanmusuIndex
@@ -46,15 +78,15 @@ def main():
         exit()
 
     for line in file_handler:
-        if line.startswith("#"):
+        if line.startswith("#") or line.strip() == '':
             continue;
         fields = line.split(',')
         id_     = fields[0].strip()
         name    = fields[1].strip()
-        adana   = fields[2].strip()
+        nick_name   = fields[2].strip()
         # planes   = fields[3].strip()
-        # print id_, name, adana
-        kanmusuIndex[id_] = (name, adana)
+        # print id_, name, nick_name
+        kanmusuIndex[id_] = (name, nick_name)
 
     # _print_dict()
 

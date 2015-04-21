@@ -5,8 +5,8 @@ import kcUtility as u
 import kcShipData
 
 class Ship(object):
-    def __init__(self, own_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky):
-        self.own_id = own_id
+    def __init__(self, local_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky):
+        self.local_id = local_id
         self.sortno = sortno
         self.lv = lv
         self.nowhp = nowhp
@@ -20,16 +20,19 @@ class Ship(object):
         self.taisen = taisen
         self.sakuteki = sakuteki
         self.lucky = lucky
+        # 建娘的官方名字
+        self.name = kcShipData.get_ship_name_by_id(self.sortno)
+        self.nick_name = kcShipData.get_ship_nick_name_by_id(self.sortno)
 
     def print_info(self):
-        msg = str(self.own_id) + "\t" + str(self.sortno) +  "\t" + str(self.lv) + "\t"
-        name = str(kcShipData.get_ship_name_by_id(self.sortno))
-        if name == 'None':
-            msg += u._color['red'] + name + u._color['default']
+        msg = str(self.local_id) + "\t" + str(self.sortno) +  "\t" + str(self.lv) + "\t"
+        name = self.name
+        if name is None:
+            msg += u.color['red'] + "Could not find name" + u.color['default']
         else:
             msg += name
         print(msg)
-        # print("own_id " + str(self.own_id))
+        # print("local_id " + str(self.local_id))
         # print("sortno " + str(self.sortno))
         # print("lv " + str(self.lv))
         # print("nowhp " + str(self.nowhp))

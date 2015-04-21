@@ -21,7 +21,7 @@ _place = "port"
 
 # 顯示在 terminal 的顏色
 # http://apple.stackexchange.com/questions/9821/can-i-make-my-mac-os-x-terminal-color-items-according-to-syntax-like-the-ubuntu
-_color = dict()
+color = dict()
 
 
 
@@ -29,7 +29,7 @@ _color = dict()
 一般工具
 """
 def uprint(msg, font_color = 'default'):
-    tmp = "電：{0}{1}{2}".format(_color[font_color], msg, _color['default'])
+    tmp = "電：{0}{1}{2}".format(color[font_color], msg, color['default'])
     print(tmp)
 
 def uerror(msg):
@@ -49,7 +49,7 @@ def set_place(player, new_place):
         kcFetchAPI.fetch_api_response(player, 'port')
         get_focus_terminal()
     _place = new_place
-    uprint("Place は " + _color['yellow'] + new_place + _color['default'] + " に変更しました")
+    uprint("Place は " + color['yellow'] + new_place + color['default'] + " に変更しました")
 
 def get_place():
     return _place
@@ -101,18 +101,18 @@ def keydown_string_and_wait(msg, sleep_sec):
     _sleep(sleep_sec)
 
 def keydown_string_no_wait(msg):
-    print get_time_stamp() + "input_string(): " + msg
+    # print get_time_stamp() + "input_string(): " + msg
     _k.type_string(msg)
 
 def keydown_ctrl_a_and_wait(sleep_sec):
-    print get_time_stamp() + "keydown(): ctrl + a"
+    # print get_time_stamp() + "keydown(): ctrl + a"
     _k.press_key('Command')
     _k.tap_key('a')
     _k.release_key('Command')
     _sleep(sleep_sec)
 
 def keydown_ctrl_c_and_wait(sleep_sec):
-    print get_time_stamp() + "keydown(): ctrl + c"
+    # print get_time_stamp() + "keydown(): ctrl + c"
     _k.press_key('Command')
     _k.tap_key('c')
     _k.release_key('Command')
@@ -139,11 +139,11 @@ def pbpaste():
 Main
 """
 def main():
-    global _color
-    _color['default'] = "\033[m"
-    _color['green']   = "\033[1;32m"
-    _color['red']     = "\033[1;31m"
-    _color['yellow']  = "\033[1;33m"
-    _color['gray']  = "\033[1;30m"
+    global color
+    color['default'] = "\033[m"
+    color['green']   = "\033[1;32m"
+    color['red']     = "\033[1;31m"
+    color['yellow']  = "\033[1;33m"
+    color['gray']  = "\033[1;30m"
 
 main()

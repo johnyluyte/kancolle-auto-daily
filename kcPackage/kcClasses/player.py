@@ -69,26 +69,25 @@ class Player(object):
         print "艦娘總數為：", self.ships_count
 
 
-    def get_max_level_ship_with_same_zukan_id(self, zukan_id):
-        # 從 self.ships[] 裡面找找看哪隻艦娘的圖鑑號碼跟 input 相同，取得該艦娘的 local_id (即“是第幾隻得到的”)
+    def get_max_level_ship_with_same_nick_name(self, nick_name):
+        # 從 self.ships[] 裡面找找看哪隻艦娘的圖鑑號碼跟 input 相同，取得該艦娘目前的順位 (即"在目前這 100 隻建娘內，排第幾隻，注意其與 local_id 不同之處”)
         max_level = 0
+        current_id = None
         for index,value in enumerate(self.ships):
             if value is None:
                 break
-            if (str(value.sortno) == str(zukan_id)) and (float(value.lv) > max_level):
+            if (value.nick_name == nick_name) and (int(value.lv) > max_level):
                 # 要加一，因為 self.ships 從 [0] 開始，故 self.ships[0] 實際上是第一艘船
-                max_level = float(value.lv)
-                result = index + 1
-        return result
+                max_level = int(value.lv)
+                current_id = index + 1
+        return current_id
 
-    def get_ship_local_id(self, nick_name):
-        # 輸入艦娘的綽號（譬如 denchan），透過對照表找到 denchan 對應的圖鑑號碼
-        zukan_id = kcShipData.get_ship_zukan_id_by_nick_name(nick_name)
-        print "[get_ship] zukan_id = ", zukan_id
-        result = None
-        if zukan_id is not False:
-            result = self.get_max_level_ship_with_same_zukan_id(zukan_id)
-        print "[get_ship] nick_name = ", nick_name ," local_id = " , result
-
-        return result
-
+    def get_ship_current_id_by_nick_name(self, nick_name):
+        current_id = self.get_max_level_ship_with_same_nick_name(nick_name)
+        if current_id is None:
+            u.uerror("この名前の艦娘が艦隊にいないようです")
+        else:
+            official_name = kcShipData.get_ship_name_by_nick_name(nick_name)
+            msg = "{c1:s}{name:s}({nick:s}){c2:s}さんですね、わかりました".format(c1=u.color['yellow'], c2=u.color['default'], name=official_name, nick=nick_name)
+            u.uprint(msg)
+        return current_id

@@ -12,6 +12,9 @@ TODO:
 列出所有有 nick_name 的船
 列出所有 fleet 的名稱
 change fleet (6 ships)
+遠征時間，維修時間
+全自動維修
+自動 2-3 course
 quest
 How to handle chrome dev tool unstable (periodicaly clear network monitor?)
 """
@@ -79,13 +82,13 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('place'):
         # 印出目前場景
         if len(inp.split()) == 1:
-            u.uprint("私たちは今 " + u._color['yellow'] + u.get_place() + u._color['default'] + " にいます")
+            u.uprint("私たちは今 " + u.color['yellow'] + u.get_place() + u.color['default'] + " にいます")
         # 指定目前場景
         else:
             u.set_place(player, inp.split()[1])
         return True
     elif inp == "cmd" or inp == '?':
-        u.uprint("Place = " + u._color['yellow'] + u.get_place() + u._color['default'])
+        u.uprint("Place = " + u.color['yellow'] + u.get_place() + u.color['default'])
         u.uprint("available commands = " + str(sorted(kcCommand.get_current_available_cmds())))
         return True
     elif inp == "":
@@ -133,7 +136,7 @@ def main():
     # set_place("port")
 
     while True:
-        _user_input = raw_input(u._color['green'] + "電：提督、ご命令を" + u._color['default'] + " > ")
+        _user_input = raw_input(u.color['green'] + "電：提督、ご命令を" + u.color['default'] + " > ")
 
         if is_handled_by_predefined_func(_user_input) is True:
             continue

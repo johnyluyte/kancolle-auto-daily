@@ -14,13 +14,12 @@ def run(player_, position, nick_name):
     global player
     player = player_
 
-    local_id = player.get_ship_local_id(nick_name)
-    if local_id is None:
-        print "Cannot find kanmusu with nick_name: ", nick_name
+    ship_current_id = player.get_ship_current_id_by_nick_name(nick_name)
+    if ship_current_id is None:
         return
 
     # 計算一下此艦娘在第幾頁的第幾個
-    tmp = abs(player.ships_count - local_id) + 1
+    tmp = abs(player.ships_count - ship_current_id) + 1
     page = ((tmp-1) // 10) + 1
     number = tmp % 10
     # print "Page: ", page, "N.O: ", number
@@ -39,7 +38,7 @@ def main(position, page, number):
     target = cmd['hensei']
 
 
-    do_action(target[position][0], target[position][2], 0.3)
+    do_action(target[position][0], target[position][2], 0.4)
 
     # 遊戲會記錄選擇上一個艦娘時的頁面，所意要先回到第一頁
     do_action(target['q'][0], target['q'][2], 0.1)

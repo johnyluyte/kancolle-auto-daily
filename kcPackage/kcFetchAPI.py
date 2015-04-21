@@ -142,7 +142,7 @@ def _parse_port(player, jsonData):
     count = len(ships)
     player.ships_count = count
     for i in xrange(count):
-        own_id          = ships[i]['api_id']
+        local_id          = ships[i]['api_id']
         sortno          = ships[i]['api_sortno']
         lv              = ships[i]['api_lv']
         nowhp           = ships[i]['api_nowhp']
@@ -156,7 +156,10 @@ def _parse_port(player, jsonData):
         taisen          = ships[i]['api_taisen'][0]
         sakuteki        = ships[i]['api_sakuteki'][0]
         lucky           = ships[i]['api_lucky'][0]
-        player.ships[i] = Ship(own_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
+        player.ships[i] = Ship(local_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
+        if player.ships[i].name is None:
+            u.uprint("Missing name for local_id:{0:>4d}, lv = {1:>3d}".format(player.ships[i].local_id, player.ships[i].lv) , 'red')
+
 
     # for i in range(1,101):
     #     if i % 10 == 1:
@@ -244,7 +247,7 @@ def _parse_questlist(jsonData):
 
 def _set_chrome_dev_filter(filter):
     # 將 chrome dev tool 調整到 800 * 567 px
-    u.click_and_wait([80,720], 0.01)
+    u.click_and_wait([80,720], 0.5)
     u.keydown_ctrl_a_and_wait(0.1)
     u.keydown_string_and_wait(filter, 0.4)
 
@@ -252,6 +255,9 @@ def _copy_api_response_from_chrome_dev():
     u.click_and_wait([80,770], 0.4)
     u.click_and_wait([500,770], 0.05)
     u.keydown_ctrl_c_and_wait(0.1)
+    # 清空 network 監看紀錄，以免量太大導致 chrome dev tool 延遲或錯誤
+    u.click_and_wait([50,700], 0.05)
+
 
 def _is_same_as_last_fetch(json_data):
     global last_hash
@@ -267,7 +273,7 @@ def _is_same_as_last_fetch(json_data):
 
 def fetch_api_response(player, filter):
     # 清空 clipboard
-    u.pbcopy("5566")
+    u.pbcopy("empty clipboard")
 
     # 設定 filter
     _set_chrome_dev_filter(filter)
@@ -279,8 +285,8 @@ def fetch_api_response(player, filter):
     try:
         json_data = json.loads(dataFromClipboard[7:])
     except:
-        print("Failed to fecth API, no valid JSON available")
-        print dataFromClipboard
+        u.uerror("Failed to fecth Kancolle API")
+        u.uerror("Data: {0}".format(dataFromClipboard))
         return
 
     # 與上個 JSON 是否擁有相同的 hash，有的話就更新
