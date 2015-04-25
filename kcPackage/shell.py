@@ -4,19 +4,32 @@ import kcUtility as u
 import kcCommand
 import kcScript
 import kcFetchAPI
+import kcShipData
 
 from kcClasses.player import Player
 
 """
 TODO:
-列出所有有 nick_name 的船
-列出所有 fleet 的名稱
-change fleet (6 ships)
-遠征時間，維修時間
+O 列出所有有 nick_name 的船
+O 列出所有 fleet 的名稱
+O change fleet (6 ships)，主力部隊、遠征部隊、閃亮亮部隊
+O How to handle chrome dev tool unstable (periodicaly clear network monitor?)
+build shimakaze
+build 250 0 200 0
+kaihatu plane
+kaihatu sonar
+kaihatu 20 50 10 110
+kaihatu uc
+deck1 u
+deck1 uc
+抓出艦隊種類
+計算維修時間、倍數、危機有資料？
 全自動維修
+把遠征前用 1-1 弄得閃亮亮
+修正 file open with
 自動 2-3 course
+遠征時間，
 quest
-How to handle chrome dev tool unstable (periodicaly clear network monitor?)
 """
 
 def is_handled_by_predefined_func(inp):
@@ -44,13 +57,7 @@ def is_handled_by_predefined_func(inp):
         else:
             return False
     # 顯示從 json API 得來的資料
-    elif inp.startswith('get') and len(inp.split()) == 2:
-        arg = inp.split()[1]
-        if player.get_ship_local_id(arg) == None:
-            return False
-        else:
-            return True
-    elif inp.startswith('data') and len(inp.split()) == 2:
+    elif inp.startswith('cat') and len(inp.split()) == 2:
         arg = inp.split()[1]
         if arg == 'quest' or arg == 'q':
             return True
@@ -75,10 +82,22 @@ def is_handled_by_predefined_func(inp):
         elif arg == 'material' or arg == 'r': # Resource
             player.print_info_materials()
             return True
-        elif arg == 'myfleet' or arg == 'm':
+        elif arg == 'names' or arg == 'name':
+            kcShipData.print_csv_data()
+            return True
+        elif arg == 'fleets' or arg == 'f':
+            kcShipData.print_fleets_data()
             return True
         else:
             return False
+    elif inp.startswith('lag'):
+        # 印出目前 LAG
+        if len(inp.split()) == 1:
+            u.uprint("サーバーとの予測レイテンシは " + u.color['yellow'] + u.get_lag() + u.color['default'] + " 秒です")
+        # 指定目前 LAG
+        else:
+            u.set_lag(player, inp.split()[1])
+        return True
     elif inp.startswith('place'):
         # 印出目前場景
         if len(inp.split()) == 1:

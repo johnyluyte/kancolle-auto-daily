@@ -13,14 +13,13 @@ import kcFetchAPI
 
 # - - - Global Variables - - -
 
-_LAG = 2
+_LAG = 2.0
 _m = PyMouse()
 _k = PyKeyboard()
 
 _place = "port"
 
-# 顯示在 terminal 的顏色
-# http://apple.stackexchange.com/questions/9821/can-i-make-my-mac-os-x-terminal-color-items-according-to-syntax-like-the-ubuntu
+
 color = dict()
 
 
@@ -54,13 +53,31 @@ def set_place(player, new_place):
 def get_place():
     return _place
 
+def set_lag(player, new_latency):
+    global _LAG
+    try:
+        new = float(new_latency)
+    except ValueError:
+        new = _LAG
+    _LAG = new
+
+def get_lag():
+    return str(_LAG)
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
 def get_time_stamp():
     current_time = str(datetime.datetime.now()).split('.')[0] # 2015-03-29 20:18:08
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
 def _sleep(sleep_sec):
     if sleep_sec > 0.5:
-        uprint("少々お待ちください", 'gray')
+        uprint("少々お待ちください ("+ str(_LAG) + "s)", 'gray')
     sleep(sleep_sec)
 
 
@@ -139,11 +156,15 @@ def pbpaste():
 Main
 """
 def main():
+    # 顯示在 terminal 的顏色
+    # http://apple.stackexchange.com/questions/9821/can-i-make-my-mac-os-x-terminal-color-items-according-to-syntax-like-the-ubuntu
     global color
     color['default'] = "\033[m"
     color['green']   = "\033[1;32m"
     color['red']     = "\033[1;31m"
     color['yellow']  = "\033[1;33m"
-    color['gray']  = "\033[1;30m"
-
+    color['gray']    = "\033[1;30m"
+    color['blue']    = "\033[1;34m"
+    color['purple']  = "\033[1;35m"
+    color['cyan']    = "\033[1;36m"
 main()

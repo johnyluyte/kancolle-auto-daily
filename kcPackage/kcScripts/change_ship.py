@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import kcUtility as u
-
+import kcShipData
 from kcCommand import cmd
 
 """ [腳本]
@@ -10,13 +10,34 @@ from kcCommand import cmd
 
 """
 
+def is_on_expedition(ship_current_id):
+    result = False
+    # 由  1 ~ 100 修正回 0 ~ 99 來查表
+    ship_current_id -= 1
+    # print local_id
+    local_id = int(player.ships[ship_current_id].local_id)
+
+    # 檢查該艦娘是否在第 2 ~ 4 艦隊，且該艦隊正在遠征
+    for i in xrange(1, 4):
+        # print player.decks[i].ships
+        # print player.decks[i].mission
+        if local_id in player.decks[i].ships:
+            if not player.decks[i].mission[0] == 0:
+                result = True
+    return result
+
 def run(player_, position, nick_name):
     global player
     player = player_
 
+    # 取得艦娘在目前的排組中，在 local_id 的順位在"第幾個"，此值並非 local_id，值應為 1 ~ 100
     ship_current_id = player.get_ship_current_id_by_nick_name(nick_name)
     if ship_current_id is None:
-        return
+        return False
+    # 檢查此艦娘是否空著，如果正在遠征的話就不切換
+    if is_on_expedition(ship_current_id) is True:
+        u.uerror(kcShipData.get_ship_name_by_nick_name(nick_name) + "は今遠征中、変更できないです")
+        return False
 
     # 計算一下此艦娘在第幾頁的第幾個
     tmp = abs(player.ships_count - ship_current_id) + 1
@@ -44,10 +65,11 @@ def main(position, page, number):
     do_action(target['q'][0], target['q'][2], 0.1)
 
     tmp = list()
-    if (player.ships_count // 10) + 1 == page:
+    total_page = ((player.ships_count-1) // 10) + 1
+    if page == total_page:
         # 在最後一頁
         tmp.append(target['w'])
-    elif player.ships_count // 10 == page:
+    elif page == total_page - 1:
         # 在倒數第二頁
         tmp.append(target['w'])
         tmp.append(target['f'])

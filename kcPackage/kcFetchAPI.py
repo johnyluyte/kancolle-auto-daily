@@ -166,7 +166,7 @@ def _parse_port(player, jsonData):
     #         print "[", i, "]"
     #     player.print_info_ships(i)
 
-    u.uprint("port API 解析完了です", 'yellow')
+    u.uprint("port API 解析完了です", 'cyan')
 
     return player
 
@@ -237,6 +237,8 @@ def _parse_questlist(jsonData):
             msg = ""
             # 任務編號
             # msg += "No." + str(quest['api_no']) + " "
+            # msg += state_msg + " " + quest['api_title']
+            print type(msg), type(state_msg), type(quest['api_title'])
             msg += state_msg + " " + (quest['api_title'].encode('utf-8'))
 
             print i, msg
@@ -247,7 +249,7 @@ def _parse_questlist(jsonData):
 
 def _set_chrome_dev_filter(filter):
     # 將 chrome dev tool 調整到 800 * 567 px
-    u.click_and_wait([80,720], 0.5)
+    u.click_and_wait([80,720], 0.1)
     u.keydown_ctrl_a_and_wait(0.1)
     u.keydown_string_and_wait(filter, 0.4)
 
