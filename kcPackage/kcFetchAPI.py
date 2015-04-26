@@ -251,10 +251,10 @@ def _set_chrome_dev_filter(filter):
     # 將 chrome dev tool 調整到 800 * 567 px
     u.click_and_wait([80,720], 0.1)
     u.keydown_ctrl_a_and_wait(0.1)
-    u.keydown_string_and_wait(filter, 0.4)
+    u.keydown_string_and_wait(filter, 0.2)
 
 def _copy_api_response_from_chrome_dev():
-    u.click_and_wait([80,770], 0.4)
+    u.click_and_wait([80,770], 0.6)
     u.click_and_wait([500,770], 0.05)
     u.keydown_ctrl_c_and_wait(0.1)
     # 清空 network 監看紀錄，以免量太大導致 chrome dev tool 延遲或錯誤

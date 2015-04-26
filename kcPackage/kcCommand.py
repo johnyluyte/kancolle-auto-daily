@@ -67,7 +67,8 @@ def exec_single_command(player, place ,command):
     # type 0 滑鼠點擊乙次：
     if cmd_type == 0:
         u.get_focus_game()
-        u.uprint(cmd_msg)
+        if not cmd_msg.strip() == "":
+            u.uprint(cmd_msg)
         u.click_no_wait(cmd_pos)
         u.get_focus_terminal()
     # type 1 滑鼠點擊乙次(會切換場景)：
@@ -222,7 +223,7 @@ cmd['hensei']['f2']         = (cmd['refill']['f2'][0], 0, (166,222))
 cmd['hensei']['f3']         = (cmd['refill']['f3'][0], 0, (198,221))
 cmd['hensei']['f4']         = (cmd['refill']['f4'][0], 0, (226,222))
 # 解除旗艦以外的編列
-cmd['hensei']['clear']         = ("伴随艦一括解除したのです", 0, (423,217))
+cmd['hensei']['clear']      = ("伴随艦一括解除したのです", 0, (423,217))
 # watch status 船隻狀態
 cmd['hensei']['s1']         = ("旗艦の詳細です", 0, (329,314))
 cmd['hensei']['s2']         = ("二番目の艦娘の詳細です", 0, (668,317))
@@ -322,6 +323,33 @@ cmd['factory']['sort']      = (cmd['shared_page']['sort'][0], 0, (586,211))
 cmd['factory']['destory']   = ("Hastala Vista, Baby!", 0, (699,533))
 cmd['factory']['hai']       = (cmd['ndock']['hai'][0], 0, (486,483))
 cmd['factory']['iie']       = (cmd['ndock']['iie'][0], 0, (318,485))
+# 建造與開發的材料 oil, bullet, steel, aluminum
+cmd['factory']['oil+1']        = ("", 0, (362,254))
+cmd['factory']['oil-1']        = ("", 0, (364,322))
+cmd['factory']['oil+10']       = ("", 0, (491,237))
+cmd['factory']['oil-10']       = ("", 0, (438,239))
+cmd['factory']['oil+100']      = ("", 0, (490,265))
+cmd['factory']['oil-100']      = ("", 0, (438,263))
+cmd['factory']['bullet+1']     = ("", 0, (361,383))
+cmd['factory']['bullet-1']     = ("", 0, (361,452))
+cmd['factory']['bullet+10']    = ("", 0, (491,366))
+cmd['factory']['bullet-10']    = ("", 0, (438,367))
+cmd['factory']['bullet+100']   = ("", 0, (491,393))
+cmd['factory']['bullet-100']   = ("", 0, (439,392))
+cmd['factory']['steel+1']      = ("", 0, (589,254))
+cmd['factory']['steel-1']      = ("", 0, (592,319))
+cmd['factory']['steel+10']     = ("", 0, (718,238))
+cmd['factory']['steel-10']     = ("", 0, (666,238))
+cmd['factory']['steel+100']    = ("", 0, (719,263))
+cmd['factory']['steel-100']    = ("", 0, (667,264))
+cmd['factory']['aluminum+1']   = ("", 0, (591,384))
+cmd['factory']['aluminum-1']   = ("", 0, (593,450))
+cmd['factory']['aluminum+10']  = ("", 0, (720,365))
+cmd['factory']['aluminum-10']  = ("", 0, (665,365))
+cmd['factory']['aluminum+100'] = ("", 0, (721,393))
+cmd['factory']['aluminum-100'] = ("", 0, (669,395))
+cmd['factory']['build']        = ("建造開始、なのです", 0, (711,537))
+
 # 拆解與廢棄時的選單
 cmd['factory']['q']         = (cmd['shared_page']['q'][0], 0, (218,550))
 cmd['factory']['w']         = (cmd['shared_page']['w'][0], 0, (497,552))

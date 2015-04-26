@@ -6,6 +6,8 @@ import kcCommand
 import kcScripts.change_ship
 import kcScripts.refill_fleet_daily
 import kcScripts.refill_fleet_all
+import kcScripts.factory_build
+import kcScripts.factory_uc
 
 
 def exec_script(player, place, command, args):
@@ -41,9 +43,43 @@ def exec_script(player, place, command, args):
     elif place == 'refill':
         fleet_cmds = ['f1', 'f2', 'f3', 'f4']
         if (command in fleet_cmds) and len(args) == 1:
+            # "f1 dialy"
             if args[0] == 'daily':
-                kcScripts.refill_fleet_daily.run(command)
+                kcScripts.refill_fleet_daily.run(player, command)
+            # "f1 all"
             elif args[0] == 'all':
                 kcScripts.refill_fleet_all.run(command)
+    elif place == 'factory':
+        build_cmds = ['dock1', 'dock2']
+        if command in build_cmds:
+            # "dock1 uc"
+            if len(args) == 1 and args[0] == 'uc':
+                kcScripts.factory_uc.run(command)
+            # "dock1 shimakaze"
+            elif len(args) == 1:
+                if args[0] == 'shimakaze' or args[0] == 's':
+                    kcScripts.factory_build.run( command, (250,30,200,30) )
+                elif args[0] == 'kuubou' or args[0] == 'k':
+                    kcScripts.factory_build.run( command, (300,30,400,300) )
+            # "dock2 250 30 200 30"
+            elif len(args) == 4:
+                kcScripts.factory_build.run( command, args )
+        elif command == 'kaihatu':
+            # "kaihatu plane"
+            if len(args) == 1:
+                # http://wikiwiki.jp/kancolle/?%B3%AB%C8%AF%A5%EC%A5%B7%A5%D4
+                if args[0] == 'plane' or args[0] == 'p':
+                    kcScripts.factory_build.run( command, (20,60,10,110) )
+                elif args[0] == 'sonar' or args[0] == 's':
+                    kcScripts.factory_build.run( command, (10,10,10,20) )
+                elif args[0] == 'bakurai' or args[0] == 'b':
+                    kcScripts.factory_build.run( command, (10,30,10,10) )
+                elif args[0] == 'sb':
+                    kcScripts.factory_build.run( command, (10,30,10,31) )
+            # "kaihatu 20 50 10 110"
+            elif len(args) == 4:
+                kcScripts.factory_build.run( command, args )
+        elif command == 'build' and args[0] == 'uc':
+            kcScripts.factory_uc.run(command)
     else:
         u.unknown_command(command)
