@@ -60,6 +60,72 @@ https://github.com/amylase/kancolle-auto
 這個用到的 sikuli 就是我需要的!?
 
 
+為什麼一開始不用 sikuli? 因為 OSX 10.10.x 不能用
+
+如何安裝 sikuli
+你可以去
+http://doc.sikuli.org/index.html
+http://www.sikuli.org/download.html
+http://www.sikulix.com/
+https://github.com/sikuli/sikuli
+https://github.com/RaiMan/SikuliX-2014
+https://github.com/RaiMan/SikuliX2
+https://launchpad.net/sikuli/+download
+找到瘋掉，最後只發現這些都 does not work on OSX 10.10.x
+
+所以如果你跟我一樣是 OSX 10.10.x，請直接參考
+
+https://bugs.launchpad.net/sikuli/+bug/1362011
+參考這篇文章最後三篇
+
+或直接看這篇的下面
+https://bugs.launchpad.net/sikuli/+bug/1362011/comments/10
+
+為了怕文章不見，這裡先備份(引用)
+
+1. 下載 "The only file needed to download:" 那個檔案
+2. 放到 download/nightly
+3. control + 右鍵，開啟未受信任的檔案
+4. 依照自己的需求勾選 Pack，我選擇 pack 1，並勾選 Jython 跟 JRuby
+5. 按下 setup
+6. 出現問確定，按下 yes
+7. 開始下載各 package
+8. 開始 creating jars
+9. 出現 Hallo from Sikulix.texstSetup. Python Scripting SikuliX seems to be working!
+10. download/nightly 資料夾內的東西可以刪掉嗎
+
+If you have OSX Mavericks or later, go to the http://nightly.sikuli.de/ page (the nightly builds page), ignore everything but the part that reads:
+
+"The only file needed to download:
+sikulixsetup-1.1.0 (store and run in an empty folder)"
+
+... and download that sikulixsetup file.
+
+Put this in its own folder, call the folder "Sikuli".
+
+Run the setup file. Choose option 1, add the jruby option. Install and wait for downloading and installing to do their thing.
+
+You should get the "Hallo from Sikulix.texstSetup. Python Scripting SikuliX seems to be working!" message (maybe two of these).
+
+You can now move the Sikuli folder containing the app, the "Downloads" folder and the setup file to the standard /Applications/ folder. You can delete both the "Downloads" folder in the Sikuli folder and the original setup jar file.
+
+It's probably a good idea to make a new folder called "Scripts" and keep all your sikuli script files in there. It is a personal preference (some might like that to be in ~/Documents/, for example), but I like having this in the Sikuli folder so that everything is located within a simple hierarchy.
+
+
+直接用 command line 執行：
+/Applications/SikuliX.app/run -r ~/myScript.sikuli
+
+即使是在 terminal ，SikuliX 也要花 6~8 秒才能啟動並執行 script，相對來說很慢
+
+不過我們是用在戰鬥途中，就還好！？ 反正 kancolle 進入戰鬥畫面前也有一段空閒時間
+
+Q:
+https://answers.launchpad.net/sikuli/+question/249084
+A:
+仕様です
+
+
+
 ### 4. 輔助型、提供資訊
 
 艦これ預設的 UI 實在是很爛，所以很多玩家開發出介面型工具，讓遊戲資訊能更簡潔明瞭的顯示出來，讓玩家掌握
