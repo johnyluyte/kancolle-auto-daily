@@ -67,11 +67,17 @@ function initKancollePage(){
 
 
 $(function(){
+    // We need wait a little period for kancolle page to load its iFrame
+    setTimeout(function(){
+        main()
+    }, 500);
+});
+
+function main(){
     initKancollePage();
     initCAT();
     initKancolleWiki();
-});
-
+}
 
 function initCAT(){
     // squares 架構： body > CATsquaresContainer > myTable > myTbody > tr > td > squares
