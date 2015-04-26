@@ -14,22 +14,22 @@ O 列出所有有 nick_name 的船
 O 列出所有 fleet 的名稱
 O change fleet (6 ships)，主力部隊、遠征部隊、閃亮亮部隊
 O How to handle chrome dev tool unstable (periodicaly clear network monitor?)
-build shimakaze
-build 250 0 200 0
-kaihatu plane
-kaihatu sonar
-kaihatu 20 50 10 110
-kaihatu uc
-deck1 u
-deck1 uc
-抓出艦隊種類
-計算維修時間、倍數、危機有資料？
+O dock1 shimakaze
+O dock1 250 0 200 0
+O kaihatu sonar
+O kaihatu 20 50 10 110
+O dock1 uc
+O build uc
+skuik
+
+腳本：
+計算維修時間、倍數、危機有資料？  抓出艦隊種類
 全自動維修
 把遠征前用 1-1 弄得閃亮亮
 修正 file open with
-自動 2-3 course
-遠征時間，
-quest
+自動 3-2-1 course
+自動遠征
+自動每日任務
 """
 
 def is_handled_by_predefined_func(inp):
@@ -113,6 +113,7 @@ def is_handled_by_predefined_func(inp):
     elif inp == "":
         global _user_input
         _user_input = "ok"
+        u.play_audio('audio/nanodesu.mp3')
         return False
 
 

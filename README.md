@@ -164,7 +164,8 @@ http://stackoverflow.com/questions/16058065/how-can-i-convert-strings-like-u5c0f
 
 之後就可以將不同的 "macro" 寫成不同的腳本，直接在統一個 command line 模式下呼叫
 
-
+# http://www51.atpages.jp/kancollev/kcplayer.php?c=37v28&vol=0.2
+用 audacity 剪輯語音與 UC
 
 
 

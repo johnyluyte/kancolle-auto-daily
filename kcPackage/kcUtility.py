@@ -8,6 +8,9 @@ import datetime
 import Foundation
 import AppKit
 
+import threading
+import subprocess
+
 import kcFetchAPI
 
 
@@ -76,9 +79,30 @@ def get_time_stamp():
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
 def _sleep(sleep_sec):
-    if sleep_sec > 0.5:
-        uprint("少々お待ちください ("+ str(_LAG) + "s)", 'gray')
+    if sleep_sec > 0.7:
+        uprint("少々お待ちください ("+ str(sleep_sec) + "s)", 'gray')
     sleep(sleep_sec)
+
+"""
+撥音效相關
+
+原版 Python 做不到，需要第三方 library 支援
+但我們只很少撥音效，故使用 overhead 較高的 subprocess 來呼叫 OSX terminal 的 afplay 指令撥音即可
+"""
+class AudioThread(threading.Thread):
+    def __init__(self, thread_name, audio_path):
+        threading.Thread.__init__(self)
+        self.thread_name = thread_name
+        self.audio_path = audio_path
+    def run(self):
+        # print "Starting " + self.name
+        subprocess.call(['afplay', self.audio_path])
+        # print "Exiting " + self.name
+
+def play_audio(audio_path):
+    audio_thread = AudioThread("Thread-1", audio_path)
+    audio_thread.start()
+
 
 
 """
