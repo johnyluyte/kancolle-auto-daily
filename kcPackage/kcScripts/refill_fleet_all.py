@@ -20,11 +20,12 @@ def main(fleet):
     global target
     target = cmd['refill']
 
-    do_action(target[fleet][0], target[fleet][2], 0.1)
-    do_action(target['all'][0], target['all'][2], 0.1)
-    do_action(target['matome'][0], target['matome'][2], u._LAG)
+    do_action(target[fleet], 0.1)
+    do_action(target['all'], 0.1)
+    do_action(target['matome'], u._LAG)
 
 
-def do_action(cmd_msg, cmd_pos, sleep_time):
-    u.uprint(cmd_msg)
-    u.click_and_wait(cmd_pos, sleep_time)
+def do_action(cmd, sleep_time = 0.05):
+    if not cmd[0].strip() == '':
+        u.uprint(cmd[0])
+    u.click_and_wait(cmd[2], sleep_time)

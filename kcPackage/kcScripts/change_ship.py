@@ -58,12 +58,13 @@ def main(position, page, number):
     """
     target = cmd['hensei']
 
+    # 選擇第 1 ~ 6 位艦娘
+    do_action(target[position], 0.4)
 
-    do_action(target[position][0], target[position][2], 0.4)
+    # 遊戲會記錄選擇上一個頁面，所以要先回到第一頁
+    do_action(target['q'], 0.1)
 
-    # 遊戲會記錄選擇上一個艦娘時的頁面，所意要先回到第一頁
-    do_action(target['q'][0], target['q'][2], 0.1)
-
+    # 選擇艦娘所在頁面
     tmp = list()
     total_page = ((player.ships_count-1) // 10) + 1
     if page == total_page:
@@ -73,8 +74,6 @@ def main(position, page, number):
         # 在倒數第二頁
         tmp.append(target['w'])
         tmp.append(target['f'])
-    # elif page == 1:
-    #     tmp.append(target['a'])
     elif page == 2:
         tmp.append(target['s'])
     elif page == 3:
@@ -95,20 +94,18 @@ def main(position, page, number):
         tmp.append(target['f'])
         tmp.append(target['f'])
         tmp.append(target['f'])
-    # elif page == 9:
-    #     tmp = target['a']
-    # elif page == 10:
-    #     tmp = target['a']
 
     for i in tmp:
-        do_action(i[0], i[2], 0.1)
+        do_action(i, 0.1)
 
+    # 選擇在此頁面的第 N 個艦娘
     number = str(number)
-    do_action(target[number][0], target[number][2], 0.2)
-    do_action(target['yes'][0], target['yes'][2], 0.01)
+    do_action(target[number], 0.2)
+    do_action(target['yes'], 0.01)
 
 
-def do_action(cmd_msg, cmd_pos, sleep_time):
-    u.uprint(cmd_msg)
-    u.click_and_wait(cmd_pos, sleep_time)
+def do_action(cmd, sleep_time = 0.05):
+    if not cmd[0].strip() == '':
+        u.uprint(cmd[0])
+    u.click_and_wait(cmd[2], sleep_time)
 

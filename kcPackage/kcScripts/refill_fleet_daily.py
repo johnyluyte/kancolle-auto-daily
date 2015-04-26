@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import kcUtility as u
 
-
 from kcCommand import cmd
 
 """ [腳本]
@@ -11,30 +10,36 @@ from kcCommand import cmd
 
 """
 
-def run(fleet):
+def run(player_, fleet):
     u.get_focus_game()
-    main(fleet)
+    main(player_, fleet)
     u.get_focus_terminal()
 
 
-def main(fleet):
+def main(player_, fleet):
     global target
     target = cmd['refill']
 
-    # choose fleet
-    do_action(target[fleet][0], target[fleet][2], 0.1)
 
-    for i in xrange(1,7):
+    # choose fleet
+    do_action(target[fleet], 0.1)
+    get_index_by_fleet = {'f1':0, 'f2':1, 'f3':2, 'f4':3}
+    empty_ships_in_fleet = player_.decks[get_index_by_fleet.get(fleet, None)].ships.count(-1)
+    ships_in_fleet = 6 - empty_ships_in_fleet
+    u.uprint( "この艦隊は {}{}{} 人います".format(u.color['yellow'], ships_in_fleet, u.color['default']) )
+
+    for i in xrange(1, ships_in_fleet + 1):
+        # pass
         seperate_hokyuu(str(i))
 
 
 def seperate_hokyuu(ship_pos):
-    do_action(target[ship_pos][0],target[ship_pos][2], 0)
-    do_action(target['oil'][0],target['oil'][2], u._LAG)
-    do_action(target[ship_pos][0],target[ship_pos][2], 0)
-    do_action(target['bullet'][0],target['bullet'][2], u._LAG)
+    do_action(target[ship_pos], 0)
+    do_action(target['oil'], u._LAG)
+    do_action(target[ship_pos], 0)
+    do_action(target['bullet'], u._LAG)
 
-
-def do_action(cmd_msg, cmd_pos, sleep_time):
-    u.uprint(cmd_msg)
-    u.click_and_wait(cmd_pos, sleep_time)
+def do_action(cmd, sleep_time = 0.05):
+    if not cmd[0].strip() == '':
+        u.uprint(cmd[0])
+    u.click_and_wait(cmd[2], sleep_time)
