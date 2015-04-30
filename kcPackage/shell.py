@@ -5,6 +5,7 @@ import kcCommand
 import kcScript
 import kcFetchAPI
 import kcShipData
+import kcZukan
 
 from kcClasses.player import Player
 
@@ -20,13 +21,16 @@ O kaihatu sonar
 O kaihatu 20 50 10 110
 O dock1 uc
 O build uc
+O 修正 file open with
+O save fleet_nick_name fleet_name
+scrapy fetch vpngate file
 skuik
+greasemonkey
 
 腳本：
+把遠征前用 1-1 弄得閃亮亮
 計算維修時間、倍數、危機有資料？  抓出艦隊種類
 全自動維修
-把遠征前用 1-1 弄得閃亮亮
-修正 file open with
 自動 3-2-1 course
 自動遠征
 自動每日任務
@@ -56,6 +60,24 @@ def is_handled_by_predefined_func(inp):
             return True
         else:
             return False
+    elif inp.startswith('refresh') and len(inp.split()) == 1:
+        kcShipData.load_csv()
+        # 清空 network 監看紀錄，以免量太大導致 chrome dev tool 延遲或錯誤
+        u.get_focus_game()
+        u.click_and_wait([50,700], 0.05)
+        u.get_focus_terminal()
+        return True
+    elif inp.startswith('save') and len(inp.split()) == 3:
+        u.set_place(player, 'hensei')
+        kcCommand.exec_single_command(player, u.get_place(), 'port')
+        args = inp.split()
+        kcShipData.save_current_fleets(player, args[1], args[2], player.decks[0].ships)
+        kcShipData.load_csv()
+        return True
+    elif inp.startswith('sikuli'):
+        import subprocess
+        subprocess.call(['/Applications/SikuliX.app/run', '-r', 'test.sikuli'])
+        return True
     # 顯示從 json API 得來的資料
     elif inp.startswith('cat') and len(inp.split()) == 2:
         arg = inp.split()[1]
@@ -83,17 +105,20 @@ def is_handled_by_predefined_func(inp):
             player.print_info_materials()
             return True
         elif arg == 'names' or arg == 'name':
-            kcShipData.print_csv_data()
+            kcShipData.cat_name()
             return True
         elif arg == 'fleets' or arg == 'f':
-            kcShipData.print_fleets_data()
+            kcShipData.cat_fleets()
+            return True
+        elif arg == 'damage' or arg == 'dmg':
+            player.get_damaged_ships_and_repair_time()
             return True
         else:
             return False
     elif inp.startswith('lag'):
         # 印出目前 LAG
         if len(inp.split()) == 1:
-            u.uprint("サーバーとの予測レイテンシは " + u.color['yellow'] + u.get_lag() + u.color['default'] + " 秒です")
+            u.uprint("サーバーとの予測レイテンシは " + u.append_color(u.get_lag(),'yellow') + " 秒です")
         # 指定目前 LAG
         else:
             u.set_lag(player, inp.split()[1])
@@ -101,19 +126,19 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('place'):
         # 印出目前場景
         if len(inp.split()) == 1:
-            u.uprint("私たちは今 " + u.color['yellow'] + u.get_place() + u.color['default'] + " にいます")
+            u.uprint("私たちは今 " + u.append_color(u.get_place(),'yellow') + " にいます")
         # 指定目前場景
         else:
             u.set_place(player, inp.split()[1])
         return True
     elif inp == "cmd" or inp == '?':
-        u.uprint("Place = " + u.color['yellow'] + u.get_place() + u.color['default'])
+        u.uprint("Place = " + u.append_color(u.get_place(),'yellow'))
         u.uprint("available commands = " + str(sorted(kcCommand.get_current_available_cmds())))
         return True
     elif inp == "":
         global _user_input
         _user_input = "ok"
-        u.play_audio('audio/nanodesu.mp3')
+        u.play_audio('kcAudio/nanodesu.mp3')
         return False
 
 
@@ -151,12 +176,14 @@ def main():
     global _user_input
     global player
     player = Player()
+    kcShipData.load_csv()
+    kcZukan.load_zukan_json()
 
     u.uprint("あわわわ、びっくりしたのです。")
     # set_place("port")
 
     while True:
-        _user_input = raw_input(u.color['green'] + "電：提督、ご命令を" + u.color['default'] + " > ")
+        _user_input = raw_input(u.append_color('電：提督、ご命令を','green') + " > ")
 
         if is_handled_by_predefined_func(_user_input) is True:
             continue
