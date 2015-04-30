@@ -43,6 +43,7 @@ def run(player_, position, nick_name):
     tmp = abs(player.ships_count - ship_current_id) + 1
     page = ((tmp-1) // 10) + 1
     number = tmp % 10
+    # print "count: ", player.ships_count, "current_id: ", ship_current_id, "tmp: ", tmp
     # print "Page: ", page, "N.O: ", number
 
     u.get_focus_game()
@@ -56,6 +57,8 @@ def main(position, page, number):
     @ page     : 該艦娘在第幾頁
     @ number   : 該艦娘在該頁第幾個
     """
+    u.uprint('ソート順は {}new{} をセットしてください'.format(u.color['cyan'], u.color['default']))
+
     target = cmd['hensei']
 
     # 選擇第 1 ~ 6 位艦娘

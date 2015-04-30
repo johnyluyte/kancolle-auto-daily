@@ -36,7 +36,6 @@ def exec_script(player, place, command, args):
             for i in xrange(6):
                 if result[i] is not "":
                     nick_name = kcShipData.get_nick_name_by_ship_name(result[i])
-                    print nick_name
                     if kcScripts.change_ship.run(player, 'c'+str(i+1), nick_name) is not False:
                         u._sleep(u._LAG)
 

@@ -22,9 +22,9 @@ def main(command):
     target = cmd['factory']
 
     u.uprint("電の本気を見るのです！")
-    u.play_audio('audio/honkiwomiru.mp3')
+    u.play_audio('kcAudio/honkiwomiru.mp3')
     u.sleep(2.5)
-    u.play_audio('audio/uc.mp3')
+    u.play_audio('kcAudio/uc.mp3')
     u.sleep(2)
     for i in xrange(5, 0, -1):
         u.uprint( "完全勝利するまで {}{}{} 秒です".format(u.color['cyan'], i, u.color['default']) )
