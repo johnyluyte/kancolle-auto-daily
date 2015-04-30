@@ -38,6 +38,7 @@ function removeSection(divClassOrId){
 function editKancollePageCSS(){
     $("#main-ntg").css("text-align","left");
     $("#main-ntg").css("margin","-16px -62px");
+    $("#main-ntg").css("position","static");
     $("#game_frame").css("height","500");
 }
 
@@ -59,6 +60,7 @@ function coverUpAdmiralName(){
 
 function initKancollePage(){
     removeSection("#dmm_ntgnavi");
+    removeSection("#dmm-ntgnavi-renew");
     removeSection(".area-naviapp");
     removeSection("#foot");
     editKancollePageCSS();
