@@ -132,7 +132,7 @@ def _parse_port(player, jsonData):
         ship_id           = ndock[i]['api_ship_id']
         complete_time     = ndock[i]['api_complete_time']
         complete_time_str = ndock[i]['api_complete_time_str']
-        player.ndocks[i] = Ndock(ndock_id, state, ship_id, complete_time, complete_time_str)
+        player.ndocks[i]  = Ndock(ndock_id, state, ship_id, complete_time, complete_time_str)
     # player.print_info_ndocks()
 
     # 先清空 player ships
@@ -142,7 +142,7 @@ def _parse_port(player, jsonData):
     count = len(ships)
     player.ships_count = count
     for i in xrange(count):
-        local_id          = ships[i]['api_id']
+        local_id        = ships[i]['api_id']
         sortno          = ships[i]['api_sortno']
         lv              = ships[i]['api_lv']
         nowhp           = ships[i]['api_nowhp']
@@ -159,6 +159,8 @@ def _parse_port(player, jsonData):
         player.ships[i] = Ship(local_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
         if player.ships[i].name is None:
             u.uprint("Missing name for local_id:{0:>4d}, lv = {1:>3d}".format(player.ships[i].local_id, player.ships[i].lv) , 'red')
+        if player.ships[i].stype is None:
+            u.uprint("Missing stype for local_id:{0:>4d}, lv = {1:>3d}".format(player.ships[i].local_id, player.ships[i].lv) , 'red')
 
 
     # for i in range(1,101):
@@ -219,17 +221,17 @@ def _parse_questlist(jsonData):
             if state == 1:
                 pass
             elif state == 2:
-                state_msg = "執行中"
+                state_msg = u.append_color('執行中', 'yellow')
             elif state == 3:
-                state_msg = "已完成"
-            state_msg += " "
+                state_msg = u.append_color('已完成', 'yellow')
+            state_msg += ' '
 
             # **api_progress_flag** 目前進度，1 代表 50%，2 代表 80%
             progress = quest['api_progress_flag']
             if progress == 1:
-                state_msg += "50%"
+                state_msg += u.append_color('50%', 'cyan')
             elif progress == 2:
-                state_msg += "80%"
+                state_msg += u.append_color('80%', 'cyan')
             else:
                 state_msg += "   "
             state_msg += " "
@@ -238,7 +240,7 @@ def _parse_questlist(jsonData):
             # 任務編號
             # msg += "No." + str(quest['api_no']) + " "
             # msg += state_msg + " " + quest['api_title']
-            print type(msg), type(state_msg), type(quest['api_title'])
+            # print type(msg), type(state_msg), type(quest['api_title'])
             msg += state_msg + " " + (quest['api_title'].encode('utf-8'))
 
             print i, msg
@@ -255,10 +257,11 @@ def _set_chrome_dev_filter(filter):
 
 def _copy_api_response_from_chrome_dev():
     u.click_and_wait([80,770], 0.6)
+    u.scroll_down()
     u.click_and_wait([500,770], 0.05)
     u.keydown_ctrl_c_and_wait(0.1)
     # 清空 network 監看紀錄，以免量太大導致 chrome dev tool 延遲或錯誤
-    u.click_and_wait([50,700], 0.05)
+    # u.click_and_wait([50,700], 0.05)
 
 
 def _is_same_as_last_fetch(json_data):

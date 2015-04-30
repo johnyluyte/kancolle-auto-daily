@@ -31,11 +31,17 @@ color = dict()
 一般工具
 """
 def uprint(msg, font_color = 'default'):
-    tmp = "電：{0}{1}{2}".format(color[font_color], msg, color['default'])
+    if font_color == 'default':
+        tmp = "電：{}".format( msg )
+    else:
+        tmp = "電：{}".format( append_color(msg, font_color) )
     print(tmp)
 
 def uerror(msg):
     uprint(msg, 'red')
+
+def append_color(msg, font_color = 'default'):
+    return '{}{}{}'.format(color[font_color], msg, color['default'])
 
 def unknown_command(command):
     uerror('unknown command: ' + command)
@@ -51,7 +57,7 @@ def set_place(player, new_place):
         kcFetchAPI.fetch_api_response(player, 'port')
         get_focus_terminal()
     _place = new_place
-    uprint("Place は " + color['yellow'] + new_place + color['default'] + " に変更しました")
+    uprint("Place は " + append_color(new_place, 'yellow') + " に変更しました")
 
 def get_place():
     return _place
@@ -63,6 +69,7 @@ def set_lag(player, new_latency):
     except ValueError:
         new = _LAG
     _LAG = new
+    uprint("Lag は " + append_color(_LAG, 'yellow') + " に変更しました")
 
 def get_lag():
     return str(_LAG)
@@ -117,6 +124,9 @@ def click_no_wait(position):
     # 這邊可以加上 offset，用來微調或修正點擊最終位置
     # print get_time_stamp() + "click(): [" + str(position[0]) + "," + str(position[1]) + "]"
     _m.click(position[0], position[1])
+
+def scroll_down(arg_vertical = -20):
+    _m.scroll(vertical = arg_vertical)  # Scrolls up 3 ticks
 
 def get_focus_game():
     click_and_wait([130,120], 0.01)
@@ -186,6 +196,7 @@ def main():
     color['default'] = "\033[m"
     color['green']   = "\033[1;32m"
     color['red']     = "\033[1;31m"
+    color['orange']  = "\033[33m"
     color['yellow']  = "\033[1;33m"
     color['gray']    = "\033[1;30m"
     color['blue']    = "\033[1;34m"
