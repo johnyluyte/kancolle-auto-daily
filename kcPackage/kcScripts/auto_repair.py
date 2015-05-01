@@ -12,7 +12,7 @@ from kcCommand import exec_single_command
 
 """
 
-injured_kanmusu = list()
+injured_kanmusu_count = 0
 empty_dock = [True, True]
 
 
@@ -22,26 +22,44 @@ def run(player):
     u.get_focus_terminal()
 
 def main(player):
-    global injured_kanmusu
-    global empty_dock
-
     # 先回 port，更新 API
     # u.set_place(player, 'place')
     # 檢查是否有空的 ndock 與受傷的艦娘
     do_action(player, u.get_place(), 'ndock', u.get_lag())
     do_action(player, u.get_place(), 'port', u.get_lag())
+    player.get_damaged_ships_and_repair_time()
+    u.get_focus_terminal()
+    u.scroll_down()
+    u.get_focus_game()
 
-    # player.print_info_ndocks(player)
+    try:
+        check_ndock_and_kanmusu(player)
+    except KeyboardInterrupt:
+        print ""
+        u.uprint('自動修理が中断されました', 'red')
+        return
+
+    u.uprint('全部修理完了です')
+
+
+def check_ndock_and_kanmusu(player):
+    """
+    這邊採用 busy waiting，實際上不用 busy waiting 也能做到一樣的效果
+    但我喜歡看他倒數
+    """
+    global injured_kanmusu_count
+    global empty_dock
+    u.uprint('ドック使用中 = ' + str(empty_dock))
 
     all_healed = False
     while all_healed is False:
         # 檢查受傷的艦娘
-        injured_kanmusu = list()
+        injured_kanmusu_count = 0
         for i in xrange(100):
             if player.ships[i] is None:
                 break
             elif player.ships[i].dmghp > 0:
-                injured_kanmusu.append(player.ships[i].name)
+                injured_kanmusu_count += 1
         # 檢查空的維修廠
         for i in xrange(2):
             if player.ndocks[i].state == 0:
@@ -49,9 +67,9 @@ def main(player):
             else:
                 empty_dock[i] = False
         # 到 ndock 將受傷的艦娘放入
-        if (True in empty_dock) and (len(injured_kanmusu) > 1):
+        if (True in empty_dock) and (injured_kanmusu_count > 1):
             put_into_ndock(player)
-        elif (len(injured_kanmusu) == 0) or (len(injured_kanmusu) == 1):
+        elif (injured_kanmusu_count == 0) or (injured_kanmusu_count == 1):
             all_healed = True
         # 監看並等待維修時間差不多結束
         else:
@@ -61,19 +79,13 @@ def main(player):
                 do_action(player, u.get_place(), 'ndock', u.get_lag())
                 do_action(player, u.get_place(), 'port', u.get_lag())
         u.sleep(1)
-    u.uprint('全部修理完了です')
-
 
 def put_into_ndock(player):
-    global injured_kanmusu
+    global injured_kanmusu_count
     global empty_dock
     fast_sleep = 1.7
 
-    print('ドック = ', empty_dock)
-    # msg = ''
-    # for i in injured_kanmusu:
-    #     msg += i + ','
-    # u.uprint('怪我している艦娘たち：' + u.append_color(msg, 'green') )
+    u.uprint('ドック使用中 = ' + str(empty_dock))
     player.get_damaged_ships_and_repair_time()
     u.get_focus_terminal()
     u.scroll_down()
@@ -88,7 +100,7 @@ def put_into_ndock(player):
     elif empty_dock[1] is True:
         # 從最下面修 (擦傷、小破)
         do_action(player, u.get_place(), 'dock2', fast_sleep)
-        count = len(injured_kanmusu)
+        count = injured_kanmusu_count
         if count > 9:
             count = 0
         do_action(player, u.get_place(), str(count), fast_sleep)

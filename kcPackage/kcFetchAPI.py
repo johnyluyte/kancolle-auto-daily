@@ -251,7 +251,11 @@ def _parse_questlist(jsonData):
 
 def _set_chrome_dev_filter(filter):
     # 將 chrome dev tool 調整到 800 * 567 px
+    # 先點 network
+    u.click_and_wait([160,670], 0.1)
+    # 點 filter 欄位
     u.click_and_wait([80,720], 0.1)
+    # 輸入 filter
     u.keydown_ctrl_a_and_wait(0.1)
     u.keydown_string_and_wait(filter, 0.2)
 
@@ -278,7 +282,7 @@ def _is_same_as_last_fetch(json_data):
 
 def fetch_api_response(player, filter):
     # 清空 clipboard
-    u.pbcopy("empty clipboard")
+    u.pbcopy("NA")
 
     # 設定 filter
     _set_chrome_dev_filter(filter)
@@ -292,16 +296,21 @@ def fetch_api_response(player, filter):
     except:
         u.uerror("Failed to fecth Kancolle API")
         u.uerror("Data: {0}".format(dataFromClipboard))
-        return
+        return 'fail_to_fetch'
 
     # 與上個 JSON 是否擁有相同的 hash，有的話就更新
     if _is_same_as_last_fetch(json_data) is True:
-        return
+        return 'same_as_last'
 
-    if filter == 'questlist':
-        global gl_total_quest_page
-        gl_total_quest_page = _parse_questlist(json_data)
-        print "gl_total_quest_page = ", gl_total_quest_page
-    elif filter == 'port':
-        _parse_port(player, json_data)
+    try:
+        if filter == 'questlist':
+            global gl_total_quest_page
+            gl_total_quest_page = _parse_questlist(json_data)
+            print "gl_total_quest_page = ", gl_total_quest_page
+        elif filter == 'port':
+            _parse_port(player, json_data)
+    except:
+        u.uerror("Failed to parse Kancolle API")
+        # u.uerror("Data: {0}".format(dataFromClipboard))
+        return 'fail_to_parse'
 

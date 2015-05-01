@@ -26,12 +26,12 @@ O save fleet_nick_name fleet_name
 O 計算維修時間、倍數、危機有資料？  抓出艦隊種類
 O fetch vpngate file
 O 全自動維修
-auto_repair 的 lag 沒做用?
+O auto_repair 的 lag 沒做用?
+O cat ?
+O api except 要自動 retry，先點 network
 skuik
 greasemonkey
-cat ?
 對潛裝備在誰身上
-api except 要自動 retry
 
 腳本：
 把遠征前用 1-1 弄得閃亮亮
@@ -93,7 +93,17 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('cat') and len(inp.split()) == 2:
         # 顯示從 json API 得來的資料
         arg = inp.split()[1]
-        if arg == 'deck' or arg == 'd':
+        if arg == '?':
+            print('cat [arguments]:')
+            print("[deck] [d] - 印出四個艦隊編成")
+            print("[ndock] [n] - 印出維修工廠狀態")
+            print("[ship] [s] - 印出所有船艦狀態")
+            print("[material] [r] - 印出目前擁有的資源")
+            print("[names] [name] - 印出四個艦隊編成")
+            print("[fleets] [f] - 印出使用者自行編列的艦隊編成")
+            print("[damage] [dmg] - 印出受傷的船艦與預期維修時間")
+            return True
+        elif arg == 'deck' or arg == 'd':
             # 印出四個艦隊編成
             player.print_info_decks()
             return True
@@ -102,7 +112,7 @@ def is_handled_by_predefined_func(inp):
             player.print_info_ndocks(player)
             return True
         elif arg == 'ship' or arg == 's':
-            # 印出所有船隻狀態
+            # 印出所有船艦狀態
             for i in range(1,101):
                 if i % 10 == 1:
                     print "[", i, "]"
@@ -144,7 +154,7 @@ def is_handled_by_predefined_func(inp):
             u.set_place(player, inp.split()[1])
         return True
     elif inp == '?':
-        u.uprint("Place = " + u.append_color(u.get_place(),'yellow'))
+        u.uprint("Place = " + u.append_color(u.get_place(),'yellow') + ", Lag = " + u.append_color(u.get_lag(),'yellow'))
         u.uprint("available commands = " + str(sorted(kcCommand.get_current_available_cmds())))
         return True
     elif inp == "":

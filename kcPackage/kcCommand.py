@@ -299,10 +299,10 @@ for key, value in cmd['shared_menu'].items():
     cmd['ndock'][key] = value
 for key, value in cmd['shared_page'].items():
     cmd['ndock'][key] = value
-cmd['ndock']['dock1']       = ("第一ドックを選択しました", 0, (249,268))
-cmd['ndock']['dock2']       = ("第二ドックを選択しました", 0, (246,342))
-cmd['ndock']['dock1item']   = ("第一ドックでアイテムを使用しますか", 0, (754,250))
-cmd['ndock']['dock2item']   = ("第二ドックでアイテムを使用しますか", 0, (758,336))
+cmd['ndock']['dock1']       = ("一番目のドックを選択しました", 0, (249,268))
+cmd['ndock']['dock2']       = ("二番目のドックを選択しました", 0, (246,342))
+cmd['ndock']['dock1item']   = ("一番目のドックでアイテムを使用しますか", 0, (754,250))
+cmd['ndock']['dock2item']   = ("二番目のドックでアイテムを使用しますか", 0, (758,336))
 cmd['ndock']['repair']      = ("いますぐ修理しますか？", 0, (690,535))
 cmd['ndock']['hai']         = ("はい、なのです", 0, (503,498))
 cmd['ndock']['iie']         = ("いいえ、キャンセルします", 0, (312,494))
