@@ -24,6 +24,7 @@ class Ship(object):
         self.name      = kcShipData.get_ship_name_by_id(self.sortno)
         self.nick_name = kcShipData.get_ship_nick_name_by_id(self.sortno)
         self.stype     = kcZukan.get_stype_by_name(self.name)
+        self.dmghp     = self.maxhp - self.nowhp
 
     def print_info(self):
         msg = str(self.local_id) + "\t" + str(self.sortno) +  "\t" + str(self.lv) + "\t"

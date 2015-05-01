@@ -16,7 +16,7 @@ import kcFetchAPI
 
 # - - - Global Variables - - -
 
-_LAG = 2.0
+_LAG = 3.0
 _m = PyMouse()
 _k = PyKeyboard()
 
@@ -53,7 +53,7 @@ def set_place(player, new_place):
     global _place
     if new_place == 'port' and not _place == 'port':
         get_focus_game()
-        _sleep(1)
+        _sleep(1.5)
         kcFetchAPI.fetch_api_response(player, 'port')
         get_focus_terminal()
     _place = new_place
@@ -72,7 +72,7 @@ def set_lag(player, new_latency):
     uprint("Lag は " + append_color(_LAG, 'yellow') + " に変更しました")
 
 def get_lag():
-    return str(_LAG)
+    return _LAG
 
 def is_number(s):
     try:

@@ -67,7 +67,13 @@ def get_nick_name_by_ship_name(ship_name):
             break
     return nick_name
 
-
+def get_name_by_local_id(player, local_id):
+    name = 'N/A'
+    for ship in player.ships:
+        if ship is None: break
+        if ship.local_id == local_id:
+            name = ship.name
+    return name
 """
 # load CSV 相關
 """

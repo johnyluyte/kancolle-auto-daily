@@ -59,7 +59,7 @@ type 4 滑鼠點擊乙次(會切換場景)，有 callback：  (msg, type=4, pos1
 """
 
 
-def exec_single_command(player, place ,command):
+def exec_single_command(player, place ,command, sleep=0):
     cmd_msg  = cmd[place][command][0]
     cmd_type = cmd[place][command][1]
     cmd_pos  = cmd[place][command][2]
@@ -69,13 +69,13 @@ def exec_single_command(player, place ,command):
         u.get_focus_game()
         if not cmd_msg.strip() == "":
             u.uprint(cmd_msg)
-        u.click_no_wait(cmd_pos)
+        u.click_and_wait(cmd_pos, sleep)
         u.get_focus_terminal()
     # type 1 滑鼠點擊乙次(會切換場景)：
     elif cmd_type == 1:
         u.get_focus_game()
         u.uprint(cmd_msg)
-        u.click_no_wait(cmd_pos)
+        u.click_and_wait(cmd_pos, sleep)
         u.set_place(player, command)
         u.get_focus_terminal()
         """

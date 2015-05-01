@@ -23,14 +23,18 @@ O dock1 uc
 O build uc
 O 修正 file open with
 O save fleet_nick_name fleet_name
-scrapy fetch vpngate file
+O 計算維修時間、倍數、危機有資料？  抓出艦隊種類
+O fetch vpngate file
+O 全自動維修
+auto_repair 的 lag 沒做用?
 skuik
 greasemonkey
+cat ?
+對潛裝備在誰身上
+api except 要自動 retry
 
 腳本：
 把遠征前用 1-1 弄得閃亮亮
-計算維修時間、倍數、危機有資料？  抓出艦隊種類
-全自動維修
 自動 3-2-1 course
 自動遠征
 自動每日任務
@@ -45,8 +49,8 @@ def is_handled_by_predefined_func(inp):
     if inp == "exit" or inp =="bye":
         u.uprint("お疲れ様でした、明日も頑張ってください")
         exit()
-    # 抓取 json API
     elif inp.startswith('api') and len(inp.split()) == 2:
+        # 抓取 json API
         arg = inp.split()[1]
         if arg == 'quest' or arg == 'q':
             u.get_focus_game()
@@ -61,6 +65,7 @@ def is_handled_by_predefined_func(inp):
         else:
             return False
     elif inp.startswith('refresh') and len(inp.split()) == 1:
+        # 重新讀取 kcShipData
         kcShipData.load_csv()
         # 清空 network 監看紀錄，以免量太大導致 chrome dev tool 延遲或錯誤
         u.get_focus_game()
@@ -68,6 +73,7 @@ def is_handled_by_predefined_func(inp):
         u.get_focus_terminal()
         return True
     elif inp.startswith('save') and len(inp.split()) == 3:
+        # 將目前第一艦隊的建娘組合存入 kcShipData 的 fleet
         u.set_place(player, 'hensei')
         kcCommand.exec_single_command(player, u.get_place(), 'port')
         args = inp.split()
@@ -78,23 +84,25 @@ def is_handled_by_predefined_func(inp):
         import subprocess
         subprocess.call(['/Applications/SikuliX.app/run', '-r', 'test.sikuli'])
         return True
-    # 顯示從 json API 得來的資料
-    elif inp.startswith('cat') and len(inp.split()) == 2:
+    elif inp.startswith('auto') and len(inp.split()) == 2:
         arg = inp.split()[1]
-        if arg == 'quest' or arg == 'q':
+        if arg == 'repair' or arg == 'r':
+            # 自動維修
+            kcScript.exec_script(player, 'auto', 'repair', None)
             return True
-        elif arg == 'port' or arg == 'p':
-            return True
-        elif arg == 'deck' or arg == 'd':
+    elif inp.startswith('cat') and len(inp.split()) == 2:
+        # 顯示從 json API 得來的資料
+        arg = inp.split()[1]
+        if arg == 'deck' or arg == 'd':
+            # 印出四個艦隊編成
             player.print_info_decks()
             return True
         elif arg == 'ndock' or arg == 'n':
-            player.print_info_ndocks()
-            return True
-        elif arg == 'event' or arg == 'e':
-            # 即將到來的事件（修復、遠征、建造）
+            # 印出維修工廠狀態
+            player.print_info_ndocks(player)
             return True
         elif arg == 'ship' or arg == 's':
+            # 印出所有船隻狀態
             for i in range(1,101):
                 if i % 10 == 1:
                     print "[", i, "]"
@@ -102,15 +110,19 @@ def is_handled_by_predefined_func(inp):
             player.print_info_ships_count()
             return True
         elif arg == 'material' or arg == 'r': # Resource
+            # 印出目前擁有的資源
             player.print_info_materials()
             return True
         elif arg == 'names' or arg == 'name':
+            # 印出艦娘的暱稱
             kcShipData.cat_name()
             return True
         elif arg == 'fleets' or arg == 'f':
+            # 印出使用者自行編列的艦隊編成
             kcShipData.cat_fleets()
             return True
         elif arg == 'damage' or arg == 'dmg':
+            # 印出所有受傷的艦娘資訊與預期維修時間
             player.get_damaged_ships_and_repair_time()
             return True
         else:
@@ -118,7 +130,7 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('lag'):
         # 印出目前 LAG
         if len(inp.split()) == 1:
-            u.uprint("サーバーとの予測レイテンシは " + u.append_color(u.get_lag(),'yellow') + " 秒です")
+            u.uprint("サーバーとの予測レイテンシは " + u.append_color(str(u.get_lag()),'yellow') + " 秒です")
         # 指定目前 LAG
         else:
             u.set_lag(player, inp.split()[1])
@@ -131,7 +143,7 @@ def is_handled_by_predefined_func(inp):
         else:
             u.set_place(player, inp.split()[1])
         return True
-    elif inp == "cmd" or inp == '?':
+    elif inp == '?':
         u.uprint("Place = " + u.append_color(u.get_place(),'yellow'))
         u.uprint("available commands = " + str(sorted(kcCommand.get_current_available_cmds())))
         return True
@@ -151,8 +163,8 @@ def check_command(input_):
         如果正常的話就執行，不回傳
         如果非合理指令，就不動作並回傳 False
         e.g.
-            input_ = "get akagi"
-            則我們檢查 word[0]，也就是 "get" 是否為合法的指令。
+            input_ = "c1 akagi"
+            則我們檢查 word[0]，也就是 "c1" 是否為合法的指令。
     """
     input_ = input_.split()
     command = input_[0]

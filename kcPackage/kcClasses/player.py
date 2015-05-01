@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import sys
 import math
 
 import kcUtility as u
@@ -33,20 +34,35 @@ class Player(object):
         else:
             u.uerror("[Player][print_info_decks] Invalid deck_id")
 
-    def print_info_ndocks(self, dock_id = 5):
+    def print_info_ndocks(self, player, dock_id = 5):
         if self.ndocks[0] is None:
             u.uerror("[Player][print_info_ndocks] Not initialized")
             return
         # 印出所有的修船廠狀態
         if dock_id == 5:
-            for i in range(0,4):
+            for i in range(0,2):
                 if self.ndocks[i] is None: continue
-                self.ndocks[i].print_info()
+                info = self.ndocks[i].get_info(player)
+                print("第" + str(info['ndock_id']) + "修船廠(" + info['state'] + ")：" + info['name_count_down'])
         # 印出某個指定的修船廠狀態
-        elif dock_id > 0 and dock_id < 5 and (self.ndocks[dock_id-1] is not None):
-            self.ndocks[dock_id-1].print_info()
+        # elif dock_id > 0 and dock_id < 5 and (self.ndocks[dock_id-1] is not None):
+            # self.ndocks[dock_id-1].print_info_short(player)
         else:
             u.uerror("[Player][print_info_ndocks] Invalid dock_id")
+
+    def print_info_ndocks_auto_repair(self, player):
+        info = [{} for _ in xrange(2)]
+
+        for i in range(0,2):
+            if self.ndocks[i] is None: continue
+            info[i] = self.ndocks[i].get_info(player)
+
+        msg = "入渠 1:" + info[0]['name_count_down'] + " 2:" + info[1]['name_count_down']
+        sys.stdout.write( "\r{}".format(msg) )
+        sys.stdout.flush()
+
+        seconds_left = [info[0]['seconds_left'] ,info[1]['seconds_left']]
+        return seconds_left
 
     """
     TODO: 應該改成輸入船的名字也可以印出來!?
@@ -169,10 +185,10 @@ class Player(object):
                 hp = str(ship.nowhp)+"/"+str(ship.maxhp)
                 div = float(ship.nowhp) / float(ship.maxhp)
                 # print div
-                if div < 0.25:
+                if div <= 0.25:
                     hp += ' 大破'
                     hp = u.append_color(hp, 'red')
-                elif div < 0.5:
+                elif div <= 0.5:
                     hp += ' 中破'
                     hp = u.append_color(hp, 'orange')
 
@@ -189,7 +205,7 @@ class Player(object):
                 else:
                     repair_time = u.append_color(repair_time, 'red')
 
-            msg = '{:>8s}, {} lv{:>2d} ({})'.format(repair_time, u.append_color(value[3], 'cyan'), value[2], value[1])
+            msg = '{repair_time:>8s}, lv{lv:>2d} {name} ({hp})'.format(repair_time=repair_time, lv=value[2], name=u.append_color(value[3], 'cyan'), hp=value[1])
             u.uprint(msg)
         u.uprint('怪我している艦娘は {} 人います'.format(u.append_color(len(damaged_ships), 'cyan')))
 
