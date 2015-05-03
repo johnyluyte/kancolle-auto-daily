@@ -46,10 +46,12 @@ def check_ndock_and_kanmusu(player):
     """
     這邊採用 busy waiting，實際上不用 busy waiting 也能做到一樣的效果
     但我喜歡看他倒數
+    為了應應臨時抓不到 api、網路延遲、遠征回來等情形 ，這裡先持續用 busy waiting
+    暫時不要 refactoring
     """
     global injured_kanmusu_count
     global empty_dock
-    u.uprint('ドック使用中 = ' + str(empty_dock))
+    u.uprint('空いてるドック = ' + str(empty_dock))
 
     all_healed = False
     while all_healed is False:
@@ -76,8 +78,11 @@ def check_ndock_and_kanmusu(player):
             seconds_left = player.print_info_ndocks_auto_repair(player)
             if seconds_left[0] < 59 or seconds_left[1] < 59:
                 print ""
+                # random sleep
+                u.get_focus_game()
                 do_action(player, u.get_place(), 'ndock', u.get_lag())
                 do_action(player, u.get_place(), 'port', u.get_lag())
+                u.get_focus_game()
         u.sleep(1)
 
 def put_into_ndock(player):
@@ -85,7 +90,7 @@ def put_into_ndock(player):
     global empty_dock
     fast_sleep = 1.7
 
-    u.uprint('ドック使用中 = ' + str(empty_dock))
+    u.uprint('空いてるドック = ' + str(empty_dock))
     player.get_damaged_ships_and_repair_time()
     u.get_focus_terminal()
     u.scroll_down()
@@ -109,6 +114,7 @@ def put_into_ndock(player):
     do_action(player, u.get_place(), 'repair', fast_sleep)
     do_action(player, u.get_place(), 'hai', fast_sleep)
     do_action(player, u.get_place(), 'port', u.get_lag())
+    u.get_focus_game()
     player.print_info_ndocks(player)
     u.get_focus_terminal()
     u.scroll_down()
