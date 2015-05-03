@@ -16,7 +16,7 @@ import kcFetchAPI
 
 # - - - Global Variables - - -
 
-_LAG = 3.0
+_LAG = 2.0
 _m = PyMouse()
 _k = PyKeyboard()
 
@@ -129,10 +129,10 @@ def scroll_down(arg_vertical = -20):
     _m.scroll(vertical = arg_vertical)  # Scrolls up 3 ticks
 
 def get_focus_game():
-    click_and_wait([130,120], 0.01)
+    click_and_wait((706,147), 0.01)
 
 def get_focus_terminal():
-    click_and_wait([1000,221], 0.01)
+    click_and_wait((1000,221), 0.01)
 
 
 """

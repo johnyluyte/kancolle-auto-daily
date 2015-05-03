@@ -16,9 +16,11 @@ def get_ship_name_by_id(id):
         有找到：回傳艦娘的官方名稱
         沒找到：回傳 None
     """
-    name = kanmusu_dict.get(str(id), None)
-    if name is not None:
-        name = name[0]
+    tuple_ = kanmusu_dict.get(str(id), None)
+    if tuple_ is not None:
+        name = tuple_[0]
+    else:
+        name = None
     return name
 
 def get_ship_nick_name_by_id(id):
@@ -51,6 +53,7 @@ def get_ship_name_by_nick_name(nick_name):
             break
     return ship_name
 
+
 def get_nick_name_by_ship_name(ship_name):
     """
     輸入艦娘的官方名稱，回傳該艦娘的暱稱
@@ -66,6 +69,7 @@ def get_nick_name_by_ship_name(ship_name):
             nick_name = value[1]
             break
     return nick_name
+
 
 def get_name_by_local_id(player, local_id):
     name = 'N/A'
@@ -83,6 +87,10 @@ def load_csv_store_ships(fields):
     name       = fields[1].strip()
     nick_name  = fields[2].strip()
     # planes   = fields[3].strip()
+
+    # 如果使用者沒有指定這隻艦娘的綽號的話，指定其綽號 = 本名
+    if nick_name == '':
+        nick_name = name
     kanmusu_dict[index] = (name, nick_name)
 
 def load_csv_store_fleets(fields):
@@ -175,21 +183,24 @@ def save_current_fleets(player, nick_name, name, ships):
             output += format_nick_name + "," + format_name + ","
 
             for i in xrange(6):
-                # 用 local_id 取得 sortno
-                sortno = None
-                for ship in player.ships:
-                    if ship is None: break
-                    if ship.local_id == ships[i]:
-                        sortno = ship.sortno
-                # 再用 sortno 取得 ship_name
-                ship_name = get_ship_name_by_id(sortno)
-                if ship_name is None:
-                    ship_name = ""
-                # ship_name_unicode = ship_name.decode('utf-8')
-                # format_ship_name = u'{: >4s}'.format(ship_name_unicode)
-                format_ship_name = '{:>8s}'.format(ship_name)
-                # output += " " + format_ship_name.encode('utf-8') + ","
-                output += " " + format_ship_name + ","
+                if ships[i] == -1:
+                    output += "        ,"
+                else:
+                    # 用 local_id 取得 sortno
+                    sortno = None
+                    for ship in player.ships:
+                        if ship is None: break
+                        if ship.local_id == ships[i]:
+                            sortno = ship.sortno
+                    # 再用 sortno 取得 ship_name
+                    ship_name = get_ship_name_by_id(sortno)
+                    if ship_name is None:
+                        ship_name = ""
+                    # ship_name_unicode = ship_name.decode('utf-8')
+                    # format_ship_name = u'{: >4s}'.format(ship_name_unicode)
+                    format_ship_name = '{:>8s}'.format(ship_name)
+                    # output += " " + format_ship_name.encode('utf-8') + ","
+                    output += " " + format_ship_name + ","
             print output
 
 

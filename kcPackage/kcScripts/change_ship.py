@@ -99,7 +99,7 @@ def main(position, page, number):
         tmp.append(target['f'])
 
     for i in tmp:
-        do_action(i, 0.1)
+        do_action(i, 0.15)
 
     # 選擇在此頁面的第 N 個艦娘
     number = str(number)

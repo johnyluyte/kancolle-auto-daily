@@ -101,7 +101,7 @@ class Player(object):
     def get_ship_current_id_by_nick_name(self, nick_name):
         current_id = self.get_max_level_ship_with_same_nick_name(nick_name)
         if current_id is None:
-            u.uerror("この名前の艦娘が艦隊にいないようです")
+            u.uerror("この艦娘が艦隊にいないです {}".format(nick_name) )
         else:
             official_name = kcShipData.get_ship_name_by_nick_name(nick_name)
             msg = "{c1:s}{name:s}({nick:s}){c2:s}さんですね、わかりました".format(c1=u.color['yellow'], c2=u.color['default'], name=official_name, nick=nick_name)
@@ -179,7 +179,11 @@ class Player(object):
         damaged_ships = list()
         for ship in self.ships:
             if ship is None: break
+            # print ship.name, ship.nowhp, ship.maxhp
             if not ship.nowhp == ship.maxhp:
+                if ship.stype is None:
+                    u.uerror("Missing stype, local_id:{0:>4d}, lv = {1:>3d}".format(ship.local_id, player.ship.lv) )
+                    continue
                 repair_time = self._get_repair_time(ship)
                 # 幫大破小破上色
                 hp = str(ship.nowhp)+"/"+str(ship.maxhp)

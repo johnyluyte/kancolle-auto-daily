@@ -32,6 +32,7 @@ O api except 要自動 retry，先點 network
 skuik
 greasemonkey
 對潛裝備在誰身上
+random sleep in scripts to avoid detecter
 
 腳本：
 把遠征前用 1-1 弄得閃亮亮
@@ -75,7 +76,7 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('save') and len(inp.split()) == 3:
         # 將目前第一艦隊的建娘組合存入 kcShipData 的 fleet
         u.set_place(player, 'hensei')
-        kcCommand.exec_single_command(player, u.get_place(), 'port')
+        kcCommand.exec_single_command(player, u.get_place(), 'port', u.get_lag())
         args = inp.split()
         kcShipData.save_current_fleets(player, args[1], args[2], player.decks[0].ships)
         kcShipData.load_csv()

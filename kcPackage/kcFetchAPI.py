@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import traceback
 import kcUtility as u
 
 from kcClasses.deck import Deck
@@ -294,6 +295,7 @@ def fetch_api_response(player, filter):
     try:
         json_data = json.loads(dataFromClipboard[7:])
     except:
+        traceback.print_exc()
         u.uerror("Failed to fecth Kancolle API")
         u.uerror("Data: {0}".format(dataFromClipboard))
         return 'fail_to_fetch'
@@ -310,6 +312,7 @@ def fetch_api_response(player, filter):
         elif filter == 'port':
             _parse_port(player, json_data)
     except:
+        traceback.print_exc()
         u.uerror("Failed to parse Kancolle API")
         # u.uerror("Data: {0}".format(dataFromClipboard))
         return 'fail_to_parse'
