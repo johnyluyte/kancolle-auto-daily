@@ -18,7 +18,7 @@ def exec_script(player, place, command, args):
         if (command in change_ship_cmds) and len(args) == 1:
             # "c1 akagi"
             kcScripts.change_ship.run(player, command, args[0])
-        if (command in change_fleet_cmds) and len(args) == 1:
+        elif (command in change_fleet_cmds) and len(args) == 1:
             # "f1 kobe"
             # 自動找出代號為 "kobe" 的艦隊編列，並將第一艦隊(f1) 更換成代號艦隊所編列的艦娘
             # kcScripts.change_fleet.run(player, command, args[0])
@@ -33,12 +33,22 @@ def exec_script(player, place, command, args):
             # 清空目前艦隊
             kcCommand.exec_single_command(player, place, 'clear')
             u._sleep(u._LAG)
-            # 切換六個艦娘
-            for i in xrange(6):
+            # 檢查目前旗艦是否需要更換
+            begin = 0
+            flagship_local_id = player.decks[int(command[1:])-1].ships[0]
+            flagship_name = kcShipData.get_name_by_local_id(player, flagship_local_id)
+            if flagship_name == result[0]:
+                u.uprint("旗艦は{}さん、変更する必要はありません".format(u.append_color(flagship_name, 'yellow')))
+                begin = 1
+            # 切換五個或六個艦娘
+            for i in xrange(begin, 6):
                 if result[i] is not "":
                     nick_name = kcShipData.get_nick_name_by_ship_name(result[i])
                     if kcScripts.change_ship.run(player, 'c'+str(i+1), nick_name) is not False:
                         u._sleep(u._LAG)
+            # 回到 port
+            kcCommand.exec_single_command(player, place, 'port')
+
 
     elif place == 'refill':
         fleet_cmds = ['f1', 'f2', 'f3', 'f4']

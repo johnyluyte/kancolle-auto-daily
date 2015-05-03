@@ -23,7 +23,10 @@ class Ship(object):
         # 建娘的官方名字
         self.name      = kcShipData.get_ship_name_by_id(self.sortno)
         self.nick_name = kcShipData.get_ship_nick_name_by_id(self.sortno)
-        self.stype     = kcZukan.get_stype_by_name(self.name)
+        if self.name is None:
+            self.stype = None
+        else:
+            self.stype = kcZukan.get_stype_by_name(self.name)
         self.dmghp     = self.maxhp - self.nowhp
 
     def print_info(self):
