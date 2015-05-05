@@ -115,6 +115,15 @@ It's probably a good idea to make a new folder called "Scripts" and keep all you
 直接用 command line 執行：
 /Applications/SikuliX.app/run -r ~/myScript.sikuli
 
+用 finder 如果直接點兩下 test.sikuli 的話，會自動用 sikuliX.app 開啟該 sikuli 專案
+
+但是 sikuli 專案其實是 python 檔與圖片檔所構成的
+
+用 terminal 的話可以直接藉由 cd path_to_your_project/fileName.sikuli 進去看
+
+若要用 finder 看的話，可藉由 前往->前往資料夾->path_to_your_project/fileName.sikuli/fileName.py 來進入
+
+
 即使是在 terminal ，SikuliX 也要花 6~8 秒才能啟動並執行 script，相對來說很慢
 
 不過我們是用在戰鬥途中，就還好！？ 反正 kancolle 進入戰鬥畫面前也有一段空閒時間
@@ -124,6 +133,13 @@ https://answers.launchpad.net/sikuli/+question/249084
 A:
 仕様です
 
+另一個要注意的點
+
+如果直接在 finder 點兩下 test.sikuli 的話，是“執行”該 sikuli，並不是編輯
+
+如要用 sikuliX 的 IDE 編輯該 sikuli，請用 F4 開啟 sikuliX.app，再開啟想編輯的 sikuli project
+
+另一個方法就是用 ST3 等文字編輯器開啟 test.sikuli 內的 test.py
 
 
 ### 4. 輔助型、提供資訊

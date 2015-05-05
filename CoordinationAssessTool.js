@@ -3,10 +3,12 @@ $('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.j
 function initKancolleWiki(){
     var msg = "<div id='CATkancolleWiki'>";
     msg += "艦これ攻略 Wiki："
-    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%B7%FA%C2%A4'>艦娘レシピ早見表</a> ｜ ";
-    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%B3%AB%C8%AF'>裝備レシピ早見表</a> ｜ ";
+    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%B7%FA%C2%A4'>艦娘レシピ</a> ｜ ";
+    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%B3%AB%C8%AF'>裝備レシピ</a> ｜ ";
     msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%B1%F3%C0%AC'>遠征早見表</a> ｜ ";
-    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%C7%A4%CC%B3'>任務一覧</a>";
+    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%C7%A4%CC%B3'>任務一覧</a> ｜ ";
+    msg += "<a target='_blank' href='http://wikiwiki.jp/kancolle/?%C8%AF%CE%E1%A1%AA%C2%E8%BD%BD%B0%EC%B9%E6%BA%EE%C0%EF'>2015春イベント</a> ｜ ";
+    msg += "<a target='_blank' href='http://blog.livedoor.jp/pettann/archives/43786854.html'>装備の組み合わせ</a>";
     msg += "</div>";
     $('body').append(msg);
 
