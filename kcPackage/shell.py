@@ -29,13 +29,29 @@ O 全自動維修
 O auto_repair 的 lag 沒做用?
 O cat ?
 O api except 要自動 retry，先點 network
-skuik
-greasemonkey
+O 距離下一個破還差多少 HP
+O condition
+
 對潛裝備在誰身上
+1. cat item 列出所有裝備(名稱:數量，排序，數量越少加顏色，方便我自己判斷)
+如果沒有在艦娘身上的裝備，會顯示在哪裡!?
+不用擔心，slot_item.json 會列出所有裝備，但要記得重新登入抓取
+2. cat gear 列出重要裝備(水雷、聲納、烈雲)
+缺點，需要重新登入才能抓到 slot_item.json
+
+zukan 是不是太小題大作，我們只需要 stype，是否可直接從 api_start2 獲取?
+
+sikuli
+/Applications/SikuliX.app/run -r ~/myScript.sikuli
+減少 sikuli 比對的範圍
+第一艦隊名稱
+CAT 加上 裝備連擊、春季Event
+
+greasemonkey
 random sleep in scripts to avoid detecter
 
 腳本：
-把遠征前用 1-1 弄得閃亮亮
+O 把遠征前用 1-1 弄得閃亮亮
 自動 3-2-1 course
 自動遠征
 自動每日任務
@@ -81,9 +97,11 @@ def is_handled_by_predefined_func(inp):
         kcShipData.save_current_fleets(player, args[1], args[2], player.decks[0].ships)
         kcShipData.load_csv()
         return True
-    elif inp.startswith('sikuli'):
-        import subprocess
-        subprocess.call(['/Applications/SikuliX.app/run', '-r', 'test.sikuli'])
+    elif inp.startswith('map11'):
+        kcScript.exec_sikuli(player ,'1-1')
+        return True
+    elif inp.startswith('map321'):
+        kcScript.exec_sikuli(player ,'3-2-1')
         return True
     elif inp.startswith('auto') and len(inp.split()) == 2:
         arg = inp.split()[1]

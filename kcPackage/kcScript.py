@@ -9,8 +9,16 @@ import kcScripts.refill_fleet_all
 import kcScripts.factory_build
 import kcScripts.factory_uc
 import kcScripts.auto_repair
+import kcScripts.sikuli_1_1
+import kcScripts.sikuli_3_2_1
 
 
+
+def exec_sikuli(player, map_):
+    if map_ == '1-1':
+        kcScripts.sikuli_1_1.run(player)
+    elif map_ == '3-2-1':
+        kcScripts.sikuli_3_2_1.run(player)
 def exec_script(player, place, command, args):
     if place == 'hensei':
         change_ship_cmds = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6']
