@@ -49,9 +49,9 @@ def unknown_command(command):
 def change_scene(funcName):
     map( funcName, [0] )
 
-def set_place(player, new_place):
+def set_place(player, new_place, update_api=True):
     global _place
-    if new_place == 'port' and not _place == 'port':
+    if (new_place == 'port') and (not _place == 'port') and (update_api is True):
         get_focus_game()
         _sleep(1.5)
         kcFetchAPI.fetch_api_response(player, 'port')
@@ -85,8 +85,8 @@ def get_time_stamp():
     current_time = str(datetime.datetime.now()).split('.')[0] # 2015-03-29 20:18:08
     return "[" + current_time[5:] + "] " # [03-29 20:18:08]
 
-def _sleep(sleep_sec):
-    if sleep_sec > 0.7:
+def _sleep(sleep_sec, print_=True):
+    if (sleep_sec > 0.7) and (print_ is True):
         uprint("少々お待ちください ("+ str(sleep_sec) + "s)", 'gray')
     sleep(sleep_sec)
 

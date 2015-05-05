@@ -202,7 +202,7 @@ def save_current_fleets(player, nick_name, name, ships):
                     # output += " " + format_ship_name.encode('utf-8') + ","
                     output += " " + format_ship_name + ","
             print output
-
+    u.uprint('艦隊編成を保存しました', 'cyan')
 
 """
 # Cat Names 相關

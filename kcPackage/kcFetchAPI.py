@@ -158,10 +158,7 @@ def _parse_port(player, jsonData):
         sakuteki        = ships[i]['api_sakuteki'][0]
         lucky           = ships[i]['api_lucky'][0]
         player.ships[i] = Ship(local_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
-        if player.ships[i].name is None:
-            u.uprint("Missing name for local_id:{0:>4d}, lv = {1:>3d}".format(player.ships[i].local_id, player.ships[i].lv) , 'red')
-        if player.ships[i].stype is None:
-            u.uprint("Missing stype for local_id:{0:>4d}, lv = {1:>3d}".format(player.ships[i].local_id, player.ships[i].lv) , 'red')
+
 
 
     # for i in range(1,101):
@@ -297,7 +294,7 @@ def fetch_api_response(player, filter):
     except:
         traceback.print_exc()
         u.uerror("Failed to fecth Kancolle API")
-        u.uerror("Data: {0}".format(dataFromClipboard))
+        # u.uerror("Data: {0}".format(dataFromClipboard))
         return 'fail_to_fetch'
 
     # 與上個 JSON 是否擁有相同的 hash，有的話就更新

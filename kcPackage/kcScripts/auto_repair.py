@@ -112,7 +112,7 @@ def put_into_ndock(player):
 
     # 回到 port，更新 API
     do_action(player, u.get_place(), 'repair', fast_sleep)
-    do_action(player, u.get_place(), 'hai', fast_sleep)
+    do_action(player, u.get_place(), 'hai', u.get_lag())
     do_action(player, u.get_place(), 'port', u.get_lag())
     u.get_focus_game()
     player.print_info_ndocks(player)

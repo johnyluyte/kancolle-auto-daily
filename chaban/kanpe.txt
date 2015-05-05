@@ -2,8 +2,12 @@
 大家好
 
 
+檢查遊戲聲音大小跟 Terminal 聲音大小，
+なのです
+UC
 
 
+# 茶番
 
 羅：
 
@@ -41,11 +45,98 @@ Who am I?
 alright, 茶番はこ↓こ↑まで
 
 
-vpngate
+
+
+# VPN
+
+講解遊戲鎖國外 IP
+
+講解 VPN
+
+用 vimium 開啟 gatevpn
+尋找日本伺服器
+下載 configure file
+
+示範 fetch.py (alias gatevpn?)
+先全部 N
+再一次，選 Y
+小心密碼別打錯，下載並安裝 configure file
+連線
+
+
+# CAT
+
+連上 VPN 後，用 vimium 開啟 kancolle 遊戲
+先別點開始
+講解一下這是 DMM 的正常遊戲介面
+用 greasemonky 示範我的遊戲介面
+magic !
+下方維基點點看
+
+稍微展示一下 js file
+
+
+這樣前置工作就完成了，可以開始寫主要的外掛
+
+先簡單介紹一下遊戲
+
+# 遊戲介紹
+
+
+
+
+# 外掛 Shell
+Unix, Linux 系統，Terminal
+
+
+# 自動更換艦娘
+遠征中就不換
+旗艦已經是該艦娘就不換
+
+# 自動更換艦隊
+記得切換成 sort!
+save test test
+csv
+非常非常方便，切換
+Event 攻略隊伍、攻略補給艦隊伍、潛水艇艦隊、對潛水艇特工水雷艦隊、
+map1-1 陪練隊、map3-2-1 陪練隊、map1-5 攻略隊
+
+
+
+# 自動出擊、練等級
+
+# cat dmg, cat n
+準備 5 隻以上受傷的艦娘(1-1刷)
+
+講解 cat n
+
+講解 cat dmg
+對照遊戲維修時間、等級、大破等等
+O 距離中破或大破還差多少 HP !! (截一張有大中小破擦傷的圖寫 blog)
+
+這些資訊很方便，因為等級高的艦娘受小傷也需要很長的修復時間
+原本的UI很難一眼看出來
+藉由顯示出這些資訊，可以讓我快速判斷整體艦隊的狀態
+在一般地圖實用性還好
+但在攻略期間限定的 event 時非常好用，可快速判斷哪幾隻艦娘要用快速修復，哪幾隻可以放著繼續出擊
+
+
+
+# 自動維修
+
+
+示範 auto r
+全面結束後，示範 ctrl+c
+
 
 
 
 示範抓取 API→ sublime text -> json
 講解幾個數值(火力、雷裝..)
 
+
+cat ship
+cat deck
+cat ndock
+cat dmg
 

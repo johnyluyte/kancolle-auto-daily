@@ -20,10 +20,11 @@ def get_stype_by_name(name):
     # 例如
     # 電改 在圖鑑中就不存在，修正成 電 後就可以找到了
     # 而 大鳳改 就沒這個問題，在圖鑑中本來就存在著
-    if (result is None) and (name[-1] == u'改'):
-        # print name[-1]
-        # print name[:-1]
-        result = ship_type_dict.get(name[:-1], None)
+    if (result is None) and (len(name)>1):
+        if (name[-1] == u'改'):
+            # print name[-1]
+            # print name[:-1]
+            result = ship_type_dict.get(name[:-1], None)
     # print name
     # print name[-1]
     # print result
