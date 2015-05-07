@@ -6,6 +6,7 @@ import kcScript
 import kcFetchAPI
 import kcShipData
 import kcZukan
+import kcGear
 
 from kcClasses.player import Player
 
@@ -32,29 +33,33 @@ O api except 要自動 retry，先點 network
 O 距離下一個破還差多少 HP
 O condition
 
-對潛裝備在誰身上
+O 對潛裝備在誰身上
 1. cat item 列出所有裝備(名稱:數量，排序，數量越少加顏色，方便我自己判斷)
 如果沒有在艦娘身上的裝備，會顯示在哪裡!?
 不用擔心，slot_item.json 會列出所有裝備，但要記得重新登入抓取
 2. cat gear 列出重要裝備(水雷、聲納、烈雲)
 缺點，需要重新登入才能抓到 slot_item.json
 
-zukan 是不是太小題大作，我們只需要 stype，是否可直接從 api_start2 獲取?
-
-sikuli
+O sikuli
 /Applications/SikuliX.app/run -r ~/myScript.sikuli
-減少 sikuli 比對的範圍
-第一艦隊名稱
-CAT 加上 裝備連擊、春季Event
+O 減少 sikuli 比對的範圍
 
-greasemonkey
-random sleep in scripts to avoid detecter
+O CAT 加上 裝備連擊、春季Event
 
 腳本：
 O 把遠征前用 1-1 弄得閃亮亮
-自動 3-2-1 course
-自動遠征
-自動每日任務
+O 自動 3-2-1 course
+
+O greasemonkey
+
+zukan 是不是太小題大作，我們只需要 stype，是否可直接從 api_start2 獲取?
+第一艦隊名稱
+
+更新 slot_item.json
+random sleep in scripts to avoid detecter
+
+阿部 chrome extension
+防止 kancolle error niki 的 chrome extension?
 """
 
 def is_handled_by_predefined_func(inp):
@@ -100,6 +105,12 @@ def is_handled_by_predefined_func(inp):
     elif inp.startswith('map11'):
         kcScript.exec_sikuli(player ,'1-1')
         return True
+    elif inp.startswith('map21'):
+        kcScript.exec_sikuli(player ,'2-1')
+        return True
+    elif inp.startswith('map22'):
+        kcScript.exec_sikuli(player ,'2-2')
+        return True
     elif inp.startswith('map321'):
         kcScript.exec_sikuli(player ,'3-2-1')
         return True
@@ -121,10 +132,16 @@ def is_handled_by_predefined_func(inp):
             print("[names] [name] - 印出四個艦隊編成")
             print("[fleets] [f] - 印出使用者自行編列的艦隊編成")
             print("[damage] [dmg] - 印出受傷的船艦與預期維修時間")
+            print("[gearall] [ga] - 印出所有裝備與所持的艦娘")
+            print("[gear] [g] - 印出貴重裝備與所持的艦娘")
             return True
         elif arg == 'deck' or arg == 'd':
-            # 印出四個艦隊編成
+            # 印出四個艦隊狀態
             player.print_info_decks()
+            return True
+        elif arg == 'd1' or arg == 'd1':
+            # 印出第一個艦隊狀態
+            player.print_info_decks(deck_id=1)
             return True
         elif arg == 'ndock' or arg == 'n':
             # 印出維修工廠狀態
@@ -153,6 +170,12 @@ def is_handled_by_predefined_func(inp):
         elif arg == 'damage' or arg == 'dmg':
             # 印出所有受傷的艦娘資訊與預期維修時間
             player.get_damaged_ships_and_repair_time()
+            return True
+        elif arg == 'gearall' or arg == 'ga':
+            kcGear.print_all_gears()
+            return True
+        elif arg == 'gear' or arg == 'g':
+            kcGear.print_important_gears()
             return True
         else:
             return False
@@ -219,6 +242,7 @@ def main():
     player = Player()
     kcShipData.load_csv()
     kcZukan.load_zukan_json()
+    kcGear.main()
 
     u.uprint("あわわわ、びっくりしたのです。")
     # set_place("port")
