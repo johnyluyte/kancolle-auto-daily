@@ -145,6 +145,16 @@ svdata={"api_result":1,"api_result_msg":"\u6210\u529f","api_data":{"api_ship":[{
 
 
 
+想看什麼叫做 redundant json 的話，看 api_start2 就知道了
+
+api_start2 裡面有許多資料可以挖
+
+包含所有裝備的數值與說明
+
+slot_item.json 則包含了你目前擁有的所有裝備的資料，跟處理船艦的方式一樣，裝備的 `api_id` 指的是你這個遊戲帳號的第 N 件裝備，換句話說，你第一次進遊戲時選的第一隻艦娘所附帶的第一件裝備的 `api_id` 就是 1，之後往上累加，由於 `api_id` 容易讓人混淆，因此我們一樣以 `local_id` 來代表上述描述。
+
+用 `slot_item.json` 的 `local_id` 配上 `api_start2` 的 `api_mst_slotitem`，就可以找出每一件裝備的名稱、各種屬性等等。
+
 
 
 

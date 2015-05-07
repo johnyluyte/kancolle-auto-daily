@@ -1,29 +1,64 @@
 
-大家好
-
 
 檢查遊戲聲音大小跟 Terminal 聲音大小，
 なのです
 UC
 
 
+
 # 茶番
 
-羅：
+各位聽眾朋友大家好，我是交大金城武
+
+很高興能夠再次跟大家在空中相會
+
+在節目開始之前，先來介紹本次節目的特別來賓
+
+台南的羅先生，羅先生您好
+
+
+交大金城武您好，各位觀眾朋友大家好
+
+
+
+這次節目的主題是，展示我這幾個禮拜寫的
+
+艦隊收集 艦隊コレクション kancolle 這款遊戲的外掛
+
+
+正式介紹之前呢，先來看我們的讀者來信
+
+首先第一封信是來自彰化的汪先生，
+
+
+交大金城武您好，我是來自彰化的汪先生
+
+我想請問一下，要怎麼樣才能寫出一個好程式呢
+
+
 
 常常有人問我要怎麼樣才可寫好程式
 
-要有一台聰明的電腦
+首先，要有聰明的頭腦以及良好的邏輯能力
 
-白雪公主，魔鏡
+俗話說 工欲善其事，必先利其器
+
+大家比較常忽略的一點就是，有一個聰明的人腦，卻沒有聰明的電腦
+
+
+怎麼樣算是聰明的電腦呢
+
+大家有沒有看過白雪公主
+
+魔鏡啊魔鏡，世界上最美的人是誰
+
+同樣的問題
+
+如果電腦回答得出來的話，就是聰明的電腦
+
 
 
 Who is the most handsome guy in the world?
-
-この世界で　誰が一番　かっこいいですか
-
-
-And it turns out that along all 60 billion people
 
 Searching for the most handsome guy in the world
 
@@ -36,26 +71,55 @@ North America...Done
 South America...Done
 
 
-I am the most handsome guy in the world
+And it turns out that among all 60 billion people, I am the most handsome guy in the world
 
+Well, not so surprised
 
-Who am I?
-
+如果大家的電腦也這麼聰明的話，想必也都可以輕鬆的寫好程式
 
 alright, 茶番はこ↓こ↑まで
 
 
+接下來進入正題
+
+也就是
+
+艦隊收集 艦隊コレクション kancolle 這款遊戲的外掛
+
+在介紹這款外掛之前，要先介紹這款遊戲
+
+用 vimium 開啟 854854
+
+出現區域 error
+
+這款遊戲會鎖日本以外的地方的 IP，所以要從海外連進去的話，最簡單的方式就是使用 VPN
+
+也就是 Virtual Private Network
 
 
 # VPN
 
-講解遊戲鎖國外 IP
+這個東西在我當計網概助教的時候，有很多同學來問過我
 
-講解 VPN
+老師在講你沒有在聽，助教講完你考試完就忘記了
+
+不過沒關係，我們只需要知道 VPN 怎麼用就好了
+
+我的電腦是 MAC，使用的 VPN client 是 tunnelblick
 
 用 vimium 開啟 gatevpn
 尋找日本伺服器
 下載 configure file
+
+我們使用的是免費的 VPN，免費的壞處就是 VPN server 不穩定，有可能今天連上，明天就連不上了
+
+因此切換 VPN server 是很常見的情形
+
+常常要設定新的 configure file 其實也蠻麻煩的
+
+所以我就寫了一個簡單的小程式，
+
+他會去 parse 這些 VPN server 的列表，過濾出我們想要的，然後自行安裝設定檔
 
 示範 fetch.py (alias gatevpn?)
 先全部 N
@@ -64,9 +128,14 @@ alright, 茶番はこ↓こ↑まで
 連線
 
 
+
 # CAT
 
 連上 VPN 後，用 vimium 開啟 kancolle 遊戲
+
+切斷 VPN !
+
+
 先別點開始
 講解一下這是 DMM 的正常遊戲介面
 用 greasemonky 示範我的遊戲介面
@@ -75,12 +144,13 @@ magic !
 
 稍微展示一下 js file
 
+這樣前置工作就完成了，這個東西對之後外掛的開發有相當大的幫助
 
-這樣前置工作就完成了，可以開始寫主要的外掛
 
-先簡單介紹一下遊戲
 
 # 遊戲介紹
+
+先簡單操作一下遊戲
 
 
 

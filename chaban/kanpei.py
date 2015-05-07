@@ -23,7 +23,7 @@ continents = [
     ('South America',0.012)
 ]
 
-print 'Searching for the most handsome guy:'
+print 'Searching for the most handsome guy in the world:'
 
 for continent in continents:
     for i in xrange(101):
@@ -36,4 +36,13 @@ for continent in continents:
         )
         sys.stdout.flush()
     print
+
+print 'Analyzing data...'
+time.sleep(10)
+
+print '== Result =='
+print 'Subjects: 6,731,528,121'
+print 'Matched: 1'
+print '\tSubject Name: C**** C***, Taiwan'
+print '== End of Result =='
 
