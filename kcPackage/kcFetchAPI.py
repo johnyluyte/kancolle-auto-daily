@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import traceback
+import kcGear
 import kcUtility as u
 
 from kcClasses.deck import Deck
@@ -142,6 +143,7 @@ def _parse_port(player, jsonData):
     ships = meta['api_ship']
     count = len(ships)
     player.ships_count = count
+    kcGear.clear_who_has()
     for i in xrange(count):
         local_id        = ships[i]['api_id']
         sortno          = ships[i]['api_sortno']
@@ -158,6 +160,11 @@ def _parse_port(player, jsonData):
         sakuteki        = ships[i]['api_sakuteki'][0]
         lucky           = ships[i]['api_lucky'][0]
         player.ships[i] = Ship(local_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky)
+        # 裝備
+        gears = ships[i]['api_slot']
+        for gear in gears:
+            if gear == -1: continue
+            kcGear.update_gear_data_by_local_id(gear, player.ships[i].name, player.ships[i].lv)
 
 
 
@@ -278,12 +285,12 @@ def _is_same_as_last_fetch(json_data):
     return False
 
 
-def fetch_api_response(player, filter):
+def fetch_api_response(player, filter_, retry = 1):
     # 清空 clipboard
     u.pbcopy("NA")
 
     # 設定 filter
-    _set_chrome_dev_filter(filter)
+    _set_chrome_dev_filter(filter_)
     # 複製 response
     _copy_api_response_from_chrome_dev()
 
@@ -292,9 +299,16 @@ def fetch_api_response(player, filter):
     try:
         json_data = json.loads(dataFromClipboard[7:])
     except:
-        traceback.print_exc()
+        # traceback.print_exc()
         u.uerror("Failed to fecth Kancolle API")
         # u.uerror("Data: {0}".format(dataFromClipboard))
+        # 當抓取失敗時，最多重複 n = retry 次
+        if retry == 0:
+            return 'Reached_retry_limit'
+        retry = retry - 1
+        u.uprint('Retrying...')
+        u._sleep(u.get_lag())
+        fetch_api_response(player, filter_, retry)
         return 'fail_to_fetch'
 
     # 與上個 JSON 是否擁有相同的 hash，有的話就更新
@@ -302,15 +316,22 @@ def fetch_api_response(player, filter):
         return 'same_as_last'
 
     try:
-        if filter == 'questlist':
+        if filter_ == 'questlist':
             global gl_total_quest_page
             gl_total_quest_page = _parse_questlist(json_data)
             print "gl_total_quest_page = ", gl_total_quest_page
-        elif filter == 'port':
+        elif filter_ == 'port':
             _parse_port(player, json_data)
     except:
-        traceback.print_exc()
+        # traceback.print_exc()
         u.uerror("Failed to parse Kancolle API")
         # u.uerror("Data: {0}".format(dataFromClipboard))
+        # 當抓取失敗時，最多重複 n = retry 次
+        if retry == 0:
+            return 'Reached_retry_limit'
+        retry = retry - 1
+        u.uprint('Retrying...')
+        u._sleep(u.get_lag())
+        fetch_api_response(player, filter_, retry)
         return 'fail_to_parse'
 
