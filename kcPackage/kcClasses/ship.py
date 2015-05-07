@@ -2,7 +2,6 @@
 # from kcUtility import _color
 import kcUtility as u
 import kcShipData
-import kcZukan
 
 class Ship(object):
     def __init__(self, local_id, sortno, lv, nowhp, maxhp, cond, karyoku, raisou, taiku, soukou, kaihi, taisen, sakuteki, lucky):
@@ -20,21 +19,18 @@ class Ship(object):
         self.taisen    = taisen
         self.sakuteki  = sakuteki
         self.lucky     = lucky
-        # 建娘的官方名字
-        self.name      = kcShipData.get_ship_name_by_id(self.sortno)
-        if self.name is None:
-            u.uprint("Missing name, local_id:{0:>4d}, lv:{1:>3d}".format(self.local_id, self.lv) , 'red')
+        # 上方為 port API 可抓出的資訊
 
-        self.nick_name = kcShipData.get_ship_nick_name_by_id(self.sortno)
-
-        if self.name is None:
-            self.stype = None
-        else:
-            self.stype = kcZukan.get_stype_by_name(self.name)
         self.dmghp     = self.maxhp - self.nowhp
+        self.name      = kcShipData.get_name_by_sortno(self.sortno)
+        self.nick_name = kcShipData.get_adana_by_name(self.name)
+        self.stype     = kcShipData.get_stype_by_sortno(self.sortno)
 
+        if self.name is None:
+            u.uerror("Missing name, local_id:{0:>4d}, lv:{1:>3d}".format(self.local_id, self.lv))
         if self.stype is None:
-            u.uprint("Missing stype, local_id:{0:>4d}, lv:{1:>3d}".format(self.local_id, self.lv) , 'red')
+            u.uerror("Missing stype, local_id:{0:>4d}, lv:{1:>3d}".format(self.local_id, self.lv))
+
 
     def print_info(self):
         msg = str(self.local_id) + "\t" + str(self.sortno) +  "\t" + str(self.lv) + "\t"

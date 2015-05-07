@@ -5,7 +5,6 @@ import kcCommand
 import kcScript
 import kcFetchAPI
 import kcShipData
-import kcZukan
 import kcGear
 
 from kcClasses.player import Player
@@ -88,19 +87,24 @@ def is_handled_by_predefined_func(inp):
             return False
     elif inp.startswith('refresh') and len(inp.split()) == 1:
         # 重新讀取 kcShipData
-        kcShipData.load_csv()
+        kcShipData.main()
         # 清空 network 監看紀錄，以免量太大導致 chrome dev tool 延遲或錯誤
         u.get_focus_game()
         u.click_and_wait([50,700], 0.05)
         u.get_focus_terminal()
         return True
+    # save f1 kobe
     elif inp.startswith('save') and len(inp.split()) == 3:
-        # 將目前第一艦隊的建娘組合存入 kcShipData 的 fleet
+        args = inp.split()
+        # 將指定艦隊(第1~4艦隊)的艦隊編成儲存起來
+        avail_fleet_pos = ['f1','f2','f3','f4']
+        if args[1] not in avail_fleet_pos:
+            u.uerror('Usage: save (f1|f2|f3|f4) (fleet_name)')
+            return True
         u.set_place(player, 'hensei')
         kcCommand.exec_single_command(player, u.get_place(), 'port', u.get_lag())
-        args = inp.split()
-        kcShipData.save_current_fleets(player, args[1], args[2], player.decks[0].ships)
-        kcShipData.load_csv()
+        kcShipData.save_current_fleets(player, args[2], player.decks[int(args[1][-1])-1].ships)
+        kcShipData.load_user_fleets_data()
         return True
     elif inp.startswith('map11'):
         kcScript.exec_sikuli(player ,'1-1')
@@ -161,7 +165,7 @@ def is_handled_by_predefined_func(inp):
             return True
         elif arg == 'names' or arg == 'name':
             # 印出艦娘的暱稱
-            kcShipData.cat_name()
+            kcShipData.cat_names()
             return True
         elif arg == 'fleets' or arg == 'f':
             # 印出使用者自行編列的艦隊編成
@@ -240,8 +244,7 @@ def main():
     global _user_input
     global player
     player = Player()
-    kcShipData.load_csv()
-    kcZukan.load_zukan_json()
+    kcShipData.main()
     kcGear.main()
 
     u.uprint("あわわわ、びっくりしたのです。")

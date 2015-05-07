@@ -36,7 +36,7 @@ def run(player_, position, nick_name):
         return False
     # 檢查此艦娘是否空著，如果正在遠征的話就不切換
     if is_on_expedition(ship_current_id) is True:
-        u.uerror(kcShipData.get_ship_name_by_nick_name(nick_name) + "は今遠征中、変更できないです")
+        u.uerror(kcShipData.get_name_by_adana(nick_name) + "は今遠征中、変更できないです")
         return False
 
     # 計算一下此艦娘在第幾頁的第幾個

@@ -52,7 +52,7 @@ def exec_script(player, place, command, args):
             # 切換五個或六個艦娘
             for i in xrange(begin, 6):
                 if result[i] is not "":
-                    nick_name = kcShipData.get_nick_name_by_ship_name(result[i])
+                    nick_name = kcShipData.get_adana_by_name(result[i])
                     if kcScripts.change_ship.run(player, 'c'+str(i+1), nick_name) is not False:
                         u._sleep(u._LAG)
             # 回到 port

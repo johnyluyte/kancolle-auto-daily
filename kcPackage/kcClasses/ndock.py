@@ -7,10 +7,10 @@ import kcUtility as u
 class Ndock(object):
     current_time = None
 
-    def __init__(self, ndock_id, state, ship_id, complete_time, complete_time_str):
+    def __init__(self, ndock_id, state, ship_local_id, complete_time, complete_time_str):
         self.ndock_id = ndock_id
         self.state = state
-        self.ship_id = ship_id
+        self.ship_local_id = ship_local_id
         if complete_time is not 0:
             self.complete_time = int(str(complete_time)[:-3])
             # 1430398364561
@@ -53,7 +53,7 @@ class Ndock(object):
     def get_info(self, player):
         ndock_state = {0:'閒置', 1:'維修中'}
 
-        name = kcShipData.get_name_by_local_id(player, self.ship_id)
+        name = kcShipData.get_name_by_local_id(player, self.ship_local_id)
 
         self.update_current_time()
         seconds_left = 0
@@ -70,7 +70,7 @@ class Ndock(object):
         info = dict()
         info['ndock_id']        = self.ndock_id
         info['state']           = ndock_state.get(self.state, 'Error')
-        info['ship_id']         = self.ship_id
+        info['ship_local_id']   = self.ship_local_id
         info['name_count_down'] = u.append_color(name + count_down, 'yellow')
         info['seconds_left']    = seconds_left
         return info

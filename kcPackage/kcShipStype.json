@@ -1,0 +1,1969 @@
+{
+  "api_mst_ship": [
+    {
+      "api_sortno": 31,
+      "api_name": "睦月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 32,
+      "api_name": "如月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 35,
+      "api_name": "長月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 37,
+      "api_name": "三日月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 11,
+      "api_name": "吹雪",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 12,
+      "api_name": "白雪",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 14,
+      "api_name": "深雪",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 16,
+      "api_name": "磯波",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 17,
+      "api_name": "綾波",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 18,
+      "api_name": "敷波",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 68,
+      "api_name": "曙",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 70,
+      "api_name": "潮",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 91,
+      "api_name": "陽炎",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 92,
+      "api_name": "不知火",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 93,
+      "api_name": "黒潮",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 5,
+      "api_name": "雪風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 42,
+      "api_name": "長良",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 43,
+      "api_name": "五十鈴",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 45,
+      "api_name": "由良",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 19,
+      "api_name": "大井",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 20,
+      "api_name": "北上",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 26,
+      "api_name": "扶桑",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 27,
+      "api_name": "山城",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 33,
+      "api_name": "皐月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 34,
+      "api_name": "文月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 36,
+      "api_name": "菊月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 38,
+      "api_name": "望月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 13,
+      "api_name": "初雪",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 15,
+      "api_name": "叢雲",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 71,
+      "api_name": "暁",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 72,
+      "api_name": "響",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 73,
+      "api_name": "雷",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 74,
+      "api_name": "電",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 75,
+      "api_name": "初春",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 76,
+      "api_name": "子日",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 77,
+      "api_name": "若葉",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 78,
+      "api_name": "初霜",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 79,
+      "api_name": "白露",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 80,
+      "api_name": "時雨",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 81,
+      "api_name": "村雨",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 82,
+      "api_name": "夕立",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 83,
+      "api_name": "五月雨",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 84,
+      "api_name": "涼風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 89,
+      "api_name": "霰",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 90,
+      "api_name": "霞",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 10,
+      "api_name": "島風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 28,
+      "api_name": "天龍",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 29,
+      "api_name": "龍田",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 44,
+      "api_name": "名取",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 46,
+      "api_name": "川内",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 47,
+      "api_name": "神通",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 48,
+      "api_name": "那珂",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 97,
+      "api_name": "大井改",
+      "api_stype": 4
+    },
+    {
+      "api_sortno": 98,
+      "api_name": "北上改",
+      "api_stype": 4
+    },
+    {
+      "api_sortno": 52,
+      "api_name": "古鷹",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 53,
+      "api_name": "加古",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 54,
+      "api_name": "青葉",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 55,
+      "api_name": "妙高",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 56,
+      "api_name": "那智",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 57,
+      "api_name": "足柄",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 58,
+      "api_name": "羽黒",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 59,
+      "api_name": "高雄",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 60,
+      "api_name": "愛宕",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 61,
+      "api_name": "摩耶",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 62,
+      "api_name": "鳥海",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 51,
+      "api_name": "最上",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 63,
+      "api_name": "利根",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 64,
+      "api_name": "筑摩",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 101,
+      "api_name": "最上改",
+      "api_stype": 6
+    },
+    {
+      "api_sortno": 94,
+      "api_name": "祥鳳",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 65,
+      "api_name": "飛鷹",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 30,
+      "api_name": "龍驤",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 3,
+      "api_name": "伊勢",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 21,
+      "api_name": "金剛",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 23,
+      "api_name": "榛名",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 1,
+      "api_name": "長門",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 2,
+      "api_name": "陸奥",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 102,
+      "api_name": "伊勢改",
+      "api_stype": 10
+    },
+    {
+      "api_sortno": 6,
+      "api_name": "赤城",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 7,
+      "api_name": "加賀",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 24,
+      "api_name": "霧島",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 22,
+      "api_name": "比叡",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 4,
+      "api_name": "日向",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 103,
+      "api_name": "日向改",
+      "api_stype": 10
+    },
+    {
+      "api_sortno": 25,
+      "api_name": "鳳翔",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 8,
+      "api_name": "蒼龍",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 9,
+      "api_name": "飛龍",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 66,
+      "api_name": "隼鷹",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 67,
+      "api_name": "朧",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 69,
+      "api_name": "漣",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 85,
+      "api_name": "朝潮",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 86,
+      "api_name": "大潮",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 87,
+      "api_name": "満潮",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 88,
+      "api_name": "荒潮",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 39,
+      "api_name": "球磨",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 40,
+      "api_name": "多摩",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 41,
+      "api_name": "木曾",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 49,
+      "api_name": "千歳",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 50,
+      "api_name": "千代田",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 95,
+      "api_name": "千歳改",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 96,
+      "api_name": "千代田改",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 99,
+      "api_name": "千歳甲",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 100,
+      "api_name": "千代田甲",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 104,
+      "api_name": "千歳航",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 105,
+      "api_name": "千代田航",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 106,
+      "api_name": "翔鶴",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 107,
+      "api_name": "瑞鶴",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 108,
+      "api_name": "瑞鶴改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 109,
+      "api_name": "鬼怒",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 110,
+      "api_name": "阿武隈",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 111,
+      "api_name": "夕張",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 112,
+      "api_name": "瑞鳳",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 113,
+      "api_name": "瑞鳳改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 114,
+      "api_name": "大井改二",
+      "api_stype": 4
+    },
+    {
+      "api_sortno": 115,
+      "api_name": "北上改二",
+      "api_stype": 4
+    },
+    {
+      "api_sortno": 116,
+      "api_name": "三隈",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 117,
+      "api_name": "三隈改",
+      "api_stype": 6
+    },
+    {
+      "api_sortno": 119,
+      "api_name": "舞風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 120,
+      "api_name": "衣笠",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 124,
+      "api_name": "鈴谷",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 125,
+      "api_name": "熊野",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 126,
+      "api_name": "伊168",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 127,
+      "api_name": "伊58",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 128,
+      "api_name": "伊8",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 129,
+      "api_name": "鈴谷改",
+      "api_stype": 6
+    },
+    {
+      "api_sortno": 130,
+      "api_name": "熊野改",
+      "api_stype": 6
+    },
+    {
+      "api_sortno": 131,
+      "api_name": "大和",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 132,
+      "api_name": "秋雲",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 133,
+      "api_name": "夕雲",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 134,
+      "api_name": "巻雲",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 135,
+      "api_name": "長波",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 136,
+      "api_name": "大和改",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 137,
+      "api_name": "阿賀野",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 138,
+      "api_name": "能代",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 139,
+      "api_name": "矢矧",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 140,
+      "api_name": "酒匂",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 141,
+      "api_name": "五十鈴改二",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 142,
+      "api_name": "衣笠改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 143,
+      "api_name": "武蔵",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 144,
+      "api_name": "夕立改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 145,
+      "api_name": "時雨改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 146,
+      "api_name": "木曾改二",
+      "api_stype": 4
+    },
+    {
+      "api_sortno": 147,
+      "api_name": "Верный",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 148,
+      "api_name": "武蔵改",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 149,
+      "api_name": "金剛改二",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 150,
+      "api_name": "比叡改二",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 151,
+      "api_name": "榛名改二",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 152,
+      "api_name": "霧島改二",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 153,
+      "api_name": "大鳳",
+      "api_stype": 18
+    },
+    {
+      "api_sortno": 154,
+      "api_name": "香取",
+      "api_stype": 21
+    },
+    {
+      "api_sortno": 155,
+      "api_name": "伊401",
+      "api_stype": 14
+    },
+    {
+      "api_sortno": 156,
+      "api_name": "大鳳改",
+      "api_stype": 18
+    },
+    {
+      "api_sortno": 157,
+      "api_name": "龍驤改二",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 158,
+      "api_name": "川内改二",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 159,
+      "api_name": "神通改二",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 160,
+      "api_name": "那珂改二",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 161,
+      "api_name": "あきつ丸",
+      "api_stype": 17
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 163,
+      "api_name": "まるゆ",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 164,
+      "api_name": "弥生",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 165,
+      "api_name": "卯月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 166,
+      "api_name": "あきつ丸改",
+      "api_stype": 17
+    },
+    {
+      "api_sortno": 167,
+      "api_name": "磯風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 168,
+      "api_name": "浦風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 169,
+      "api_name": "谷風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 170,
+      "api_name": "浜風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 171,
+      "api_name": "Bismarck",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 172,
+      "api_name": "Bismarck改",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 173,
+      "api_name": "Bismarck zwei",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 174,
+      "api_name": "Z1",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 175,
+      "api_name": "Z3",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 176,
+      "api_name": "Prinz Eugen",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 177,
+      "api_name": "Prinz Eugen改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 178,
+      "api_name": "Bismarck drei",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 179,
+      "api_name": "Z1 zwei",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 180,
+      "api_name": "Z3 zwei",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 181,
+      "api_name": "天津風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 182,
+      "api_name": "明石",
+      "api_stype": 19
+    },
+    {
+      "api_sortno": 183,
+      "api_name": "大淀",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 184,
+      "api_name": "大鯨",
+      "api_stype": 20
+    },
+    {
+      "api_sortno": 185,
+      "api_name": "龍鳳",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 186,
+      "api_name": "時津風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 187,
+      "api_name": "明石改",
+      "api_stype": 19
+    },
+    {
+      "api_sortno": 188,
+      "api_name": "利根改二",
+      "api_stype": 6
+    },
+    {
+      "api_sortno": 189,
+      "api_name": "筑摩改二",
+      "api_stype": 6
+    },
+    {
+      "api_sortno": 118,
+      "api_name": "初風",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 123,
+      "api_name": "伊19",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 192,
+      "api_name": "那智改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 193,
+      "api_name": "足柄改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 194,
+      "api_name": "羽黒改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 195,
+      "api_name": "綾波改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 196,
+      "api_name": "飛龍改二",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 197,
+      "api_name": "蒼龍改二",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 301,
+      "api_name": "吹雪改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 302,
+      "api_name": "白雪改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 303,
+      "api_name": "初雪改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 304,
+      "api_name": "深雪改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 305,
+      "api_name": "叢雲改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 306,
+      "api_name": "磯波改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 307,
+      "api_name": "綾波改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 308,
+      "api_name": "敷波改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 309,
+      "api_name": "金剛改",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 310,
+      "api_name": "比叡改",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 311,
+      "api_name": "榛名改",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 312,
+      "api_name": "霧島改",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 313,
+      "api_name": "天龍改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 314,
+      "api_name": "龍田改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 315,
+      "api_name": "球磨改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 316,
+      "api_name": "多摩改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 317,
+      "api_name": "木曾改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 318,
+      "api_name": "長良改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 319,
+      "api_name": "五十鈴改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 320,
+      "api_name": "由良改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 321,
+      "api_name": "名取改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 322,
+      "api_name": "川内改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 323,
+      "api_name": "神通改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 324,
+      "api_name": "那珂改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 325,
+      "api_name": "陽炎改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 326,
+      "api_name": "不知火改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 327,
+      "api_name": "黒潮改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 328,
+      "api_name": "雪風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 329,
+      "api_name": "島風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 330,
+      "api_name": "朧改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 331,
+      "api_name": "曙改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 332,
+      "api_name": "漣改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 333,
+      "api_name": "潮改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 334,
+      "api_name": "暁改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 335,
+      "api_name": "響改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 336,
+      "api_name": "雷改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 337,
+      "api_name": "電改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 338,
+      "api_name": "初春改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 339,
+      "api_name": "子日改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 340,
+      "api_name": "若葉改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 341,
+      "api_name": "初霜改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 342,
+      "api_name": "白露改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 343,
+      "api_name": "時雨改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 344,
+      "api_name": "村雨改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 345,
+      "api_name": "夕立改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 346,
+      "api_name": "五月雨改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 347,
+      "api_name": "涼風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 348,
+      "api_name": "朝潮改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 349,
+      "api_name": "大潮改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 350,
+      "api_name": "満潮改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 351,
+      "api_name": "荒潮改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 352,
+      "api_name": "霰改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 353,
+      "api_name": "霞改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 354,
+      "api_name": "睦月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 355,
+      "api_name": "如月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 356,
+      "api_name": "皐月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 357,
+      "api_name": "文月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 358,
+      "api_name": "長月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 359,
+      "api_name": "菊月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 360,
+      "api_name": "三日月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 361,
+      "api_name": "望月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 362,
+      "api_name": "古鷹改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 363,
+      "api_name": "加古改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 364,
+      "api_name": "青葉改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 365,
+      "api_name": "妙高改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 366,
+      "api_name": "那智改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 367,
+      "api_name": "足柄改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 368,
+      "api_name": "羽黒改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 369,
+      "api_name": "高雄改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 370,
+      "api_name": "愛宕改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 371,
+      "api_name": "摩耶改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 372,
+      "api_name": "鳥海改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 373,
+      "api_name": "利根改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 374,
+      "api_name": "筑摩改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 375,
+      "api_name": "長門改",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 376,
+      "api_name": "陸奥改",
+      "api_stype": 9
+    },
+    {
+      "api_sortno": 377,
+      "api_name": "赤城改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 378,
+      "api_name": "加賀改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 379,
+      "api_name": "蒼龍改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 380,
+      "api_name": "飛龍改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 381,
+      "api_name": "龍驤改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 382,
+      "api_name": "祥鳳改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 383,
+      "api_name": "飛鷹改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 384,
+      "api_name": "隼鷹改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 385,
+      "api_name": "鳳翔改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 386,
+      "api_name": "扶桑改",
+      "api_stype": 10
+    },
+    {
+      "api_sortno": 387,
+      "api_name": "山城改",
+      "api_stype": 10
+    },
+    {
+      "api_sortno": 388,
+      "api_name": "翔鶴改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 389,
+      "api_name": "鬼怒改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 390,
+      "api_name": "阿武隈改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 391,
+      "api_name": "千歳航改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 392,
+      "api_name": "千代田航改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 393,
+      "api_name": "夕張改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 394,
+      "api_name": "舞風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 395,
+      "api_name": "衣笠改",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 121,
+      "api_name": "千歳航改二",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 122,
+      "api_name": "千代田航改二",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 396,
+      "api_name": "初風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 397,
+      "api_name": "秋雲改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 398,
+      "api_name": "夕雲改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 399,
+      "api_name": "巻雲改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 400,
+      "api_name": "長波改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 401,
+      "api_name": "阿賀野改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 402,
+      "api_name": "能代改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 403,
+      "api_name": "矢矧改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 404,
+      "api_name": "弥生改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 405,
+      "api_name": "卯月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 406,
+      "api_name": "Z1改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 407,
+      "api_name": "Z3改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 408,
+      "api_name": "浜風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 409,
+      "api_name": "谷風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 410,
+      "api_name": "酒匂改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 411,
+      "api_name": "天津風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 412,
+      "api_name": "浦風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 190,
+      "api_name": "龍鳳改",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 191,
+      "api_name": "妙高改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 413,
+      "api_name": "磯風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 414,
+      "api_name": "大淀改",
+      "api_stype": 3
+    },
+    {
+      "api_sortno": 415,
+      "api_name": "時津風改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 416,
+      "api_name": "春雨改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 417,
+      "api_name": "早霜改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 418,
+      "api_name": "清霜改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 204,
+      "api_name": "初春改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 419,
+      "api_name": "朝雲改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 420,
+      "api_name": "山雲改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 421,
+      "api_name": "野分改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 422,
+      "api_name": "秋月改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 202,
+      "api_name": "天城",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 203,
+      "api_name": "葛城",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 504,
+      "api_name": "U-511改",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 423,
+      "api_name": "香取改",
+      "api_stype": 21
+    },
+    {
+      "api_sortno": 424,
+      "api_name": "朝霜改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 425,
+      "api_name": "高波改",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 498,
+      "api_name": "伊168改",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 499,
+      "api_name": "伊58改",
+      "api_stype": 14
+    },
+    {
+      "api_sortno": 500,
+      "api_name": "伊8改",
+      "api_stype": 14
+    },
+    {
+      "api_sortno": 501,
+      "api_name": "伊19改",
+      "api_stype": 14
+    },
+    {
+      "api_sortno": 502,
+      "api_name": "まるゆ改",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 503,
+      "api_name": "伊401改",
+      "api_stype": 14
+    },
+    {
+      "api_sortno": 201,
+      "api_name": "雲龍",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 205,
+      "api_name": "春雨",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 206,
+      "api_name": "雲龍改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 207,
+      "api_name": "潮改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 208,
+      "api_name": "隼鷹改二",
+      "api_stype": 7
+    },
+    {
+      "api_sortno": 209,
+      "api_name": "早霜",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 210,
+      "api_name": "清霜",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 211,
+      "api_name": "扶桑改二",
+      "api_stype": 10
+    },
+    {
+      "api_sortno": 212,
+      "api_name": "山城改二",
+      "api_stype": 10
+    },
+    {
+      "api_sortno": 213,
+      "api_name": "朝雲",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 214,
+      "api_name": "山雲",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 215,
+      "api_name": "野分",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 216,
+      "api_name": "古鷹改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 219,
+      "api_name": "初霜改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 220,
+      "api_name": "叢雲改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 221,
+      "api_name": "秋月",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 224,
+      "api_name": "高波",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 225,
+      "api_name": "朝霜",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 226,
+      "api_name": "吹雪改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 227,
+      "api_name": "鳥海改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 228,
+      "api_name": "摩耶改二",
+      "api_stype": 5
+    },
+    {
+      "api_sortno": 229,
+      "api_name": "天城改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 230,
+      "api_name": "葛城改",
+      "api_stype": 11
+    },
+    {
+      "api_sortno": 231,
+      "api_name": "U-511",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 234,
+      "api_name": "睦月改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 235,
+      "api_name": "如月改二",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 236,
+      "api_name": "呂500",
+      "api_stype": 13
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 241,
+      "api_name": "Littorio",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 242,
+      "api_name": "Roma",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 245,
+      "api_name": "秋津洲",
+      "api_stype": 16
+    },
+    {
+      "api_sortno": 246,
+      "api_name": "Italia",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 247,
+      "api_name": "Roma改",
+      "api_stype": 8
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 0,
+      "api_name": "なし",
+      "api_stype": 2
+    },
+    {
+      "api_sortno": 250,
+      "api_name": "秋津洲改",
+      "api_stype": 16
+    }
+  ]
+}

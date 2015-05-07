@@ -13,11 +13,13 @@ class Player(object):
         self.ships       = [None] * 100  # 意義同上，建立 1 個含有 100 個 None 的 list
         self.ships_count = 0
 
+
     def print_info_materials(self):
         if self.materials is None:
             u.uerror("[Player][print_info_materials] Not initialized")
             return
         self.materials.print_info()
+
 
     def print_info_decks(self, deck_id = 5):
         if self.decks[0] is None:
@@ -141,7 +143,7 @@ class Player(object):
         if current_id is None:
             u.uerror("この艦娘が艦隊にいないです {}".format(nick_name) )
         else:
-            official_name = kcShipData.get_ship_name_by_nick_name(nick_name)
+            official_name = kcShipData.get_name_by_adana(nick_name)
             msg = "{c1:s}{name:s}({nick:s}){c2:s}さんですね、わかりました".format(c1=u.color['yellow'], c2=u.color['default'], name=official_name, nick=nick_name)
             u.uprint(msg)
         return current_id
@@ -256,6 +258,7 @@ class Player(object):
             msg = self._format_damaged_ships_and_repair_time(value)
             u.uprint(msg)
         u.uprint('怪我している艦娘は {} 人います'.format(u.append_color(len(damaged_ships), 'cyan')))
+
 
     def _format_damaged_ships_and_repair_time(self, value):
         # 幫修理時間上色
