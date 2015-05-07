@@ -25,34 +25,52 @@ class Player(object):
             return
         # 印出所有的艦隊狀態
         if deck_id == 5:
-            for i in range(0,4):
-                if self.decks[i] is None: continue
-                # self.decks[i].print_info()
-                result = self.decks[i].get_info()
-                fleet_name = result['name'].encode('utf-8')
-                print(u.append_color(fleet_name, 'cyan'))
-                msg = ''
-                for local_id in result['ships']:
-                    if local_id == -1: continue
-                    for ship in self.ships:
-                        if ship is None: break
-                        if ship.local_id == local_id:
-                            name = u.append_color(ship.name, 'yellow')
-                            cond = ship.cond
-                            if cond < 20:
-                                cond = u.append_color(cond, 'red')
-                            elif cond < 30:
-                                cond = u.append_color(cond, 'orange')
-                            elif cond >= 50:
-                                cond = u.append_color(cond, 'yellow')
-                            msg += name + '(' + str(cond) + '), '
-                print(msg)
-                print("任務" + str(result['mission']))
+            start_pos = 0
+            end_pos = 4
         # 印出某個指定的艦隊狀態
         elif deck_id > 0 and deck_id < 5 and (self.decks[deck_id-1] is not None):
-            self.decks[deck_id-1].print_info()
+            start_pos = deck_id-1
+            end_pos = deck_id
         else:
             u.uerror("[Player][print_info_decks] Invalid deck_id")
+            return
+            # self.decks[deck_id-1].print_info()
+
+        for i in range(start_pos,end_pos):
+            if self.decks[i] is None: continue
+            # self.decks[i].print_info()
+            result = self.decks[i].get_info()
+            fleet_name = result['name'].encode('utf-8')
+            print(u.append_color(fleet_name, 'cyan'))
+            msg = ''
+            for local_id in result['ships']:
+                if local_id == -1: continue
+                for ship in self.ships:
+                    if ship is None: break
+                    if ship.local_id == local_id:
+                        cond = ship.cond
+                        if cond < 20:
+                            cond = u.append_color(cond, 'red')
+                        elif cond < 30:
+                            cond = u.append_color(cond, 'orange')
+                        elif cond >= 50:
+                            cond = u.append_color(cond, 'yellow')
+
+                        # 如果是印出全部艦隊的話，印簡易的資訊就好
+                        if deck_id == 5:
+                            msg += u.append_color(ship.name, 'yellow') + '(' + str(cond) + '), '
+                        # 如果是印出特定艦隊的話，印詳細的資訊
+                        else:
+                            tmp = self._get_hp_and_next_ha(ship.nowhp, ship.maxhp)
+                            repair_time = self._get_repair_time(ship)
+                            value = (repair_time, tmp[0], ship.lv, ship.name, tmp[1])
+
+                            msg += '(' + str(cond) + ') '
+                            msg += self._format_damaged_ships_and_repair_time(value)
+                            msg += '\n'
+            print(msg[:-1])
+            print("任務" + str(result['mission']))
+
 
     def print_info_ndocks(self, player, dock_id = 5):
         if self.ndocks[0] is None:
@@ -164,6 +182,8 @@ class Player(object):
         stype  = ship.stype
         lv     = ship.lv
         sub_hp = ship.maxhp - ship.nowhp
+        if sub_hp == 0:
+            return(0,0,0)
 
         if stype == 13:
             bailitu = 0.5
@@ -195,6 +215,25 @@ class Player(object):
         return (hour, minute, second)
 
 
+    def _get_hp_and_next_ha(self, nowhp, maxhp):
+        hp = str(nowhp)+"/"+str(maxhp)
+        div = float(nowhp) / float(maxhp)
+        if div <= 0.25:
+            hp += ' 大破'
+            hp = u.append_color(hp, 'red')
+            # 計算距離下一個破還差多少 hp
+            next_ha = u.append_color('!!!', 'red')
+        elif div <= 0.5:
+            hp += ' 中破'
+            hp = u.append_color(hp, 'orange')
+            next_ha = u.append_color('+'+str(nowhp - int(maxhp/4.0)), 'red')
+        elif div <= 0.75:
+            hp += ' 小破'
+            next_ha = u.append_color('+'+str(nowhp - int(maxhp/2.0)), 'orange')
+        else:
+            next_ha = '+'+str(nowhp - int(maxhp/2.0))
+        return (hp, next_ha)
+
     def get_damaged_ships_and_repair_time(self):
         damaged_ships = list()
         for ship in self.ships:
@@ -206,40 +245,28 @@ class Player(object):
                     continue
                 repair_time = self._get_repair_time(ship)
                 # 幫大破小破上色
-                hp = str(ship.nowhp)+"/"+str(ship.maxhp)
-                div = float(ship.nowhp) / float(ship.maxhp)
-                # print div
-                if div <= 0.25:
-                    hp += ' 大破'
-                    hp = u.append_color(hp, 'red')
-                    # 計算距離下一個破還差多少 hp
-                    next_ha = u.append_color('!!!', 'red')
-                elif div <= 0.5:
-                    hp += ' 中破'
-                    hp = u.append_color(hp, 'orange')
-                    next_ha = u.append_color('+'+str(ship.nowhp - int(ship.maxhp/4.0)), 'red')
-                elif div <= 0.75:
-                    hp += ' 小破'
-                    next_ha = u.append_color('+'+str(ship.nowhp - int(ship.maxhp/2.0)), 'orange')
-                else:
-                    next_ha = '+'+str(ship.nowhp - int(ship.maxhp/2.0))
-
+                tmp     = self._get_hp_and_next_ha(ship.nowhp, ship.maxhp)
+                hp      = tmp[0]
+                next_ha = tmp[1]
 
                 damaged_ships.append( (repair_time, hp, ship.lv, ship.name, next_ha) )
 
         damaged_ships.sort(reverse=True)
-
         for value in damaged_ships:
-            # 幫修理時間上色
-            repair_time = '{:0>2d}:{:0>2d}:{:0>2d}'.format(value[0][0], value[0][1], value[0][2])
-            if not value[0][0] == 0:
-                if value[0][0] == 1:
-                    repair_time = u.append_color(repair_time, 'yellow')
-                else:
-                    repair_time = u.append_color(repair_time, 'red')
-
-            msg = '{repair_time:>8s}, lv{lv:>2d} {name} ({hp}) {next}'.format(repair_time=repair_time, lv=value[2], name=u.append_color(value[3], 'cyan'), hp=value[1], next=value[4])
+            msg = self._format_damaged_ships_and_repair_time(value)
             u.uprint(msg)
         u.uprint('怪我している艦娘は {} 人います'.format(u.append_color(len(damaged_ships), 'cyan')))
+
+    def _format_damaged_ships_and_repair_time(self, value):
+        # 幫修理時間上色
+        repair_time = '{:0>2d}:{:0>2d}:{:0>2d}'.format(value[0][0], value[0][1], value[0][2])
+        if not value[0][0] == 0:
+            if value[0][0] == 1:
+                repair_time = u.append_color(repair_time, 'yellow')
+            else:
+                repair_time = u.append_color(repair_time, 'red')
+
+        msg = '{repair_time:>8s}, lv{lv:>2d} {name} ({hp}) {next}'.format(repair_time=repair_time, lv=value[2], name=u.append_color(value[3], 'cyan'), hp=value[1], next=value[4])
+        return msg
 
 
