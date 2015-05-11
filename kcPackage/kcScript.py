@@ -96,6 +96,8 @@ def exec_script(player, place, command, args):
                     kcScripts.factory_build.run( command, (10,30,10,10) )
                 elif args[0] == 'sb':
                     kcScripts.factory_build.run( command, (10,30,10,31) )
+                elif args[0] == 'm':
+                    kcScripts.factory_build.run( command, (10,90,90,30) )
             # "kaihatu 20 50 10 110"
             elif len(args) == 4:
                 kcScripts.factory_build.run( command, args )

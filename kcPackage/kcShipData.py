@@ -209,7 +209,7 @@ def load_user_ships_data(file_name='user_ships.data'):
             # print name, type(name), adana, type(adana)
             ship_adana_dict[name] = adana
 
-def load_ship_data(file_name='kcShipStype.json'):
+def load_ship_data(file_name='kcOfficialShip.json'):
     """
     讀取 start_api2 的官方艦娘資訊，包含
     - api_sortno 圖鑑號碼
@@ -239,6 +239,9 @@ def main():
     #     print key, value[0], value[1]
     # print len(ship_data_dict)
 
+    # for key, value in ship_adana_dict.items():
+    #     print key, value
+    # print len(ship_adana_dict)
 
 
 if __name__ == '__main__':
