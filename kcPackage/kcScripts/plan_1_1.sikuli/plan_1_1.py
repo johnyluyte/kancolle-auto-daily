@@ -16,14 +16,14 @@ while(1):
         click("singeki.png")
     elif(region_general.exists("tettai.png")) and (daiha_detected is True):
         click("tettai.png")
-    elif(region_fleets.exists("cyuuha.png")):
+    elif(region_fleets.exists(Pattern("cyuuha.png").similar(0.85))):
         if(cyuuha_detected is False):
             cyuuha_detected = True
             print "--------------"
             print "\033[33m 中破 detected、まだ大丈夫です \033[m"
             print "--------------"
             sys.stdout.flush()
-    elif(region_fleets.exists(Pattern("daiha.png").similar(0.81))):
+    elif(region_fleets.exists(Pattern("daiha.png").similar(0.85))):
         if(daiha_detected is False):
             daiha_detected = True
             print "--------------"
@@ -36,6 +36,6 @@ while(1):
     # 偵測是否回到母港了
     elif(region_general.exists("fight.png")):
         break
-    sleep(0.5)
+    # sleep(0.5)
 
 print "\033[1;33m[ Sikuri Finished (Plan A) ]\033[m"

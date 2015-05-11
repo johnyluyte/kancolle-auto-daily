@@ -74,7 +74,7 @@ def print_all_gears(important_gears=None):
     sort_title_now = -1
     for tuple_ in result:
         # print sort_title_now, tuple_[0][1]
-        if not tuple_[0][1] == str(sort_title_now):
+        if (not tuple_[0][1] == str(sort_title_now)) and (not important_gears == None):
             sort_title_now += 1
             print('\n{}'.format(u.append_color('### ' + sort_title[sort_title_now] + '###', 'cyan')) )
 

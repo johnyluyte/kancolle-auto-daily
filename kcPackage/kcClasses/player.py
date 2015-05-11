@@ -143,7 +143,11 @@ class Player(object):
         if current_id is None:
             u.uerror("この艦娘が艦隊にいないです {}".format(nick_name) )
         else:
-            official_name = kcShipData.get_name_by_adana(nick_name)
+            official_name = None
+            for ship in self.ships:
+                if ship.nick_name == nick_name:
+                    official_name = ship.name
+                    break
             msg = "{c1:s}{name:s}({nick:s}){c2:s}さんですね、わかりました".format(c1=u.color['yellow'], c2=u.color['default'], name=official_name, nick=nick_name)
             u.uprint(msg)
         return current_id
