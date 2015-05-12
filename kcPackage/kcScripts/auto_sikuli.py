@@ -6,6 +6,9 @@ import kcUtility as u
 from kcCommand import cmd
 from kcCommand import exec_single_command
 
+import kcScripts.refill_fleet_daily
+import kcScripts.refill_fleet_all
+
 """ [腳本]
 
 > "map11"
@@ -52,11 +55,15 @@ def main(player, world_, map_, plan_):
         u._sleep(3, print_=False)
 
     # 戰鬥結束，回到母港
-    u.uprint('出撃終了です、補給します', 'yellow')
     u.set_place(player, 'port')
     do_action(player, u.get_place(), 'refill', u.get_lag())
-    do_action(player, u.get_place(), 'all', 1)
-    do_action(player, u.get_place(), 'matome', u.get_lag())
+    u.uprint('出撃終了です、補給します', 'yellow')
+
+    # 一個一個補給，每日補給任務
+    # kcScripts.refill_fleet_daily.run(player, 'f1')
+    # 一次全部補給
+    kcScripts.refill_fleet_all.run('f1')
+
     do_action(player, u.get_place(), 'hensei')
     u.uprint('作戦 {} 遂行完了です'.format(u.append_color(plan_, 'cyan')))
     player.print_info_decks(deck_id=1)
