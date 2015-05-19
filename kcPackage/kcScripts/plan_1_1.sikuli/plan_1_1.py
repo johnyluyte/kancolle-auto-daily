@@ -22,7 +22,7 @@ while True:
         if(region_general.exists("singeki.png")):
             click("singeki.png")
         # 偵測是否大破
-        elif(region_fleets.exists(Pattern("daiha.png").similar(0.80))):
+        elif(region_fleets.exists(Pattern("daiha.png").similar(0.75))):
             daiha_detected = True
             print "\033[1;31m!!! 大破 detected、すぐ撤退します!\033[m"
     # 已經有船艦大破惹

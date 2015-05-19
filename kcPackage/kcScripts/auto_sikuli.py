@@ -62,7 +62,12 @@ def main(player, world_, map_, plan_):
     # 一個一個補給，每日補給任務
     # kcScripts.refill_fleet_daily.run(player, 'f1')
     # 一次全部補給
-    kcScripts.refill_fleet_all.run('f1')
+    # kcScripts.refill_fleet_all.run('f1')
+    # 只補給旗艦
+    do_action(player, u.get_place(), 'refill')
+    do_action(player, u.get_place(), '1')
+    do_action(player, u.get_place(), 'matome')
+
 
     do_action(player, u.get_place(), 'hensei')
     u.uprint('作戦 {} 遂行完了です'.format(u.append_color(plan_, 'cyan')))
