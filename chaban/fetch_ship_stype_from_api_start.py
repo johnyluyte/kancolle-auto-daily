@@ -2,7 +2,7 @@
 
 
 def main():
-    with open('api_start2_long.json','r') as in_file, open('kcShipStype.json','w') as out_file:
+    with open('api_start2_long.json','r') as in_file, open('kcOfficialShip.json','w') as out_file:
         for line in in_file:
             check_write_to_file(out_file, line)
 

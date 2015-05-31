@@ -324,7 +324,7 @@ def fetch_api_response(player, filter_, retry = 1):
             _parse_port(player, json_data)
     except:
         # traceback.print_exc()
-        u.uerror("Failed to parse Kancolle API")
+        u.uerror("Failed to parse Kancolle API (新しい艦娘がアップデートしましたか？)")
         # u.uerror("Data: {0}".format(dataFromClipboard))
         # 當抓取失敗時，最多重複 n = retry 次
         if retry == 0:
