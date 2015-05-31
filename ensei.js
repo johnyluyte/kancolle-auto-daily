@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         ensei
+// @namespace    http://chunnorris.cc/
+// @version      0.1
+// @description  Remove ensei IDs I am not interested in
+// @author       cchien
+// @match        http://wikiwiki.jp/kancolle/?%B1%F3%C0%AC
+// @grant        none
+// ==/UserScript==
+
 $('<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></' + 'script>').appendTo(document.body);
 
 function clear3(){
