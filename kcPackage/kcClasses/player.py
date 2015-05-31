@@ -122,7 +122,10 @@ class Player(object):
             u.uerror("[Player][print_info_ships] Invalid ship_in_list")
 
     def print_info_ships_count(self):
-        print "艦娘總數為：", self.ships_count
+        msg = self.ships_count
+        if self.ships_count > 95:
+            msg = u.append_color(self.ships_count, 'red')
+        print "艦娘保有数：", msg
 
 
     def get_max_level_ship_with_same_nick_name(self, nick_name):
@@ -224,7 +227,9 @@ class Player(object):
     def _get_hp_and_next_ha(self, nowhp, maxhp):
         hp = str(nowhp)+"/"+str(maxhp)
         div = float(nowhp) / float(maxhp)
-        if div <= 0.25:
+        if div == 1:
+            next_ha = '';
+        elif div <= 0.25:
             hp += ' 大破'
             hp = u.append_color(hp, 'red')
             # 計算距離下一個破還差多少 hp

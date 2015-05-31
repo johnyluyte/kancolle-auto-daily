@@ -50,7 +50,7 @@ def main(player, world_, map_, plan_):
         # print t.thread_status
         if t.thread_status == 0:
             break;
-        # spam 陣形一，"陣形 - 単縦陣(水雷特化)"，為了不讓 console 印出，訊息設成""
+        # spam 陣形一，"陣形 - 単縦陣"
         u.click_and_wait(cmd['tatakau']['1'][2], 0)
         u._sleep(3, print_=False)
 
@@ -61,17 +61,21 @@ def main(player, world_, map_, plan_):
 
     # 一個一個補給，每日補給任務
     # kcScripts.refill_fleet_daily.run(player, 'f1')
+
     # 一次全部補給
-    # kcScripts.refill_fleet_all.run('f1')
-    # 只補給旗艦
-    do_action(player, u.get_place(), 'refill')
-    do_action(player, u.get_place(), '1')
-    do_action(player, u.get_place(), 'matome')
+    kcScripts.refill_fleet_all.run('f1')
+
+    # 只補給旗艦(捨て艦戦術)
+    # do_action(player, u.get_place(), 'refill')
+    # do_action(player, u.get_place(), '1')
+    # do_action(player, u.get_place(), 'matome')
 
 
     do_action(player, u.get_place(), 'hensei')
     u.uprint('作戦 {} 遂行完了です'.format(u.append_color(plan_, 'cyan')))
     player.print_info_decks(deck_id=1)
+    player.print_info_ships_count()
+    player.print_info_ndocks(player)
 
 
 def do_action(player, place, command, sleep_time=1.2):
